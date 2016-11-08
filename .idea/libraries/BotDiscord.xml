@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BotDiscord">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../JDA-withDependencies-2.2.1_353.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
