@@ -199,7 +199,7 @@ public class MessageReceivedEventListener {
                 audioManage1.openAudioConnection(SalonRequeteDjJackson);
                 audioManage1.setConnectTimeout(2000);
                 audioManage1.setSendingHandler(djJackson);
-                djJackson.setVolume(1);
+                djJackson.setVolume(100);
                 djJacksonOn = true;
                 activeAudio1 = true;
             }
@@ -207,7 +207,7 @@ public class MessageReceivedEventListener {
                 audioManage2.openAudioConnection(SalonRequeteDjJackson);
                 audioManage2.setConnectTimeout(2000);
                 audioManage2.setSendingHandler(djJackson);
-                djJackson.setVolume(1);
+                djJackson.setVolume(100);
                 djJacksonOn = true;
                 activeAudio2 = true;
             }
@@ -316,7 +316,7 @@ public class MessageReceivedEventListener {
                 djJackson.reset();
                 try {
                     String buf = e.getMessage().getContent().substring(3);
-                    lien = new File("localtracks/"+buf+"/"+buf+".mp3").toURI().toURL();
+                    lien = new File("BotDiscord_jar/localtracks/"+buf+"/"+buf+".mp3").toURI().toURL();
                     System.out.println(lien.toString());
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
