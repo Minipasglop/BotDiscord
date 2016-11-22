@@ -55,71 +55,70 @@ public class UserUpdateStatusEventListener {
         Date currentTime_1 = new Date();
         String heureString = h.format(currentTime_1);
         int heure = Integer.parseInt(heureString);
-        String NomAuteurBonjour = user.getUsername();
         if(heure > 20 || heure < 6 ) {
-            if (NomAuteurBonjour.equalsIgnoreCase("B4rb4m") && peutDireBonjour(user)) {  //B4
+            if (user.getId().equals("160460873838755840") && peutDireBonjour(user)) {  //B4
                 Salon.sendMessage("Bonchouèr " + Tools.getMentionFromUser(user) + " l'patron.");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Cielou") && peutDireBonjour(user)) {  //Cielou
+            else if (user.getId().equals("213664666952400907") && peutDireBonjour(user)) {  //Cielou
                 Salon.sendMessage("Bonchouèr " + Tools.getMentionFromUser(user) + " la :girl: du chan.");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Minipasglop") && peutDireBonjour(user)) { //PasGlop
+            else if (user.getId().equals("218461869617184768") && peutDireBonjour(user)) { //PasGlop
                 Salon.sendMessage("Bonchouèr à toi " + Tools.getMentionFromUser(user) + ", Ô créateur.");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("coeurdefilou") && peutDireBonjour(user)) {  //Filou
+            else if (user.getId().equals("213670267224850433") && peutDireBonjour(user)) {  //Filou
                 Salon.sendMessage("Bon :cookie: du soir à toi " + Tools.getMentionFromUser(user) + ".");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("skelenoir)") && peutDireBonjour(user)) {//Skel
+            else if (user.getId().equals("213655383397498881") && peutDireBonjour(user)) {//Skel
                 Salon.sendMessage("Bonjour à toi " + Tools.getMentionFromUser(user) + " le petit :rabbit:");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Magicake") && peutDireBonjour(user)) {//Gateau
+            else if (user.getId().equals("215072885960736773") && peutDireBonjour(user)) {//Gateau
                 Salon.sendMessage("Bonchouèr ! Gateau ! :)");
             ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Meleadeles") && peutDireBonjour(user)) {
+            else if (user.getId().equals("222256376385241088")&& peutDireBonjour(user)) {
             Salon.sendMessage("Bonchouèr à toi frère de prénom du créateur aka " + Tools.getMentionFromUser(user));
             ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("raptorrr/benoit") && peutDireBonjour(user)) {
+            else if (user.getId().equals("198776707967090689") && peutDireBonjour(user)) {
             Salon.sendMessage("Yo tiltMeister  de la nuit aka " + Tools.getMentionFromUser(user));
             ecrireDansLog(user);
             }
         }
         else {
-            if (NomAuteurBonjour.equalsIgnoreCase("B4rb4m") && peutDireBonjour(user)) {  //B4
+            if (user.getId().equals("160460873838755840") && peutDireBonjour(user)) {  //B4
                 Salon.sendMessage("Chalut " + Tools.getMentionFromUser(user) + " l'patron.");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Cielou") && peutDireBonjour(user)) { //Cielou
+            else if (user.getId().equals("213664666952400907") && peutDireBonjour(user)) { //Cielou
                 Salon.sendMessage("Coucou " + Tools.getMentionFromUser(user) + " la :girl: du chan.");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Minipasglop") && peutDireBonjour(user)) { //PasGlop
+            else if (user.getId().equals("218461869617184768") && peutDireBonjour(user)) { //PasGlop
                 Salon.sendMessage("Bonjour à toi " + Tools.getMentionFromUser(user) + ", Ô créateur.");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("coeurdefilou") && peutDireBonjour(user)) { //Filou
+            else if (user.getId().equals("213670267224850433") && peutDireBonjour(user)) { //Filou
                 Salon.sendMessage("Bon :cookie: à toi " + Tools.getMentionFromUser(user) + ".");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("skelenoir)") && peutDireBonjour(user)) { //Skel
+            else if (user.getId().equals("213655383397498881") && peutDireBonjour(user)) { //Skel
                 Salon.sendMessage("Bonjour à toi " + Tools.getMentionFromUser(user) + " le petit :rabbit:");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Magicake") && peutDireBonjour(user)) { //Gateau
+            else if (user.getId().equals("215072885960736773") && peutDireBonjour(user)) { //Gateau
                 Salon.sendMessage("Hey ! Gateau ! :)");
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("Meleadeles") && peutDireBonjour(user)) {
+            else if (user.getId().equals("222256376385241088") && peutDireBonjour(user)) {
                 Salon.sendMessage("Bonjour à toi frère de prénom du créateur aka " + Tools.getMentionFromUser(user));
                 ecrireDansLog(user);
             }
-            else if (NomAuteurBonjour.equalsIgnoreCase("raptorrr/benoit") && peutDireBonjour(user)) {
+            else if (user.getId().equals("198776707967090689") && peutDireBonjour(user)) {
                 Salon.sendMessage("Yo tiltMeister aka " + Tools.getMentionFromUser(user));
                 ecrireDansLog(user);
             }
