@@ -159,9 +159,9 @@ public class MessageReceivedEventListener {
                 "hypersad","mystère","aucunsens","boss","cry","explique","héroisme","mégaboss","aurevoir","bruh","damn","fail","idontcare","nani","baka","calme","darkness","falcon","intensefap","nein",
                 "batlescouilles","cc","darude", "fap","internet","nipah", "chala" , "cestmort","derp","fast","logique","no","gameover","gg","grossemerde","fdp","lolelol", "nope", "noticeme","nya","ohoh",
                 "ok","ora ","phrase","notpass", "nyaaa","ohyes","omg","parfait","plébéien","poi","popopo","princesse","punch","sad","scream","pokemongo","pourrir","psycho","run","sadhorn",
-                "sofresh","splendide","tg","turkeyfap","victory","weed","yamete","surprise","toad","ui","ville","weee","yes","tartarin","trap","uiii","waa","wtf","yolo","zawarudow"};
+                "sofresh","splendide","tg","turkeyfap","victory","weed","yamete","surprise","toad","ui","ville","weee","yes","tartarin","trap","uiii","waa","wtf","yolo",};
         String Message = "```";
-        Message += "\n/s <soundName>";
+        Message += "\n+s <soundName>";
         for (int i = 0; i < TabSong.length - 1; ++i) {
             Message += "\n";
             String Ligne = TabSong[i];
@@ -189,7 +189,6 @@ public class MessageReceivedEventListener {
             for (int i = 0; i < listeSalonsAudio.size(); ++i) {
                 if (listeSalonsAudio.get(i).getUsers().contains(auteur)) {
                     SalonRequeteDjJackson = listeSalonsAudio.get(i);
-                    System.out.println(SalonRequeteDjJackson.toString());
                     break;
                 }
             }
@@ -199,7 +198,7 @@ public class MessageReceivedEventListener {
                 audioManage1.openAudioConnection(SalonRequeteDjJackson);
                 audioManage1.setConnectTimeout(2000);
                 audioManage1.setSendingHandler(djJackson);
-                djJackson.setVolume(100);
+                djJackson.setVolume(1);
                 djJacksonOn = true;
                 activeAudio1 = true;
             }
@@ -207,7 +206,7 @@ public class MessageReceivedEventListener {
                 audioManage2.openAudioConnection(SalonRequeteDjJackson);
                 audioManage2.setConnectTimeout(2000);
                 audioManage2.setSendingHandler(djJackson);
-                djJackson.setVolume(100);
+                djJackson.setVolume(1);
                 djJacksonOn = true;
                 activeAudio2 = true;
             }
@@ -307,7 +306,7 @@ public class MessageReceivedEventListener {
             e.getChannel().sendMessage(Tools.getMentionFromUser(e.getMessage().getAuthor()) + " tu es un sale con.");
         }//insulte les fanboys de windows ^^
 
-        if (e.getMessage().getContent().contains("+s") && e.getMessage().getContent().length() > 3) {
+        if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3) {
             if(! djJacksonOn) connexionSalon(e);
             if (djJackson.isPlaying()) {
                 e.getChannel().sendMessage("Je suis deja en train de jouer du son groooos");
@@ -316,8 +315,7 @@ public class MessageReceivedEventListener {
                 djJackson.reset();
                 try {
                     String buf = e.getMessage().getContent().substring(3);
-                    lien = new File("BotDiscord_jar/localtracks/"+buf+"/"+buf+".mp3").toURI().toURL();
-                    System.out.println(lien.toString());
+                    lien = new File("localtracks/"+buf+"/"+buf+".mp3").toURI().toURL();
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }
