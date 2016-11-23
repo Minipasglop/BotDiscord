@@ -19,27 +19,17 @@ import java.net.URL;
 import java.util.List;
 
 
-/**
- * Created by Junior on 21/10/2016.
- */
+
 public class MessageReceivedEventListener {
 
     private MyTimer monTimer;
-
     private Main instance;
-
     private AudioManager audioManage1;
-
     private AudioManager audioManage2;
-
     private boolean activeAudio1;
-
     private boolean activeAudio2;
-
     private List<VoiceChannel> listeSalonsAudio;
-
     private MyUrlPlayer djJackson;
-
     private static boolean djJacksonOn;
 
     public MessageReceivedEventListener(Main jda) {

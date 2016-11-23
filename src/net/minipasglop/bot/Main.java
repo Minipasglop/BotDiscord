@@ -1,6 +1,6 @@
 package net.minipasglop.bot;
 
-//http://home.dv8tion.net:8080/job/JDA/Promoted%20Build/javadoc/
+//http://home.dv8tion.net:8080/job/JDA/Promoted%20Build/javadoc/  <--- Lien vers la Doc de l'API utilisée, très utile, bien fournie... Je recommande :D
 
 import net.dv8tion.jda.JDA;
 import net.dv8tion.jda.JDABuilder;
@@ -21,27 +21,18 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
-
+//La classe Main du projet, celle qui crée le bot, et gère les différentes classes listener au bon moment en fonction des events afin de faire des choses O_o
 public class Main implements EventListener {
 
     private JDA jda;
-
     private final String token = "MjIyNzg4MDUxMjI1NjczNzI4.CrCfFQ.wGH5pTMJVuKBdxTAXyHIlHMsAYc";
-
     private int nombreCommandes;
-
     private boolean stop;
-
     private boolean spam;
-
     private List<Guild> listeSalonBot;
-
     private MessageReceivedEventListener mrel;
-
     private UserUpdateStatusEventListener uusel;
-
     private AvatarAndNameUpdateListener aanul;
-
     private static Vector<List<User>> listeUsers;
 
 
@@ -89,11 +80,11 @@ public class Main implements EventListener {
                 }
                 jda.shutdown(true);
                 stop = true;
-            }
+            }//Arreter le bot proprement en tapant "stop" dans la console, il nous affichera alors le nombre de commande qu'il a effectué et attendra 5 secondes avant de mourir... Pauvre Jackson :'(
             if (cmd.equalsIgnoreCase("tg")) {
                 System.out.println("Arret du spam... :'( ");
                 spam = false;
-            }
+            }//Permets d'arreter de spammer.= quand la commande de spam est lancée par mes soins.
         }
     }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console
 
@@ -123,22 +114,23 @@ public class Main implements EventListener {
             MessageReceivedEvent e = (MessageReceivedEvent) event;
             mrel.use(e);
             nombreCommandes++;
-        }
+        }//Partie relative au listener gérant les commandes
 
         if (event instanceof UserOnlineStatusUpdateEvent) {
             UserOnlineStatusUpdateEvent ev = (UserOnlineStatusUpdateEvent) event;
             uusel.use(ev);
             nombreCommandes++;
-        }// Partie relative au listener gerant le bonjour personnalise A LA CONNECTION PUTAIN C'EST COOL CA BOBBY
+        }// Partie relative au listener gerant le bonjour personnalise
 
         if (event instanceof UserAvatarUpdateEvent) {
             aanul.useAva((UserAvatarUpdateEvent) event);
             nombreCommandes++;
+        }//Partie relative au listener gérant les modifications d'avatar
 
-            if (event instanceof UserNameUpdateEvent) {
-                aanul.useName(event);
-                nombreCommandes++;
-            }
-        }
-    }
+        if (event instanceof UserNameUpdateEvent) {
+            aanul.useName(event);
+            nombreCommandes++;
+        }//Partie relative au listener gérant les modifications de nom d'utilisateur
+
+    }//onEvent(), pas la meilleure facon de le faire avec les instanceof :/ Mais comme on dit Inshallah ca marche ^^
 }

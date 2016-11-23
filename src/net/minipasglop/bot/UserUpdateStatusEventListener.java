@@ -8,18 +8,13 @@ import net.dv8tion.jda.events.user.UserOnlineStatusUpdateEvent;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
-/**
- * Created by Junior on 21/10/2016.
- */
+
 public class UserUpdateStatusEventListener {
 
     private static SimpleDateFormat h;
-
     private static BufferedWriter bw;
-
     public UserUpdateStatusEventListener() {
         h = new SimpleDateFormat ("HH");
     }

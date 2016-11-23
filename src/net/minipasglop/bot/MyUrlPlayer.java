@@ -12,9 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
 
-/**
- * Created by Minipasglop on 20/09/2016.
- */
+//Meme chose que la classe URLPlayer de L'API utilisée, on modifie juste la visibilité de la fonction reset(), afin de pouvoir faire jouer des sons au bot, et de lui dire de se taire si c'est
+//innaproprié :)
 public class MyUrlPlayer extends URLPlayer {
     protected String userAgent;
     protected URL urlOfResource;

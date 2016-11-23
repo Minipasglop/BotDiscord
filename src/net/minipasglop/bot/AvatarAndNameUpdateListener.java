@@ -12,17 +12,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by Junior on 21/10/2016.
- */
+//Classe gérant les events relatifs a la modification de nom d'utilisateur / avatar
 public class AvatarAndNameUpdateListener {
 
     private BufferedWriter bw;
 
     public void useAva(UserAvatarUpdateEvent e){
-        if(Tools.getListeSalonsBot().get(0).getUsers().contains(e.getUser()))
+        if(Tools.getListeSalonsBot().get(0).getUsers().contains(e.getUser())) //Si user dans premier salon, alors on poste message dans premier salon.
             Tools.getJda().getTextChannelById(Tools.getIdMainSalonB4()).sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:");
-        else if(Tools.getListeSalonsBot().get(1).getUsers().contains(e.getUser()))
+        else if(Tools.getListeSalonsBot().get(1).getUsers().contains(e.getUser())) //Si user dans deuxieme serveur auquel le bot appartiens, on poste message dans le salon principal du deuxieme serveur.
             Tools.getJda().getTextChannelById(Tools.getIdMainSalonMini()).sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:");
     }// Partie relative au listener gérant le changement d'avatar
 
@@ -37,6 +35,6 @@ public class AvatarAndNameUpdateListener {
             bw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
+        }//envoie un message a l'utilisateur qui viens de changer d'user name et stocke ce changement dans un fichier.
     }
 }
