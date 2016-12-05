@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 
 
@@ -291,12 +292,12 @@ public class MessageReceivedEventListener {
                 nombreCommandes++;
             }//Mention depuis le message*/
 
-        if (e.getMessage().getContent().contains("Windows") && e.getMessage().getContent().contains("bien")) {
+        if (e.getMessage().getContent().contains("windows") && e.getMessage().getContent().contains("bien")) {
             e.getChannel().sendTyping();
             e.getChannel().sendMessage(Tools.getMentionFromUser(e.getMessage().getAuthor()) + " tu es un sale con.");
         }//insulte les fanboys de windows ^^
 
-        if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3) {
+        if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3 && !e.getMessage().getContent().contains("b4")) {
             if(! djJacksonOn) connexionSalon(e);
             if (djJackson.isPlaying()) {
                 e.getChannel().sendMessage("Je suis deja en train de jouer du son groooos");
