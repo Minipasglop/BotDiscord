@@ -24,12 +24,10 @@ import java.util.Vector;
 //La classe Main du projet, celle qui crée le bot, et gère les différentes classes listener au bon moment en fonction des events afin de faire des choses O_o
 public class Main implements EventListener {
 
-    private JDA jda;
+    private static JDA jda;
     private final String token = "MjIyNzg4MDUxMjI1NjczNzI4.CrCfFQ.wGH5pTMJVuKBdxTAXyHIlHMsAYc";
     private int nombreCommandes;
-    private boolean stop;
-    private boolean spam;
-    private List<Guild> listeSalonBot;
+    private static boolean spam;
     private MessageReceivedEventListener mrel;
     private UserUpdateStatusEventListener uusel;
     private AvatarAndNameUpdateListener aanul;
@@ -41,15 +39,11 @@ public class Main implements EventListener {
             jda = new JDABuilder().setBotToken(token).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(this);
             jda.getAccountManager().setGame("www.twitch.tv/minipasglop");
-            listeSalonBot = jda.getGuilds();
-            listeUsers = new Vector<>(listeSalonBot.size());
-            for(int i = 0; i < listeSalonBot.size(); ++i) {
-                listeUsers.add(listeSalonBot.get(i).getUsers());
-            }
-            Tools.setListeUsers(listeUsers);
-            Tools.setListeSalonsBot(listeSalonBot);
-            Tools.setJda(jda);
+            listeUsers = new Vector<>(jda.getGuilds().size());
+            for(int i = 0; i < jda.getGuilds().size(); ++i)
+                listeUsers.add(jda.getGuilds().get(i).getUsers());
             new FileWriter(new File("LogCo.txt")).close();
+            mrel = new MessageReceivedEventListener();
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
@@ -62,10 +56,9 @@ public class Main implements EventListener {
         System.out.println("Connecte avec: " + jda.getSelfInfo().getUsername());
         int i;
         System.out.println("Le bot est autorisé sur " + (i = jda.getGuilds().size()) + " serveur" + (i > 1 ? "s" : ""));
-        mrel = new MessageReceivedEventListener(this);
         uusel = new UserUpdateStatusEventListener();
         aanul = new AvatarAndNameUpdateListener();
-        stop = false;
+        boolean stop = false;
         spam = false;
         nombreCommandes = 0;
         while (!stop) {
@@ -92,19 +85,19 @@ public class Main implements EventListener {
         new Main();
     }//Fonction main
 
-    public boolean isSpam() {
+    public static boolean isSpam() {
         return spam;
     }
 
-    public void setSpam(boolean spam) {
-        this.spam = spam;
+    public static void setSpam(boolean spam) {
+        spam = spam;
     }
 
-    public List<Guild> getListeSalonBot() {
-        return listeSalonBot;
+    public static List<Guild> getListeSalonBot() {
+        return jda.getGuilds();
     }
 
-    public JDA getJda() {
+    public static JDA getJda() {
         return jda;
     }
 

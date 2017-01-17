@@ -15,37 +15,6 @@ Classe que je qualifierai "d'intermédiaire"... Elle permets de récupérer des 
 
 public class Tools {
 
-    private static final String idMainSalonB4 = "216566802153472000";
-    private static final String idMainSalonMini = "218753166815133696";
-    private static List<Guild> listeSalonsBot;
-    private static Vector<List<User>> listeUsers;
-    public static String newline = System.getProperty("line.separator");
-    private static JDA jda;
-    public static Vector<List<User>> getListeUsers() {
-        return listeUsers;
-    }
-    public static void setListeUsers(Vector<List<User>> listeUsers) {
-        Tools.listeUsers = listeUsers;
-    }
-    public static String getIdMainSalonB4() {
-        return idMainSalonB4;
-    }
-    public static String getIdMainSalonMini() {
-        return idMainSalonMini;
-    }
-    public static List<Guild> getListeSalonsBot() {
-        return listeSalonsBot;
-    }
-    public static void setListeSalonsBot(List<Guild> listeSalonsBot) {
-        Tools.listeSalonsBot = listeSalonsBot;
-    }
-    public static JDA getJda() {
-        return jda;
-    }
-    public static void setJda(JDA jda) {
-        Tools.jda = jda;
-    }
-
     public String getMentionFromMess(Message message) {
         List<User> userMention = message.getMentionedUsers();
         StringBuilder builder = new StringBuilder();

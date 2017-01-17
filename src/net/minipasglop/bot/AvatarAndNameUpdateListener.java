@@ -1,5 +1,6 @@
 package net.minipasglop.bot;
 
+import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.entities.User;
 import net.dv8tion.jda.events.Event;
 import net.dv8tion.jda.events.user.UserAvatarUpdateEvent;
@@ -18,10 +19,11 @@ public class AvatarAndNameUpdateListener {
     private BufferedWriter bw;
 
     public void useAva(UserAvatarUpdateEvent e){
-        if(Tools.getListeSalonsBot().get(0).getUsers().contains(e.getUser())) //Si user dans premier salon, alors on poste message dans premier salon.
-            Tools.getJda().getTextChannelById(Tools.getIdMainSalonB4()).sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:");
-        else if(Tools.getListeSalonsBot().get(1).getUsers().contains(e.getUser())) //Si user dans deuxieme serveur auquel le bot appartiens, on poste message dans le salon principal du deuxieme serveur.
-            Tools.getJda().getTextChannelById(Tools.getIdMainSalonMini()).sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:");
+        for(Guild chan : Main.getListeSalonBot()){
+            if(chan.getUsers().contains(e.getUser())){
+                Main.getJda().getTextChannels().get(0).sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:\" ");
+            }
+        }
     }// Partie relative au listener gérant le changement d'avatar
 
     public void useName(Event e) {

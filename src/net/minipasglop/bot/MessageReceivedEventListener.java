@@ -1,8 +1,8 @@
 package net.minipasglop.bot;
 
 import net.dv8tion.jda.MessageHistory;
+import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.entities.TextChannel;
-import net.dv8tion.jda.entities.User;
 import net.dv8tion.jda.entities.VoiceChannel;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.managers.AudioManager;
@@ -16,45 +16,33 @@ import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-
+import java.util.*;
 
 
 public class MessageReceivedEventListener {
 
     private MyTimer monTimer;
-    private Main instance;
-    private AudioManager audioManage1;
-    private AudioManager audioManage2;
-    private boolean activeAudio1;
-    private boolean activeAudio2;
+    private Map<Guild,AudioManager> audioManagers;
+    private Map<Guild,MyUrlPlayer> lesDjJacksons;
     private List<VoiceChannel> listeSalonsAudio;
-    private MyUrlPlayer djJackson;
-    private static boolean djJacksonOn;
 
-    public MessageReceivedEventListener(Main jda) {
-        instance = jda;
+    public MessageReceivedEventListener() throws MalformedURLException {
         monTimer = new MyTimer();
-        listeSalonsAudio = instance.getJda().getVoiceChannels();
-        audioManage1 = instance.getJda().getAudioManager(Tools.getListeSalonsBot().get(0));
-        audioManage2 = instance.getJda().getAudioManager(Tools.getListeSalonsBot().get(1));
-        activeAudio1 = false;
-        activeAudio2 = false;
-        try {
-            djJackson = new MyUrlPlayer(instance.getJda());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        listeSalonsAudio = Main.getJda().getVoiceChannels();
+        audioManagers = new HashMap<>();
+        lesDjJacksons = new HashMap<>();
+        for (Guild chan : Main.getListeSalonBot()){
+            audioManagers.put(chan, Main.getJda().getAudioManager(chan));
+            lesDjJacksons.put(chan,new MyUrlPlayer(Main.getJda()));
         }
-        djJacksonOn = false;
     }
 
     private void fonctionSpam(MessageReceivedEvent e) {
         int cpt = 0;
-        instance.setSpam(true);
+        Main.setSpam(true);
         long timer;
         while (cpt < 10000) {
-            if (!instance.isSpam())
+            if (!Main.isSpam())
                 return;
             e.getChannel().sendTyping();
             e.getChannel().sendMessage("Je suis jackson le gentil poulet. Rejoins la jackson family ! : http://steamcommunity.com/groups/Jacksonity ");
@@ -127,9 +115,7 @@ public class MessageReceivedEventListener {
     private String fonctionCat() throws IOException {
         HttpURLConnection conn = (HttpURLConnection) new URL("http://random.cat/meow").openConnection();
         conn.connect();
-
         BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-
         byte[] bytes = new byte[1024];
         int tmp;
         String chaine;
@@ -146,73 +132,51 @@ public class MessageReceivedEventListener {
 
     private void diplaySongList(TextChannel Salon) {
         Salon.sendTyping();
-        String[] TabSong = new String[]{"9000","bite","christmas","débile","han","loveyou","airhorn", "blululu", "chateau", "dégueu",  "hyperfast","mignon","airporn", "bordershock","combat","désolation",
-                "hypersad","mystère","aucunsens","boss","cry","explique","héroisme","mégaboss","aurevoir","bruh","damn","fail","idontcare","nani","baka","calme","darkness","falcon","intensefap","nein",
-                "batlescouilles","cc","darude", "fap","internet","nipah", "chala" , "cestmort","derp","fast","logique","no","gameover","gg","grossemerde","fdp","lolelol", "nope", "noticeme","nya","ohoh",
-                "ok","ora ","phrase","notpass", "nyaaa","ohyes","omg","parfait","plébéien","poi","popopo","princesse","punch","sad","scream","pokemongo","pourrir","psycho","run","sadhorn",
-                "sofresh","splendide","tg","turkeyfap","victory","weed","yamete","surprise","toad","ui","ville","weee","yes","tartarin","trap","uiii","waa","wtf","yolo",};
-        String Message = "```";
-        Message += "\n+s <soundName>";
-        for (int i = 0; i < TabSong.length - 1; ++i) {
-            Message += "\n";
-            String Ligne = TabSong[i];
-            for (int j = TabSong[i].length(); j < 15; ++j)
-                Ligne += " ";
-            Ligne += TabSong[++i];
-            for (int k = TabSong[i].length(); k < 15; ++k)
-                Ligne += " ";
-            Ligne += TabSong[++i];
-            for (int l = TabSong[i].length(); l < 15; ++l)
-                Ligne += " ";
-            Ligne += TabSong[++i];
-            Message += Ligne;
+        String[] nomSongs = new File("localtracks/").list();
+        String Message ="```\n+s <soundName>";
+        int cpt = 0;
+        for(String path : nomSongs) {
+            if(cpt % 3 == 0)
+                Message += "\n";
+            String line = path;
+            for (int j = path.length(); j < 20; ++j)
+                    line += " ";
+            Message += line;
+            cpt++;
         }
         Message += "```";
         Salon.sendMessage(Message);
     }
 
     private void connexionSalon(MessageReceivedEvent e) {
-        if (djJacksonOn)
+        if (lesDjJacksons.get(e.getGuild()).isPlaying())
             e.getChannel().sendMessage("Je suis deja connecté à un salon.");
         else {
-            User auteur = e.getMessage().getAuthor();
             VoiceChannel SalonRequeteDjJackson = null;
             for (int i = 0; i < listeSalonsAudio.size(); ++i) {
-                if (listeSalonsAudio.get(i).getUsers().contains(auteur)) {
+                if (listeSalonsAudio.get(i).getUsers().contains(e.getMessage().getAuthor())) {
                     SalonRequeteDjJackson = listeSalonsAudio.get(i);
                     break;
                 }
             }
             if (SalonRequeteDjJackson == null)
                 e.getChannel().sendMessage("Vous n'êtes pas connecté à un salon vocal.");
-            else if (Tools.getListeSalonsBot().get(0).getVoiceChannels().contains(SalonRequeteDjJackson)) {
-                audioManage1.openAudioConnection(SalonRequeteDjJackson);
-                audioManage1.setConnectTimeout(2000);
-                audioManage1.setSendingHandler(djJackson);
-                djJackson.setVolume(1);
-                djJacksonOn = true;
-                activeAudio1 = true;
-            }
-            else if(Tools.getListeSalonsBot().get(1).getVoiceChannels().contains(SalonRequeteDjJackson)) {
-                audioManage2.openAudioConnection(SalonRequeteDjJackson);
-                audioManage2.setConnectTimeout(2000);
-                audioManage2.setSendingHandler(djJackson);
-                djJackson.setVolume(1);
-                djJacksonOn = true;
-                activeAudio2 = true;
+            else if (e.getGuild().getVoiceChannels().contains(SalonRequeteDjJackson)) {
+                audioManagers.get(e.getGuild()).openAudioConnection(SalonRequeteDjJackson);
+                audioManagers.get(e.getGuild()).setConnectTimeout(2000);
+                audioManagers.get(e.getGuild()).setSendingHandler(lesDjJacksons.get(e.getGuild()));
+                lesDjJacksons.get(e.getGuild()).setVolume(1);
             }
         }
     }
 
     public void use(MessageReceivedEvent e) {
-        if (e.getMessage().getContent().equalsIgnoreCase("ping") && !e.getAuthor().isBot()) {
-            e.getChannel().sendTyping();
+        if (e.getMessage().getContent().equalsIgnoreCase("ping") && !e.getAuthor().isBot())
             e.getChannel().sendMessage("pong");
-        }//ping -> pong
+        //ping -> pong
 
         if(e.getMessage().getContent().equals("+cat") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 try {
                     e.getChannel().sendMessage(fonctionCat());
                 } catch (IOException e1) {
@@ -223,49 +187,41 @@ public class MessageReceivedEventListener {
 
         if (e.getMessage().getContent().equalsIgnoreCase("manger") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473274355-c6b72360-aa9a-4b91-98a2-ccfcd265eda8.jpg");
             }
         }
         if (e.getMessage().getContent().equalsIgnoreCase("zombie") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473625734-il-tue-ami-zombie.jpg");
             }
         }
         if (e.getMessage().getContent().equalsIgnoreCase("cookies") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473274354-1107530.jpg");
             }
         }
         if (e.getMessage().getContent().equalsIgnoreCase("patate") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473624881-potato.jpeg");
             }
         }
         if (e.getMessage().getContent().equals("+twitch mini") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("https://www.twitch.tv/minipasglop");
             }
         }
         if(e.getMessage().getContent().equalsIgnoreCase("doge") && ! e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("https://t2.rbxcdn.com/3b59a7004e5f205331b7b523c6f919f5");
             }
         }
         if(e.getMessage().getContent().equals("\\triforce") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("NewFags can't triforce \n \u200C\u200C \u200C\u200C \u200C\u200C ▲\n" + " ▲ ▲");
             }
         }
         if (e.getMessage().getContent().equalsIgnoreCase("+site b4") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendTyping();
                 e.getChannel().sendMessage("https://www.b4rb4m.fr");
             }
         }//DiversLiens
@@ -286,24 +242,17 @@ public class MessageReceivedEventListener {
             e.getChannel().sendMessage("Cawak.");
         }//pd cawak
 
-           /* if (e.getMessage().getContent().contains("@") && !e.getAuthor().isBot()) {
-                e.getChannel().sendTyping();
-                e.getChannel().sendMessage("Dis donc " + getMentionFromMess(e.getMessage()) + " tu es bien populaire...");
-                nombreCommandes++;
-            }//Mention depuis le message*/
-
         if (e.getMessage().getContent().contains("windows") && e.getMessage().getContent().contains("bien")) {
-            e.getChannel().sendTyping();
             e.getChannel().sendMessage(Tools.getMentionFromUser(e.getMessage().getAuthor()) + " tu es un sale con.");
         }//insulte les fanboys de windows ^^
 
         if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3 && !e.getMessage().getContent().contains("b4")) {
-            if(! djJacksonOn) connexionSalon(e);
-            if (djJackson.isPlaying()) {
+            if(! lesDjJacksons.get(e.getGuild()).isPlaying()) connexionSalon(e);
+            if (lesDjJacksons.get(e.getGuild()).isPlaying()) {
                 e.getChannel().sendMessage("Je suis deja en train de jouer du son groooos");
             } else {
                 URL lien = null;
-                djJackson.reset();
+                lesDjJacksons.get(e.getGuild()).reset();
                 try {
                     String buf = e.getMessage().getContent().substring(3);
                     lien = new File("localtracks/"+buf+"/"+buf+".mp3").toURI().toURL();
@@ -311,32 +260,23 @@ public class MessageReceivedEventListener {
                     e1.printStackTrace();
                 }
                 try {
-                    djJackson.setAudioUrl(lien);
+                    lesDjJacksons.get(e.getGuild()).setAudioUrl(lien);
                 } catch (IOException | UnsupportedAudioFileException e1) {
                     e1.printStackTrace();
                 }
-                djJackson.play();
+                lesDjJacksons.get(e.getGuild()).play();
             }
         }//Gestion des chansons
 
-        if (activeAudio1 && djJacksonOn && e.getMessage().getContent().equalsIgnoreCase("+tg")) {
-            audioManage1.closeAudioConnection();
-            djJackson.reset();
-            djJacksonOn  = false;
-            activeAudio1 = false;
+        if (lesDjJacksons.get(e.getGuild()).isPlaying() && e.getMessage().getContent().equalsIgnoreCase("+tg")) {
+            lesDjJacksons.get(e.getGuild()).stop();
+            lesDjJacksons.get(e.getGuild()).reset();
+            audioManagers.get(e.getGuild()).closeAudioConnection();
         }//Couper Jackson et le faire deco.
-
-        if (activeAudio2 && djJacksonOn && e.getMessage().getContent().equalsIgnoreCase("+tg")) {
-            audioManage2.closeAudioConnection();
-            djJackson.reset();
-            djJacksonOn  = false;
-            activeAudio2 = false;
-        }//Couper Jackson et le faire deco.
-
 
        if(e.getMessage().getContent().equals("+s")) {
            diplaySongList(e.getTextChannel());
-       }
+       }//La liste des commandes
 
         if (e.getMessage().getContent().equals("CList") && !e.getAuthor().isBot()) {
             displayList(e.getTextChannel());
