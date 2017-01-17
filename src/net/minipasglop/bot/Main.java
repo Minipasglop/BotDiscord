@@ -90,7 +90,7 @@ public class Main implements EventListener {
     }
 
     public static void setSpam(boolean spam) {
-        spam = spam;
+        Main.spam = spam;
     }
 
     public static List<Guild> getListeSalonBot() {
