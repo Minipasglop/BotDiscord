@@ -170,6 +170,14 @@ public class MessageReceivedEventListener {
         }
     }
 
+    private boolean songExist(String songName){
+        String[] nomSongs = new File("localtracks/").list();
+        for(String path : nomSongs)
+            if(songName.equals(path))
+                return true;
+        return false;
+    }
+
     public void use(MessageReceivedEvent e) {
         if (e.getMessage().getContent().equalsIgnoreCase("ping") && !e.getAuthor().isBot())
             e.getChannel().sendMessage("pong");
@@ -247,10 +255,11 @@ public class MessageReceivedEventListener {
         }//insulte les fanboys de windows ^^
 
         if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3 && !e.getMessage().getContent().contains("b4")) {
-            if(! lesDjJacksons.get(e.getGuild()).isPlaying()) connexionSalon(e);
+            boolean songExist = songExist(e.getMessage().getContent().substring(3));
+            if(! audioManagers.get(e.getGuild()).isConnected() && songExist) connexionSalon(e);
             if (lesDjJacksons.get(e.getGuild()).isPlaying()) {
                 e.getChannel().sendMessage("Je suis deja en train de jouer du son groooos");
-            } else {
+            } else if(songExist){
                 URL lien = null;
                 lesDjJacksons.get(e.getGuild()).reset();
                 try {
@@ -261,14 +270,17 @@ public class MessageReceivedEventListener {
                 }
                 try {
                     lesDjJacksons.get(e.getGuild()).setAudioUrl(lien);
+                    lesDjJacksons.get(e.getGuild()).play();
                 } catch (IOException | UnsupportedAudioFileException e1) {
                     e1.printStackTrace();
                 }
-                lesDjJacksons.get(e.getGuild()).play();
+
             }
+            else
+                e.getChannel().sendMessage("SoundName pas valable groooos :/");
         }//Gestion des chansons
 
-        if (lesDjJacksons.get(e.getGuild()).isPlaying() && e.getMessage().getContent().equalsIgnoreCase("+tg")) {
+        if (audioManagers.get(e.getGuild()).isConnected() && e.getMessage().getContent().equalsIgnoreCase("+tg")) {
             lesDjJacksons.get(e.getGuild()).stop();
             lesDjJacksons.get(e.getGuild()).reset();
             audioManagers.get(e.getGuild()).closeAudioConnection();
