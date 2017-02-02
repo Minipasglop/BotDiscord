@@ -1,82 +1,45 @@
 package net.minipasglop.bot;
 
-import net.dv8tion.jda.OnlineStatus;
 import net.dv8tion.jda.entities.Guild;
 import net.dv8tion.jda.entities.TextChannel;
 import net.dv8tion.jda.entities.User;
-import net.dv8tion.jda.events.user.UserOnlineStatusUpdateEvent;
+import net.dv8tion.jda.events.Event;
+import net.dv8tion.jda.events.guild.member.GuildMemberBanEvent;
+import net.dv8tion.jda.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.events.guild.member.GuildMemberLeaveEvent;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+
 
 
 public class UserUpdateStatusEventListener {
 
-    private static SimpleDateFormat h;
-    private static BufferedWriter bw;
-    public UserUpdateStatusEventListener() {
-        h = new SimpleDateFormat ("HH");
+
+    public UserUpdateStatusEventListener(){}
+
+    public void useJoinEvent(GuildMemberJoinEvent e) {
+        messageBienvenueJoinServeur(e.getUser(),e.getGuild().getPublicChannel());
     }
 
-    private static boolean peutDireBonjour(User user) {
-        try {
-            Scanner scanner = new Scanner(new File("LogCo.txt"));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if(line.equals(user.getId()))
-                    return false;
-            }
-            scanner.close();
-            return true;
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    public void useLeaveEvent(Event e){
+        if(e instanceof GuildMemberBanEvent){
+            GuildMemberBanEvent ev = (GuildMemberBanEvent) e;
+            messageDepartServeur(ev.getUser(),ev.getGuild().getPublicChannel(),"Ban");
         }
-        return true;
-    }
-
-    private static void ecrireDansLog(User user) {
-        try {
-            bw = new BufferedWriter(new FileWriter("LogCo.txt",true));
-            bw.write("\n" + user.getId());
-            bw.flush();
-            bw.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        else if(e instanceof GuildMemberLeaveEvent){
+            GuildMemberLeaveEvent ev = (GuildMemberLeaveEvent) e;
+            messageDepartServeur(ev.getUser(),ev.getGuild().getPublicChannel(),"Leave");
         }
     }
 
-    private static void bonjourPersonnalise(TextChannel Salon, User user) {
-        Date currentTime_1 = new Date();
-        String heureString = h.format(currentTime_1);
-        int heure = Integer.parseInt(heureString);
-        if(heure > 20 || heure < 6 ) {
-            if (peutDireBonjour(user)) {
-                Salon.sendMessage("Bonchouèr à toi " + Tools.getMentionFromUser(user));
-                ecrireDansLog(user);
-            }
-        }
-        else {
-            if (peutDireBonjour(user)) {
-                Salon.sendMessage("Bonjour jeune " + Tools.getMentionFromUser(user) + " l'thug.");
-                ecrireDansLog(user);
-            }
-        }
-
-    }//Fonction gerant les bonjours personnalisés
-
-    public void use(UserOnlineStatusUpdateEvent e) {
-        if (e.getPreviousOnlineStatus().equals(OnlineStatus.OFFLINE)) {
-            List<Guild> list = Main.getListeSalonBot();
-            for(Guild t : list){
-                if(t.getUsers().contains(e.getUser())){
-                       bonjourPersonnalise(t.getPublicChannel(), e.getUser());
-                    return;
-                }
-            }
-        }
+    public void messageBienvenueJoinServeur(User u,TextChannel c){
+        c.sendMessage("Bienvenue à : " + u.getAsMention() + " [Join}");
     }
+
+    public void messageDepartServeur(User u, TextChannel c,String type){
+        c.sendMessage("Bienvenue à : " + u.getAsMention() + " ["+type+"}");
+    }
+
 }
 

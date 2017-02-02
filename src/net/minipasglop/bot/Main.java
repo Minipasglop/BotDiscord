@@ -6,6 +6,10 @@ import net.dv8tion.jda.JDA;
 import net.dv8tion.jda.JDABuilder;
 import net.dv8tion.jda.entities.*;
 import net.dv8tion.jda.events.Event;
+import net.dv8tion.jda.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.events.guild.member.GuildMemberBanEvent;
+import net.dv8tion.jda.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.events.user.UserAvatarUpdateEvent;
 import net.dv8tion.jda.events.user.UserNameUpdateEvent;
@@ -109,18 +113,24 @@ public class Main implements EventListener {
             nombreCommandes++;
         }//Partie relative au listener gérant les commandes
 
-        if (event instanceof UserOnlineStatusUpdateEvent) {
-            UserOnlineStatusUpdateEvent ev = (UserOnlineStatusUpdateEvent) event;
-            uusel.use(ev);
+        else if (event instanceof GuildMemberJoinEvent) {
+            GuildMemberJoinEvent ev = (GuildMemberJoinEvent) event;
+            uusel.useJoinEvent(ev);
             nombreCommandes++;
         }// Partie relative au listener gerant le bonjour personnalise
 
-        if (event instanceof UserAvatarUpdateEvent) {
+        else if(event instanceof GuildMemberBanEvent)
+            uusel.useLeaveEvent(event);
+
+        else if(event instanceof GuildMemberLeaveEvent)
+            uusel.useLeaveEvent(event);
+
+        else if (event instanceof UserAvatarUpdateEvent) {
             aanul.useAva((UserAvatarUpdateEvent) event);
             nombreCommandes++;
         }//Partie relative au listener gérant les modifications d'avatar
 
-        if (event instanceof UserNameUpdateEvent) {
+        else if (event instanceof UserNameUpdateEvent) {
             aanul.useName(event);
             nombreCommandes++;
         }//Partie relative au listener gérant les modifications de nom d'utilisateur

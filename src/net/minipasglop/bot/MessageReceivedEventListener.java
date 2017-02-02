@@ -254,7 +254,7 @@ public class MessageReceivedEventListener {
             e.getChannel().sendMessage(Tools.getMentionFromUser(e.getMessage().getAuthor()) + " tu es un sale con.");
         }//insulte les fanboys de windows ^^
 
-        if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3 && !e.getMessage().getContent().contains("b4")) {
+        if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3  && !e.getAuthor().isBot()) {
             boolean songExist = songExist(e.getMessage().getContent().substring(3));
             if(! audioManagers.get(e.getGuild()).isConnected() && songExist) connexionSalon(e);
             if (lesDjJacksons.get(e.getGuild()).isPlaying()) {
@@ -280,7 +280,7 @@ public class MessageReceivedEventListener {
                 e.getChannel().sendMessage("SoundName pas valable groooos :/");
         }//Gestion des chansons
 
-        if (audioManagers.get(e.getGuild()).isConnected() && e.getMessage().getContent().equalsIgnoreCase("+tg")) {
+        if (audioManagers.get(e.getGuild()).isConnected() && e.getMessage().getContent().equalsIgnoreCase("+tg") && !e.getAuthor().isBot()) {
             lesDjJacksons.get(e.getGuild()).stop();
             lesDjJacksons.get(e.getGuild()).reset();
             audioManagers.get(e.getGuild()).closeAudioConnection();

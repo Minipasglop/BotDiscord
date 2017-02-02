@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 //Classe gérant les events relatifs a la modification de nom d'utilisateur / avatar
@@ -19,9 +20,11 @@ public class AvatarAndNameUpdateListener {
     private BufferedWriter bw;
 
     public void useAva(UserAvatarUpdateEvent e){
-        for(Guild chan : Main.getListeSalonBot()){
-            if(chan.getUsers().contains(e.getUser())){
-                Main.getJda().getTextChannels().get(0).sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:\" ");
+        List<Guild> list = Main.getListeSalonBot();
+        for(Guild t : list){
+            if(t.getUsers().contains(e.getUser())){
+                t.getPublicChannel().sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:\" ");
+                return;
             }
         }
     }// Partie relative au listener gérant le changement d'avatar
