@@ -2,19 +2,21 @@ package net.minipasglop.bot;
 
 //http://home.dv8tion.net:8080/job/JDA/Promoted%20Build/javadoc/  <--- Lien vers la Doc de l'API utilisée, très utile, bien fournie... Je recommande :D
 
-import net.dv8tion.jda.JDA;
-import net.dv8tion.jda.JDABuilder;
-import net.dv8tion.jda.entities.*;
-import net.dv8tion.jda.events.Event;
-import net.dv8tion.jda.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberBanEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberLeaveEvent;
-import net.dv8tion.jda.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.events.user.UserAvatarUpdateEvent;
-import net.dv8tion.jda.events.user.UserNameUpdateEvent;
-import net.dv8tion.jda.events.user.UserOnlineStatusUpdateEvent;
-import net.dv8tion.jda.hooks.EventListener;
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.events.guild.GuildBanEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.user.UserAvatarUpdateEvent;
+import net.dv8tion.jda.core.events.user.UserNameUpdateEvent;
+import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import net.dv8tion.jda.core.hooks.EventListener;
+import net.dv8tion.jda.core.events.*;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -35,17 +37,16 @@ public class Main implements EventListener {
     private MessageReceivedEventListener mrel;
     private UserUpdateStatusEventListener uusel;
     private AvatarAndNameUpdateListener aanul;
-    private static Vector<List<User>> listeUsers;
+    private static Vector<List<Member>> listeUsers;
 
 
     Main() {
         try {
-            jda = new JDABuilder().setBotToken(token).setBulkDeleteSplittingEnabled(false).buildBlocking();
+            jda = new JDABuilder(AccountType.BOT).setGame(Game.of("www.twitch.tv/minipasglop")).setToken(token).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(this);
-            jda.getAccountManager().setGame("www.twitch.tv/minipasglop");
             listeUsers = new Vector<>(jda.getGuilds().size());
             for(int i = 0; i < jda.getGuilds().size(); ++i)
-                listeUsers.add(jda.getGuilds().get(i).getUsers());
+                listeUsers.add(jda.getGuilds().get(i).getMembers());
             new FileWriter(new File("LogCo.txt")).close();
             mrel = new MessageReceivedEventListener();
         } catch (LoginException | InterruptedException e) {
@@ -56,8 +57,10 @@ public class Main implements EventListener {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (RateLimitedException e) {
+            e.printStackTrace();
         }
-        System.out.println("Connecte avec: " + jda.getSelfInfo().getUsername());
+        System.out.println("Connecte avec: " + jda.getSelfUser().getName());
         int i;
         System.out.println("Le bot est autorisé sur " + (i = jda.getGuilds().size()) + " serveur" + (i > 1 ? "s" : ""));
         uusel = new UserUpdateStatusEventListener();
@@ -75,7 +78,7 @@ public class Main implements EventListener {
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-                jda.shutdown(true);
+                jda.shutdown();
                 stop = true;
             }//Arreter le bot proprement en tapant "stop" dans la console, il nous affichera alors le nombre de commande qu'il a effectué et attendra 5 secondes avant de mourir... Pauvre Jackson :'(
             if (cmd.equalsIgnoreCase("tg")) {
@@ -119,7 +122,7 @@ public class Main implements EventListener {
             nombreCommandes++;
         }// Partie relative au listener gerant le bonjour personnalise
 
-        else if(event instanceof GuildMemberBanEvent)
+        else if(event instanceof GuildBanEvent)
             uusel.useLeaveEvent(event);
 
         else if(event instanceof GuildMemberLeaveEvent)

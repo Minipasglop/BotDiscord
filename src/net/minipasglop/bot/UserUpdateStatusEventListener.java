@@ -1,17 +1,12 @@
 package net.minipasglop.bot;
 
-import net.dv8tion.jda.entities.Guild;
-import net.dv8tion.jda.entities.TextChannel;
-import net.dv8tion.jda.entities.User;
-import net.dv8tion.jda.events.Event;
-import net.dv8tion.jda.events.guild.member.GuildMemberBanEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.events.guild.member.GuildMemberLeaveEvent;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-
-
+import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.events.Event;
+import net.dv8tion.jda.core.events.guild.GuildBanEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
 
 public class UserUpdateStatusEventListener {
 
@@ -19,26 +14,26 @@ public class UserUpdateStatusEventListener {
     public UserUpdateStatusEventListener(){}
 
     public void useJoinEvent(GuildMemberJoinEvent e) {
-        messageBienvenueJoinServeur(e.getUser(),e.getGuild().getPublicChannel());
+        messageBienvenueJoinServeur(e.getUser(),e.getGuild().getDefaultChannel());
     }
 
     public void useLeaveEvent(Event e){
-        if(e instanceof GuildMemberBanEvent){
-            GuildMemberBanEvent ev = (GuildMemberBanEvent) e;
-            messageDepartServeur(ev.getUser(),ev.getGuild().getPublicChannel(),"Ban");
+        if(e instanceof GuildBanEvent){
+            GuildBanEvent ev = (GuildBanEvent) e;
+            messageDepartServeur(ev.getUser(),ev.getGuild().getDefaultChannel(),"Ban");
         }
         else if(e instanceof GuildMemberLeaveEvent){
             GuildMemberLeaveEvent ev = (GuildMemberLeaveEvent) e;
-            messageDepartServeur(ev.getUser(),ev.getGuild().getPublicChannel(),"Leave");
+            messageDepartServeur(ev.getUser(),ev.getGuild().getDefaultChannel(),"Leave");
         }
     }
 
-    public void messageBienvenueJoinServeur(User u,TextChannel c){
-        c.sendMessage("Bienvenue à : " + u.getAsMention() + " [Join}");
+    public void messageBienvenueJoinServeur(User u, TextChannel c){
+        c.sendMessage("Bienvenue à : " + u.getAsMention() + " [Join}").complete();
     }
 
     public void messageDepartServeur(User u, TextChannel c,String type){
-        c.sendMessage("Bienvenue à : " + u.getAsMention() + " ["+type+"}");
+        c.sendMessage("Adieu : " + u.getName() + " ["+type+"}").complete();
     }
 
 }

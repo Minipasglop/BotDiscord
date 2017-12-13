@@ -1,17 +1,14 @@
 package net.minipasglop.bot;
 
-import net.dv8tion.jda.MessageHistory;
-import net.dv8tion.jda.entities.Guild;
-import net.dv8tion.jda.entities.TextChannel;
-import net.dv8tion.jda.entities.VoiceChannel;
-import net.dv8tion.jda.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.managers.AudioManager;
+import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.managers.AudioManager;
+import net.dv8tion.jda.core.requests.RequestFuture;
+import net.dv8tion.jda.core.requests.restaction.pagination.MessagePaginationAction;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.File;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -23,18 +20,18 @@ public class MessageReceivedEventListener {
 
     private MyTimer monTimer;
     private Map<Guild,AudioManager> audioManagers;
-    private Map<Guild,MyUrlPlayer> lesDjJacksons;
-    private List<VoiceChannel> listeSalonsAudio;
+    /*private Map<Guild,MyUrlPlayer> lesDjJacksons;
+    private List<VoiceChannel> listeSalonsAudio;*/
 
     public MessageReceivedEventListener() throws MalformedURLException {
         monTimer = new MyTimer();
-        listeSalonsAudio = Main.getJda().getVoiceChannels();
+        /* listeSalonsAudio = Main.getJda().getVoiceChannels();
         audioManagers = new HashMap<>();
         lesDjJacksons = new HashMap<>();
         for (Guild chan : Main.getListeSalonBot()){
-            audioManagers.put(chan, Main.getJda().getAudioManager(chan));
+            audioManagers.put(chan, Main.getJda().getGuildById(chan.getId()).getAudioManager());
             lesDjJacksons.put(chan,new MyUrlPlayer(Main.getJda()));
-        }
+        }*/
     }
 
     private void fonctionSpam(MessageReceivedEvent e) {
@@ -44,8 +41,8 @@ public class MessageReceivedEventListener {
         while (cpt < 10000) {
             if (!Main.isSpam())
                 return;
-            e.getChannel().sendTyping();
-            e.getChannel().sendMessage("Je suis jackson le gentil poulet. Rejoins la jackson family ! : http://steamcommunity.com/groups/Jacksonity ");
+            e.getChannel().sendTyping().complete();
+            e.getChannel().sendMessage("Je suis jackson le gentil poulet. Rejoins la jackson family ! : http://steamcommunity.com/groups/Jacksonity ").complete();
             cpt++;
             if (cpt % 5 == 0)
                 timer = 3000;
@@ -60,27 +57,34 @@ public class MessageReceivedEventListener {
     } // Spam jusqu'a ce que je tape tg dans la console.
 
     private static void clearChat(MessageReceivedEvent e) {
-        MessageHistory historique = e.getTextChannel().getHistory();
-        e.getTextChannel().deleteMessages(historique.retrieveAll());
-        e.getTextChannel().sendTyping();
-        e.getChannel().sendMessage("La salle de chat a été nettoyée. :see_no_evil: ");
+        List<Message> historique = e.getTextChannel().getHistory().retrievePast(100).complete();
+        if(historique.size() == 0 ){
+            e.getTextChannel().sendTyping().complete();
+            e.getChannel().sendMessage("La salle de chat a été nettoyée. :see_no_evil: ").queue();
+            return;
+        }
+        Iterator<Message> iterator = historique.iterator();
+        while(iterator.hasNext()){
+            iterator.next().delete().queue();
+        }
+        e.getTextChannel().deleteMessages(historique).complete();
+        clearChat(e);
     }
 
     private static void clearXMessages(MessageReceivedEvent e) {
-        MessageHistory historique = e.getTextChannel().getHistory();
         String message = e.getMessage().getContent();
-        int nombre = 0;
+        int nombre;
         String entier = message.substring(9);
-        nombre = Integer.parseInt(entier);
-        nombre++;
-        e.getTextChannel().deleteMessages(historique.retrieve(nombre));
-        e.getTextChannel().sendTyping();
-        e.getChannel().sendMessage((nombre - 1) + " messages ont été supprimés. ( +cleanup " + (nombre - 1) + " )");
+        nombre = Integer.parseInt(entier) +1;
+        List<Message> historique = e.getTextChannel().getHistory().retrievePast(nombre).complete();
+        e.getTextChannel().deleteMessages(historique).queue();
+        e.getTextChannel().sendTyping().queue();
+        e.getChannel().sendMessage((nombre - 1) + " messages ont été supprimés. ( +cleanup " + (nombre - 1) + " )").queue();
     }// On efface X messages
 
     private void displayList(TextChannel Salon) {
-        Salon.sendTyping();
-        String[] TabCommandes = new String[]{"+s", "+twitch mini", "+site b4", "+clear" , "+cat", "+cleanup XX ", "CList ","+tg"};
+        Salon.sendTyping().complete();
+        String[] TabCommandes = new String[]{"+s", "+twitch mini", "+site b4", "+clear" , "+cat", "+cleanup XX ", "+help ","+tg"};
         String Message = "```";
         for (int i = 0; i < TabCommandes.length - 1; ++i) {
             Message += "\n";
@@ -91,13 +95,13 @@ public class MessageReceivedEventListener {
             Message += Ligne;
         }
         Message += "```";
-        Salon.sendMessage(Message);
+        Salon.sendMessage(Message).complete();
     }//Affiche la liste des commandes. Penser à mettre à jour à l'ajout de new commandes.
 
     private boolean canDoCommand(MessageReceivedEvent e) {
         if (monTimer.getTempsRestant() != 0) {
-            e.getChannel().sendTyping();
-            e.getChannel().sendMessage(Tools.getMentionFromUser(e.getAuthor()) + " ferme ta gueule.");
+            e.getChannel().sendTyping().complete();
+            e.getChannel().sendMessage(Tools.getMentionFromUser(e.getAuthor()) + " ferme ta gueule.").complete();
             return false;
         } else {
             monTimer.setTempsRestant(5);
@@ -118,8 +122,7 @@ public class MessageReceivedEventListener {
         BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
         byte[] bytes = new byte[1024];
         int tmp;
-        String chaine;
-        String chaine2;
+        String chaine, chaine2;
         String mess = null;
         while ((tmp = bis.read(bytes)) != -1) {
             chaine = new String(bytes, 0, tmp);
@@ -130,7 +133,7 @@ public class MessageReceivedEventListener {
         return mess;
     }
 
-    private void diplaySongList(TextChannel Salon) {
+    /*private void diplaySongList(TextChannel Salon) {
         Salon.sendTyping();
         String[] nomSongs = new File("localtracks/").list();
         String Message ="```\n+s <soundName>";
@@ -176,85 +179,68 @@ public class MessageReceivedEventListener {
             if(songName.equals(path))
                 return true;
         return false;
-    }
+    } */
 
     public void use(MessageReceivedEvent e) {
         if (e.getMessage().getContent().equalsIgnoreCase("ping") && !e.getAuthor().isBot())
-            e.getChannel().sendMessage("pong");
+            e.getChannel().sendMessage("Le ping est de : " + String.valueOf(Main.getJda().getPing()) + " ms").queue();
         //ping -> pong
 
-        if(e.getMessage().getContent().equals("+cat") && !e.getAuthor().isBot()) {
+        else if(e.getMessage().getContent().equals("+cat") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
                 try {
-                    e.getChannel().sendMessage(fonctionCat());
+                    e.getChannel().sendMessage(fonctionCat()).queue();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             }
         }
 
-        if (e.getMessage().getContent().equalsIgnoreCase("manger") && !e.getAuthor().isBot()) {
+        else if (e.getMessage().getContent().equals("+twitch mini") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473274355-c6b72360-aa9a-4b91-98a2-ccfcd265eda8.jpg");
+                e.getChannel().sendMessage("https://www.twitch.tv/minipasglop").queue();
             }
         }
-        if (e.getMessage().getContent().equalsIgnoreCase("zombie") && !e.getAuthor().isBot()) {
+
+        else if(e.getMessage().getContent().equalsIgnoreCase("doge") && ! e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473625734-il-tue-ami-zombie.jpg");
+                e.getChannel().sendMessage("https://t2.rbxcdn.com/3b59a7004e5f205331b7b523c6f919f5").queue();
             }
         }
-        if (e.getMessage().getContent().equalsIgnoreCase("cookies") && !e.getAuthor().isBot()) {
+
+        else if(e.getMessage().getContent().equals("\\triforce") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473274354-1107530.jpg");
+                e.getChannel().sendMessage("NewFags can't triforce \n \u200C\u200C \u200C\u200C \u200C\u200C ▲\n" + " ▲ ▲").queue();
             }
         }
-        if (e.getMessage().getContent().equalsIgnoreCase("patate") && !e.getAuthor().isBot()) {
+
+        else if (e.getMessage().getContent().equalsIgnoreCase("+site b4") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
-                e.getChannel().sendMessage("http://image.noelshack.com/fichiers/2016/36/1473624881-potato.jpeg");
-            }
-        }
-        if (e.getMessage().getContent().equals("+twitch mini") && !e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                e.getChannel().sendMessage("https://www.twitch.tv/minipasglop");
-            }
-        }
-        if(e.getMessage().getContent().equalsIgnoreCase("doge") && ! e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                e.getChannel().sendMessage("https://t2.rbxcdn.com/3b59a7004e5f205331b7b523c6f919f5");
-            }
-        }
-        if(e.getMessage().getContent().equals("\\triforce") && !e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                e.getChannel().sendMessage("NewFags can't triforce \n \u200C\u200C \u200C\u200C \u200C\u200C ▲\n" + " ▲ ▲");
-            }
-        }
-        if (e.getMessage().getContent().equalsIgnoreCase("+site b4") && !e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                e.getChannel().sendMessage("https://www.b4rb4m.fr");
+                e.getChannel().sendMessage("https://www.b4rb4m.fr").queue();
             }
         }//DiversLiens
 
-        if (e.getMessage().getContent().equals("On leur apprends la vie Jackson ?") && e.getAuthor().getId().equals("218461869617184768")) {
+        else if (e.getMessage().getContent().equals("On leur apprends la vie Jackson ?") && e.getAuthor().getId().equals("218461869617184768")) {
             fonctionSpam(e);
         }//Spam
 
-        if (e.getMessage().getContent().equals("+clear") && !e.getAuthor().isBot()) {
+        else if (e.getMessage().getContent().equals("+clear") && !e.getAuthor().isBot()) {
             clearChat(e);
         }// On clear le TextChannel
 
-        if (e.getMessage().getContent().contains("+cleanup") && !e.getAuthor().isBot() && e.getMessage().getContent().length() <= 11) {
+        else if (e.getMessage().getContent().contains("+cleanup") && !e.getAuthor().isBot() && e.getMessage().getContent().length() <= 11) {
             clearXMessages(e);
         }// on efface les X derniers messages avec +cleanup X
 
-        if(e.getMessage().getContent().equals("pd") && !e.getAuthor().isBot()){
-            e.getChannel().sendMessage("Cawak.");
+        else if(e.getMessage().getContent().equals("pd") && !e.getAuthor().isBot()){
+            e.getChannel().sendMessage("Cawak.").queue();
         }//pd cawak
 
-        if (e.getMessage().getContent().contains("windows") && e.getMessage().getContent().contains("bien")) {
-            e.getChannel().sendMessage(Tools.getMentionFromUser(e.getMessage().getAuthor()) + " tu es un sale con.");
+        else if (e.getMessage().getContent().contains("windows") && e.getMessage().getContent().contains("bien")) {
+            e.getChannel().sendMessage(Tools.getMentionFromUser(e.getMessage().getAuthor()) + " tu es un sale con.").queue();
         }//insulte les fanboys de windows ^^
 
-        if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3  && !e.getAuthor().isBot()) {
+        /* if (e.getMessage().getContent().startsWith("+s") && e.getMessage().getContent().length() > 3  && !e.getAuthor().isBot()) {
             boolean songExist = songExist(e.getMessage().getContent().substring(3));
             if(! audioManagers.get(e.getGuild()).isConnected() && songExist) connexionSalon(e);
             if (lesDjJacksons.get(e.getGuild()).isPlaying()) {
@@ -288,9 +274,9 @@ public class MessageReceivedEventListener {
 
        if(e.getMessage().getContent().equals("+s")) {
            diplaySongList(e.getTextChannel());
-       }//La liste des commandes
+       }//La liste des commandes */
 
-        if (e.getMessage().getContent().equals("CList") && !e.getAuthor().isBot()) {
+        if (e.getMessage().getContent().equals("+help") && !e.getAuthor().isBot()) {
             displayList(e.getTextChannel());
         }//Help
 

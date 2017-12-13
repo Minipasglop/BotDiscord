@@ -1,9 +1,8 @@
 package net.minipasglop.bot;
 
-import net.dv8tion.jda.JDA;
-import net.dv8tion.jda.audio.player.URLPlayer;
-import net.dv8tion.jda.utils.SimpleLog;
-import org.apache.http.HttpHost;
+
+
+import net.dv8tion.jda.core.JDA;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -14,6 +13,7 @@ import java.net.*;
 
 //Meme chose que la classe URLPlayer de L'API utilisée, on modifie juste la visibilité de la fonction reset(), afin de pouvoir faire jouer des sons au bot, et de lui dire de se taire si c'est
 //innaproprié :)
+/*
 public class MyUrlPlayer extends URLPlayer {
     protected String userAgent;
     protected URL urlOfResource;
@@ -129,3 +129,4 @@ public class MyUrlPlayer extends URLPlayer {
     }
 
 }
+*/

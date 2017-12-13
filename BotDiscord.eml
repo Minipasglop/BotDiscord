@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component inherit-compiler-output="true" jdk="1.8" jdk_type="JavaSDK">
+<component inherit-compiler-output="true" inheritJdk="true">
 	<output-test url="file://$MODULE_DIR$/out/test/BotDiscord"/>
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="JDA-3.3.0_260-withDependencies" value="project"/>
+	</levels>
 </component>

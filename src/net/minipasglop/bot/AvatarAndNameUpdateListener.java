@@ -1,10 +1,12 @@
 package net.minipasglop.bot;
 
-import net.dv8tion.jda.entities.Guild;
-import net.dv8tion.jda.entities.User;
-import net.dv8tion.jda.events.Event;
-import net.dv8tion.jda.events.user.UserAvatarUpdateEvent;
-import net.dv8tion.jda.events.user.UserNameUpdateEvent;
+
+
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.core.events.Event;
+import net.dv8tion.jda.core.events.user.UserAvatarUpdateEvent;
+import net.dv8tion.jda.core.events.user.UserNameUpdateEvent;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -22,8 +24,8 @@ public class AvatarAndNameUpdateListener {
     public void useAva(UserAvatarUpdateEvent e){
         List<Guild> list = Main.getListeSalonBot();
         for(Guild t : list){
-            if(t.getUsers().contains(e.getUser())){
-                t.getPublicChannel().sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:\" ");
+            if(t.getMembers().contains(e.getUser())){
+                t.getDefaultChannel().sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:").complete();
                 return;
             }
         }
@@ -31,11 +33,11 @@ public class AvatarAndNameUpdateListener {
 
     public void useName(Event e) {
         User user = ((UserNameUpdateEvent) e).getUser();
-        user.getPrivateChannel().sendMessage("Jackson n'oublie pas... :wink:");
+        user.openPrivateChannel().complete().sendMessage("Jackson n'oublie pas... :wink:").complete();
         String txtDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
         try {
             bw = new BufferedWriter(new FileWriter("Log.txt", true));
-            bw.write("\nL'utilisateur : " + user.getUsername() + " d'id : " + user.getId() + " a change de nom le : " + txtDate + "\n");
+            bw.write("\nL'utilisateur : " + user.getName() + " d'id : " + user.getId() + " a change de nom le : " + txtDate + "\n");
             bw.flush();
             bw.close();
         } catch (IOException ex) {
