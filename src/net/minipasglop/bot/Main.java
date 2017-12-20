@@ -53,11 +53,7 @@ public class Main implements EventListener {
             e.printStackTrace();
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
             return;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (RateLimitedException e) {
+        } catch (IOException | RateLimitedException e) {
             e.printStackTrace();
         }
         System.out.println("Connecte avec: " + jda.getSelfUser().getName());

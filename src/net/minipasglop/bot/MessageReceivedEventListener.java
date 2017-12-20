@@ -3,8 +3,6 @@ package net.minipasglop.bot;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
-import net.dv8tion.jda.core.requests.RequestFuture;
-import net.dv8tion.jda.core.requests.restaction.pagination.MessagePaginationAction;
 
 import javax.swing.*;
 import java.io.BufferedInputStream;
@@ -84,7 +82,7 @@ public class MessageReceivedEventListener {
 
     private void displayList(TextChannel Salon) {
         Salon.sendTyping().complete();
-        String[] TabCommandes = new String[]{"+s", "+twitch mini", "+site b4", "+clear" , "+cat", "+cleanup XX ", "+help ","+tg"};
+        String[] TabCommandes = new String[]{"+s", "+twitch mini", "+clear" , "+cat", "+cleanup XX ", "+help ","+tg"};
         String Message = "```";
         for (int i = 0; i < TabCommandes.length - 1; ++i) {
             Message += "\n";
@@ -202,11 +200,6 @@ public class MessageReceivedEventListener {
             }
         }
 
-        else if(e.getMessage().getContent().equalsIgnoreCase("doge") && ! e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                e.getChannel().sendMessage("https://t2.rbxcdn.com/3b59a7004e5f205331b7b523c6f919f5").queue();
-            }
-        }
 
         else if(e.getMessage().getContent().equals("\\triforce") && !e.getAuthor().isBot()) {
             if(canDoCommand(e)) {
@@ -214,11 +207,6 @@ public class MessageReceivedEventListener {
             }
         }
 
-        else if (e.getMessage().getContent().equalsIgnoreCase("+site b4") && !e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                e.getChannel().sendMessage("https://www.b4rb4m.fr").queue();
-            }
-        }//DiversLiens
 
         else if (e.getMessage().getContent().equals("On leur apprends la vie Jackson ?") && e.getAuthor().getId().equals("218461869617184768")) {
             fonctionSpam(e);

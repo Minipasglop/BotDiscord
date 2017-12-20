@@ -3,6 +3,7 @@ package net.minipasglop.bot;
 
 
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.Event;
 import net.dv8tion.jda.core.events.user.UserAvatarUpdateEvent;
@@ -24,9 +25,13 @@ public class AvatarAndNameUpdateListener {
     public void useAva(UserAvatarUpdateEvent e){
         List<Guild> list = Main.getListeSalonBot();
         for(Guild t : list){
-            if(t.getMembers().contains(e.getUser())){
-                t.getDefaultChannel().sendMessage(e.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:").complete();
+            try{
+                Member userConcerne = t.getMember(e.getUser());
+                t.getDefaultChannel().sendMessage(userConcerne.getUser().getAsMention() + " j'adore ton nouvel avatar :heart: :fire:").complete();
                 return;
+            }
+            catch (Exception e1){
+                e1.printStackTrace();
             }
         }
     }// Partie relative au listener gérant le changement d'avatar

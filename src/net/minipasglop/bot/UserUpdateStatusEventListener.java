@@ -20,7 +20,7 @@ public class UserUpdateStatusEventListener {
     public void useLeaveEvent(Event e){
         if(e instanceof GuildBanEvent){
             GuildBanEvent ev = (GuildBanEvent) e;
-            messageDepartServeur(ev.getUser(),ev.getGuild().getDefaultChannel(),"Ban");
+            messageDepartServeur(ev.getUser(),ev.getGuild().getDefaultChannel(),"Kick / Ban");
         }
         else if(e instanceof GuildMemberLeaveEvent){
             GuildMemberLeaveEvent ev = (GuildMemberLeaveEvent) e;
@@ -29,11 +29,11 @@ public class UserUpdateStatusEventListener {
     }
 
     public void messageBienvenueJoinServeur(User u, TextChannel c){
-        c.sendMessage("Bienvenue à : " + u.getAsMention() + " [Join}").complete();
+        c.sendMessage("Bienvenue à : " + u.getAsMention() + " [Join]").complete();
     }
 
     public void messageDepartServeur(User u, TextChannel c,String type){
-        c.sendMessage("Adieu : " + u.getName() + " ["+type+"}").complete();
+        c.sendMessage("Adieu : " + u.getName() + " ["+type+"]").complete();
     }
 
 }
