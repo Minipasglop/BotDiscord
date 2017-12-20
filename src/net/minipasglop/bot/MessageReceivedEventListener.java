@@ -5,12 +5,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
 
 import javax.swing.*;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
 
 
@@ -102,7 +97,7 @@ public class MessageReceivedEventListener {
             e.getChannel().sendMessage(Tools.getMentionFromUser(e.getAuthor()) + " ferme ta gueule.").complete();
             return false;
         } else {
-            monTimer.setTempsRestant(5);
+            monTimer.setTempsRestant(2);
             new SwingWorker<Void, Void>() {
                 public Void doInBackground() {
                     MyTimer.timing(monTimer);
@@ -112,23 +107,6 @@ public class MessageReceivedEventListener {
             return true;
         }
 
-    }
-
-    private String fonctionCat() throws IOException {
-        HttpURLConnection conn = (HttpURLConnection) new URL("http://random.cat/meow").openConnection();
-        conn.connect();
-        BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-        byte[] bytes = new byte[1024];
-        int tmp;
-        String chaine, chaine2;
-        String mess = null;
-        while ((tmp = bis.read(bytes)) != -1) {
-            chaine = new String(bytes, 0, tmp);
-            chaine2 = chaine;
-            mess = chaine.substring(chaine.indexOf("http"),14) + "//random.cat/i" + chaine2.substring(32,chaine2.indexOf("\"}"));
-        }
-        conn.disconnect();
-        return mess;
     }
 
     /*private void diplaySongList(TextChannel Salon) {
@@ -185,13 +163,6 @@ public class MessageReceivedEventListener {
         //ping -> pong
 
         else if(e.getMessage().getContent().equals("+cat") && !e.getAuthor().isBot()) {
-            if(canDoCommand(e)) {
-                try {
-                    e.getChannel().sendMessage(fonctionCat()).queue();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
         }
 
         else if (e.getMessage().getContent().equals("+twitch mini") && !e.getAuthor().isBot()) {

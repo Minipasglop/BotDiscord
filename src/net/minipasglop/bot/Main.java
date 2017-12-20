@@ -22,7 +22,6 @@ import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
@@ -37,16 +36,13 @@ public class Main implements EventListener {
     private MessageReceivedEventListener mrel;
     private UserUpdateStatusEventListener uusel;
     private AvatarAndNameUpdateListener aanul;
-    private static Vector<List<Member>> listeUsers;
+    private static BotCommandMatcher chatCommandHandler;
 
 
     Main() {
         try {
             jda = new JDABuilder(AccountType.BOT).setGame(Game.of("www.twitch.tv/minipasglop")).setToken(token).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(this);
-            listeUsers = new Vector<>(jda.getGuilds().size());
-            for(int i = 0; i < jda.getGuilds().size(); ++i)
-                listeUsers.add(jda.getGuilds().get(i).getMembers());
             new FileWriter(new File("LogCo.txt")).close();
             mrel = new MessageReceivedEventListener();
         } catch (LoginException | InterruptedException e) {
@@ -56,6 +52,7 @@ public class Main implements EventListener {
         } catch (IOException | RateLimitedException e) {
             e.printStackTrace();
         }
+        chatCommandHandler = new BotCommandMatcher("+");
         System.out.println("Connecte avec: " + jda.getSelfUser().getName());
         int i;
         System.out.println("Le bot est autorisé sur " + (i = jda.getGuilds().size()) + " serveur" + (i > 1 ? "s" : ""));
@@ -108,7 +105,7 @@ public class Main implements EventListener {
     public void onEvent(Event event) {
         if (event instanceof MessageReceivedEvent) {
             MessageReceivedEvent e = (MessageReceivedEvent) event;
-            mrel.use(e);
+            chatCommandHandler.match(e.getMessage(),e);
             nombreCommandes++;
         }//Partie relative au listener gérant les commandes
 
