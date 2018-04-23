@@ -7,6 +7,8 @@ import command.server.managing.*;
 import java.util.HashMap;
 import java.util.Map;
 
+//Code from https://github.com/thibautbessone
+
 public class CommandHandler {
 
     private static Map<String, ICommand> commands = new HashMap<>();

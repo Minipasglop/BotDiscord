@@ -1,5 +1,5 @@
 package utils;
-
+//Code from https://github.com/thibautbessone
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
