@@ -1,7 +1,9 @@
 package command.server.managing;
 
 import command.ICommand;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 public class BanCommand implements ICommand {
     private final String HELP = "Ban un / plusieurs utilisateur(s) du seveur. \nUsage : `!ban @UserA @UserB @UserC ... Durée Raison `";
     private final String BAN_MESSAGE = "Tu as été banni car : ";
+    private final String NOT_ALLOWED = "Tu n'es pas habilité à bannir... Dommage :)";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -18,9 +21,15 @@ public class BanCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        List<Member> targetedUsers = event.getMessage().getMentionedMembers();
-        for (Member curr : targetedUsers) {
-            event.getGuild().getController().ban(curr,Integer.parseInt(args[args.length -2]),BAN_MESSAGE + args[args.length -1]).queue();
+        if(event.getMember().getPermissions().contains(Permission.BAN_MEMBERS)) {
+            List<Member> targetedUsers = event.getMessage().getMentionedMembers();
+            for (Member curr : targetedUsers) {
+                event.getGuild().getController().ban(curr, Integer.parseInt(args[args.length - 2]), BAN_MESSAGE + args[args.length - 1]).queue();
+            }
+        }else{
+            event.getMessage().delete().queue();
+            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
+            chanToTalk.sendMessage(NOT_ALLOWED).queue();
         }
     }
 
