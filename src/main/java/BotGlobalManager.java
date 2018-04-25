@@ -4,7 +4,6 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import utils.GlobalListener;
 
 import javax.security.auth.login.LoginException;
 import java.util.Scanner;

@@ -10,11 +10,12 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class UserMovementListener extends ListenerAdapter {
 
+    private final String ID_SERVEUR_MINI = "218753166815133696";
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         messageBienvenueJoinServeur(event.getUser(),event.getGuild().getDefaultChannel());
-        if(event.getGuild().getId().equals("218753166815133696")) {
+        if(event.getGuild().getId().equals(ID_SERVEUR_MINI)) {
             autoRole(event.getGuild(), event.getMember());
         }
     }
@@ -29,7 +30,7 @@ public class UserMovementListener extends ListenerAdapter {
     }
 
     private void messageBienvenueJoinServeur(User u, TextChannel c){
-        c.sendMessage(":punch:Bienvenue à : " + u.getAsMention() + " [Join]").complete();
+        c.sendMessage(":punch: Bienvenue à : " + u.getAsMention() + " [Join]").complete();
     }
     private void messageDepartServeur(User u, TextChannel c){
         c.sendMessage("Adieu : " + u.getName() + " [Leave] :cry:").complete();
