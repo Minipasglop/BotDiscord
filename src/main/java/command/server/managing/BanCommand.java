@@ -26,7 +26,7 @@ public class BanCommand implements ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().ban(curr, Integer.parseInt(args[args.length - 2]), BAN_MESSAGE + args[args.length - 1]).queue();
-                System.out.println(ACTION_PERFORMED + curr.getEffectiveName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
+                System.out.println(ACTION_PERFORMED + curr.getNickname() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
             }
         }else{
             event.getMessage().delete().queue();
