@@ -12,7 +12,7 @@ public class KickCommand implements ICommand {
     private final String HELP = "Kick un / plusieurs utilisateur(s) du seveur. \nUsage : `!kick @UserA @UserB @UserC ... Raison `";
     private final String KICK_MESSAGE = "Tu as été exclu car : ";
     private final String NOT_ALLOWED = "Tu n'es pas habilité à kick... Dommage :)";
-
+    private final String ACTION_PERFORMED = "Eclure : ";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -26,6 +26,7 @@ public class KickCommand implements ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().kick(curr, KICK_MESSAGE + args[args.length - 1]).queue();
+                System.out.println(ACTION_PERFORMED + curr.getEffectiveName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
             }
         }else {
             event.getMessage().delete().queue();

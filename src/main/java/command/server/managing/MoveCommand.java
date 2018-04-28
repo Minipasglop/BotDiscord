@@ -15,6 +15,7 @@ public class MoveCommand implements ICommand {
     private final String HELP = "Déplace un utilisateur d'un salon 1 vers un salon 2 . \nUsage : `!move @UserA @UserB @UserC ... SalonCible `";
     private final String COMMAND_FAILED = "Il y a eu une erreur au moment de déplacer l'utilisateur. Veuillez vous assurer qu'il soit déjà connecté à un salon vocal.";
     private final String NOT_ALLOWED = "Tu n'es pas habilité à déplacer d'autres utilisateurs... Dommage :)";
+    private final String ACTION_PERFORMED = "Déplacer : ";
 
 
     @Override
@@ -31,6 +32,7 @@ public class MoveCommand implements ICommand {
                 List<VoiceChannel> targetChannel = event.getGuild().getVoiceChannelsByName(args[args.length - 1], true);
                 try {
                     event.getGuild().getController().moveVoiceMember(curr, targetChannel.get(0)).queue();
+                    System.out.println(ACTION_PERFORMED + curr.getEffectiveName() + " vers le salon " + targetChannel.get(0) + " sur le serveur : " + event.getGuild().getName());
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                     event.getTextChannel().sendMessage(COMMAND_FAILED).queue();

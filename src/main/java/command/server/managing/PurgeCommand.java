@@ -17,7 +17,6 @@ public class PurgeCommand implements ICommand {
     private final String NOT_ALLOWED = "Tu n'es pas habilité à clean le chat... Dommage :)";
 
 
-
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if(args.length != 0 && args[0].equals("help") || args.length !=0 ) return false;

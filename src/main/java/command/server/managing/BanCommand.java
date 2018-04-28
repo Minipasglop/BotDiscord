@@ -12,6 +12,7 @@ public class BanCommand implements ICommand {
     private final String HELP = "Ban un / plusieurs utilisateur(s) du seveur. \nUsage : `!ban @UserA @UserB @UserC ... Durée Raison `";
     private final String BAN_MESSAGE = "Tu as été banni car : ";
     private final String NOT_ALLOWED = "Tu n'es pas habilité à bannir... Dommage :)";
+    private final String ACTION_PERFORMED = "Bannir : ";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -25,6 +26,7 @@ public class BanCommand implements ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().ban(curr, Integer.parseInt(args[args.length - 2]), BAN_MESSAGE + args[args.length - 1]).queue();
+                System.out.println(ACTION_PERFORMED + curr.getEffectiveName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
             }
         }else{
             event.getMessage().delete().queue();

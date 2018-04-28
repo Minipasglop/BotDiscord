@@ -14,7 +14,7 @@ public class MuteCommand implements ICommand {
     private final String MUTE_MESSAGE = "Tu as été rendu muet car : ";
     private final String UNMUTE_MESSAGE = "Tu as été unmute. Sois sage maintenant !";
     private final String NOT_ALLOWED = "Tu n'es pas habilité à mute d'autres utilisateurs... Dommage :)";
-
+    private final String ACTION_PERFORMED = "Rendre muet : ";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -28,6 +28,7 @@ public class MuteCommand implements ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().setMute(curr, true).queue();
+                System.out.println(ACTION_PERFORMED + curr.getEffectiveName() + " sur le serveur : " + event.getGuild().getName());
                 PrivateChannel chanToTalk = curr.getUser().openPrivateChannel().complete();
                 chanToTalk.sendMessage(MUTE_MESSAGE + args[args.length - 2] + " et ce pour " + args[args.length - 1] + " minute." + (Integer.parseInt(args[args.length - 1]) > 1 ? "s" : "")).queue();
                 Runnable waitUntilDemute = () -> {
