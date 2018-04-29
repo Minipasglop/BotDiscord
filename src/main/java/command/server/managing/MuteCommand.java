@@ -15,7 +15,7 @@ public class MuteCommand implements ICommand {
     private final String UNMUTE_MESSAGE = "Tu as été unmute. Sois sage maintenant !";
     private final String NOT_ALLOWED = "Tu n'es pas habilité à mute d'autres utilisateurs... Dommage :)";
     private final String ACTION_PERFORMED = "Rendre muet : ";
-    private final String ACTION_CALLBACK = "Rendre muet : ";
+    private final String ACTION_CALLBACK = "Rendre parole possible : ";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
