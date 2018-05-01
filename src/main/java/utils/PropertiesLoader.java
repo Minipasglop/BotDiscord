@@ -9,6 +9,8 @@ public class PropertiesLoader {
 
     private String userEventStatus;
 
+    private final String FILE_PATH = "jackson.properties";
+
     public String getBotToken() {
         return botToken;
     }
@@ -19,7 +21,7 @@ public class PropertiesLoader {
 
     public PropertiesLoader() {
         try {
-            File configFile = new File("jackson.properties");
+            File configFile = new File(FILE_PATH);
             FileInputStream fileInput = new FileInputStream(configFile);
             Properties properties = new Properties();
             properties.load(fileInput);
