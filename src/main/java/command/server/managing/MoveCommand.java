@@ -28,8 +28,8 @@ public class MoveCommand implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         if(event.getMember().getPermissions().contains(Permission.VOICE_MOVE_OTHERS)) {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
+            List<VoiceChannel> targetChannel = event.getGuild().getVoiceChannelsByName(args[args.length - 1], true);
             for (Member curr : targetedUsers) {
-                List<VoiceChannel> targetChannel = event.getGuild().getVoiceChannelsByName(args[args.length - 1], true);
                 try {
                     event.getGuild().getController().moveVoiceMember(curr, targetChannel.get(0)).queue();
                     System.out.println(ACTION_PERFORMED + curr.getNickname() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
