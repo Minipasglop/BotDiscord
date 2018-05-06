@@ -9,15 +9,19 @@ public class PropertiesLoader {
 
     private String userEventStatus;
 
+    private String addRoleCommandStatus;
+
     private final String FILE_PATH = "jackson.properties";
 
     public String getBotToken() {
         return botToken;
     }
 
-    public boolean isUserMovelementListenerEnabled() {
+    public boolean isUserMovementListenerEnabled() {
         return ("true").equals(userEventStatus);
     }
+
+    public boolean isRoleAddingCommandEnabled(){ return("true").equals(addRoleCommandStatus); }
 
     public PropertiesLoader() {
         try {
@@ -29,6 +33,7 @@ public class PropertiesLoader {
 
             botToken = properties.getProperty("botToken");
             userEventStatus = properties.getProperty("userEventStatus");
+            addRoleCommandStatus = properties.getProperty("addRoleCommandStatus");
 
         } catch (IOException e) {
             e.printStackTrace();

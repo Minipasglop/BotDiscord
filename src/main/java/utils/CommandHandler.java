@@ -42,5 +42,6 @@ public class CommandHandler {
         commands.put("kick",new KickCommand());
         commands.put("ban",new BanCommand());
         commands.put("mute",new MuteCommand());
+        commands.put("addRole",new RoleAddingCommand());
     }
 }
