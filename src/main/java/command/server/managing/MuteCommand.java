@@ -29,14 +29,14 @@ public class MuteCommand implements ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().setMute(curr, true).queue();
-                System.out.println(ACTION_PERFORMED + curr.getNickname() + " sur le serveur : " + event.getGuild().getName());
+                System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                 PrivateChannel chanToTalk = curr.getUser().openPrivateChannel().complete();
                 chanToTalk.sendMessage(MUTE_MESSAGE + args[args.length - 2] + " et ce pour " + args[args.length - 1] + " minute." + (Integer.parseInt(args[args.length - 1]) > 1 ? "s" : "")).queue();
                 Runnable waitUntilDemute = () -> {
                     try {
                         Thread.sleep(Integer.parseInt(args[args.length - 1]) * 60000);
                         event.getGuild().getController().setMute(curr, false).queue();
-                        System.out.println(ACTION_CALLBACK + curr.getNickname() + " sur le serveur : " + event.getGuild().getName());
+                        System.out.println(ACTION_CALLBACK + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                         chanToTalk.sendMessage(UNMUTE_MESSAGE).queue();
                     } catch (InterruptedException e) {
                         e.printStackTrace();

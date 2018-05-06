@@ -6,12 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" afterDir="false" />
-    </list>
     <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/command/server/managing/PurgeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/command/server/managing/PurgeCommand.java" afterDir="false" />
+    </list>
+    <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" afterDir="false" />
     </list>
     <ignored path="BotDiscord.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -667,7 +666,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525603495390</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Typo suppression d'un double point">
+      <created>1525603524874</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1525603524874</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -727,7 +733,8 @@
     <MESSAGE value="Modification statut du bot" />
     <MESSAGE value="Optimisation de la commande move en évitant de recréer un objet déja généré qui ne bouge pas" />
     <MESSAGE value="Commande d'ajout de role + classe utilitaire pour générer couleur random + nouvelle entrée dans le fichier de propriétés pour activer ou non la commande d'ajout de role" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commande d'ajout de role + classe utilitaire pour générer couleur random + nouvelle entrée dans le fichier de propriétés pour activer ou non la commande d'ajout de role" />
+    <MESSAGE value="Typo suppression d'un double point" />
+    <option name="LAST_COMMIT_MESSAGE" value="Typo suppression d'un double point" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

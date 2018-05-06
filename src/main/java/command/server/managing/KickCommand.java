@@ -26,7 +26,7 @@ public class KickCommand implements ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().kick(curr, KICK_MESSAGE + args[args.length - 1]).queue();
-                System.out.println(ACTION_PERFORMED + curr.getNickname() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
+                System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
             }
         }else {
             event.getMessage().delete().queue();

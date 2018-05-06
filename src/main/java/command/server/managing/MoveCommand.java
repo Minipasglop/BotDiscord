@@ -32,7 +32,7 @@ public class MoveCommand implements ICommand {
             for (Member curr : targetedUsers) {
                 try {
                     event.getGuild().getController().moveVoiceMember(curr, targetChannel.get(0)).queue();
-                    System.out.println(ACTION_PERFORMED + curr.getNickname() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
+                    System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
                     event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
