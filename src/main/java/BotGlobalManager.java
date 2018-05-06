@@ -16,7 +16,7 @@ public class BotGlobalManager {
 
     BotGlobalManager() {
         try {
-            jda = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"Work In Progress")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false).buildBlocking();
+            jda = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.DEFAULT,"Work In Progress")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(new MessageListener());
             if(config.isUserMovelementListenerEnabled()) {
                 jda.addEventListener(new UserMovementListener());
