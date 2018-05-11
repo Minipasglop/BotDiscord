@@ -1,13 +1,15 @@
-package utils;
+package discord.bot.utils;
 
-import command.*;
-import command.misc.PingCommand;
-import command.server.managing.*;
+import discord.bot.command.*;
+import discord.bot.command.misc.PingCommand;
+import discord.bot.command.misc.SoundPlayerCommand;
+import discord.bot.command.misc.YoutubeCommand;
+import discord.bot.command.server.managing.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//Code from https://github.com/thibautbessone
+//mechanics from https://github.com/thibautbessone
 
 public class CommandHandler {
 
@@ -43,5 +45,7 @@ public class CommandHandler {
         commands.put("ban",new BanCommand());
         commands.put("mute",new MuteCommand());
         commands.put("addRole",new RoleAddingCommand());
+        commands.put("sound",new SoundPlayerCommand());
+        commands.put("youtube",new YoutubeCommand());
     }
 }

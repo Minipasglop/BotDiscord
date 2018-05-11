@@ -1,12 +1,11 @@
-package command.misc;
+package discord.bot.command.misc;
 
-import command.ICommand;
+import discord.bot.command.ICommand;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class PingCommand implements ICommand {
 
     String HELP = "Premiere commande de test. \nUsage : `!ping`";
-
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

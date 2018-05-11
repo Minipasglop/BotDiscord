@@ -1,4 +1,4 @@
-package command;
+package discord.bot.command;
 
 //Code from https://github.com/thibautbessone
 

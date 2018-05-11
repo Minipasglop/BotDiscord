@@ -1,4 +1,4 @@
-package utils;
+package discord.bot.utils;
 
 import java.io.*;
 import java.util.Properties;
@@ -11,6 +11,8 @@ public class PropertiesLoader {
 
     private String addRoleCommandStatus;
 
+    private String youtubeApiKey;
+
     private final String FILE_PATH = "jackson.properties";
 
     public String getBotToken() {
@@ -19,6 +21,10 @@ public class PropertiesLoader {
 
     public boolean isUserMovementListenerEnabled() {
         return ("true").equals(userEventStatus);
+    }
+
+    public String getYoutubeApiKey() {
+        return youtubeApiKey;
     }
 
     public boolean isRoleAddingCommandEnabled(){ return("true").equals(addRoleCommandStatus); }
@@ -34,6 +40,7 @@ public class PropertiesLoader {
             botToken = properties.getProperty("botToken");
             userEventStatus = properties.getProperty("userEventStatus");
             addRoleCommandStatus = properties.getProperty("addRoleCommandStatus");
+            youtubeApiKey = properties.getProperty("youtubeApiKey");
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
-package command.server.managing;
+package discord.bot.command.server.managing;
 
-import command.ICommand;
+import discord.bot.command.ICommand;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.PrivateChannel;
@@ -12,7 +12,7 @@ public class KickCommand implements ICommand {
     private final String HELP = "Kick un / plusieurs utilisateur(s) du seveur. \nUsage : `!kick @UserA @UserB @UserC ... Raison `";
     private final String KICK_MESSAGE = "Tu as été exclu car : ";
     private final String NOT_ALLOWED = "Tu n'es pas habilité à kick... Dommage :)";
-    private final String ACTION_PERFORMED = "Eclure : ";
+    private final String ACTION_PERFORMED = "Exclure : ";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

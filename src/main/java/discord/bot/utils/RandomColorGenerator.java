@@ -1,4 +1,4 @@
-package utils;
+package discord.bot.utils;
 
 import java.awt.*;
 import java.util.Random;

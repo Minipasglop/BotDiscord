@@ -1,9 +1,9 @@
-package listeners;
+package discord.bot.listeners;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import utils.ChatCommandParser;
-import utils.CommandHandler;
+import discord.bot.utils.ChatCommandParser;
+import discord.bot.utils.CommandHandler;
 
 public class MessageListener extends ListenerAdapter {
 

@@ -1,10 +1,17 @@
-import listeners.MessageListener;
-import listeners.UserMovementListener;
+package discord.bot;
+
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.local.LocalAudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
+import discord.bot.listeners.MessageListener;
+import discord.bot.listeners.UserMovementListener;
+import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import utils.PropertiesLoader;
+import discord.bot.utils.PropertiesLoader;
 
 import javax.security.auth.login.LoginException;
 import java.util.Scanner;
@@ -12,12 +19,16 @@ import java.util.Scanner;
 public class BotGlobalManager {
     private static JDA jda;
     private static PropertiesLoader config = new PropertiesLoader();
-
+    private static AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
+    private static YoutubeApi youtubeApi = new YoutubeApi();
 
     BotGlobalManager() {
         try {
             jda = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.DEFAULT,"Work In Progress")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(new MessageListener());
+            audioPlayerManager.registerSourceManager(new LocalAudioSourceManager());
+            audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
+
             if(config.isUserMovementListenerEnabled()) {
                 jda.addEventListener(new UserMovementListener());
             }
@@ -45,4 +56,9 @@ public class BotGlobalManager {
     public static void main(String[] args) {
         new BotGlobalManager();
     }//Fonction main
+
+    public static YoutubeApi getYoutubeApi(){ return youtubeApi; }
+
+    public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
+
 }

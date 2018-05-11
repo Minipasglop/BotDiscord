@@ -1,6 +1,6 @@
-package command.server.managing;
+package discord.bot.command.server.managing;
 
-import command.ICommand;
+import discord.bot.command.ICommand;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.PrivateChannel;

@@ -1,10 +1,10 @@
-package command.server.managing;
+package discord.bot.command.server.managing;
 
-import command.ICommand;
+import discord.bot.command.ICommand;
 import net.dv8tion.jda.core.entities.*;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import utils.PropertiesLoader;
-import utils.RandomColorGenerator;
+import discord.bot.utils.PropertiesLoader;
+import discord.bot.utils.RandomColorGenerator;
 
 import java.util.Arrays;
 import java.util.List;
