@@ -7,7 +7,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class YoutubeCommand implements ICommand {
 
-    private final String HELP = "Cherche une vidéo depuis youtube. \nUsage : `!youtube <nomDuSon>`";
+    private final String HELP = "Cherche une vidéo depuis youtube. \nUsage : `!yt <nomDuSon>`";
 
     private final String NO_RESULT = "Pas de résultat pour la vidéo souhaitée.";
 

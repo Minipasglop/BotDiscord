@@ -46,6 +46,6 @@ public class CommandHandler {
         commands.put("mute",new MuteCommand());
         commands.put("addRole",new RoleAddingCommand());
         commands.put("sound",new SoundPlayerCommand());
-        commands.put("youtube",new YoutubeCommand());
+        commands.put("yt",new YoutubeCommand());
     }
 }

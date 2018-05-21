@@ -73,7 +73,7 @@ public class SoundPlayerCommand implements ICommand {
                     e.printStackTrace();
                 }
                 break;
-            case "youtube":
+            case "yt":
                 VoiceChannel targetChannel = event.getMember().getVoiceState().getChannel();
                 if (targetChannel == null) {
                     event.getTextChannel().sendMessage("Veuillez rejoindre un salon vocal.").queue();
