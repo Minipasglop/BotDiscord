@@ -1,17 +1,13 @@
 package discord.bot.command.misc;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
-import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
+import discord.bot.utils.CustomAudioLoadResultHandler;
 import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
-import discord.bot.utils.AudioPlayerSendHandler;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,9 +32,10 @@ public class SoundPlayerCommand implements ICommand {
         File folder = new File(SOUND_FOLDER);
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         AudioPlayer player = BotGlobalManager.getAudioPlayerManager().createPlayer();
+        CustomAudioLoadResultHandler myAudioLoadResultHandler = new CustomAudioLoadResultHandler(guildAudioManager,player);
 
         switch (args[0]) {
-            case "liste":
+            case "list":
                 ArrayList<String> list = new ArrayList<>();
                 for (File file : Objects.requireNonNull(folder.listFiles())) {
                     if (file.getName().contains(".mp3")) {
@@ -85,31 +82,9 @@ public class SoundPlayerCommand implements ICommand {
                     String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
                     if (!("").equalsIgnoreCase(youtubeSearch)) {
                         String videoURL = "https://youtu.be/" + youtubeSearch;
-                        BotGlobalManager.getAudioPlayerManager().loadItem(videoURL, new AudioLoadResultHandler() {
-                            @Override
-                            public void trackLoaded(AudioTrack audioTrack) {
-                                AudioPlayerSendHandler handler = new AudioPlayerSendHandler(player);
-                                guildAudioManager.setSendingHandler(handler);
-                                guildAudioManager.openAudioConnection(targetChannel);
-                                player.playTrack(audioTrack);
-                            }
-
-                            @Override
-                            public void playlistLoaded(AudioPlaylist audioPlaylist) {
-                                //unusued
-                            }
-
-                            @Override
-                            public void noMatches() {
-                                event.getTextChannel().sendMessage("Le son n'a pas été trouvé.").queue();
-                            }
-
-                            @Override
-                            public void loadFailed(FriendlyException e) {
-                                e.printStackTrace();
-                                event.getTextChannel().sendMessage("Je n'ai pas réussi à jouer le son. Peut-être qu'une météorite s'est abattue sur mon micro qui sait ?").queue();
-                            }
-                        });
+                        myAudioLoadResultHandler.setChanToWrite(event.getTextChannel());
+                        myAudioLoadResultHandler.setTargetVoicelChannel(targetChannel);
+                        BotGlobalManager.getAudioPlayerManager().loadItem(videoURL,myAudioLoadResultHandler);
                     }
                 }
                 break;
@@ -118,32 +93,9 @@ public class SoundPlayerCommand implements ICommand {
                 if (targetChannel == null) {
                     event.getTextChannel().sendMessage("Veuillez rejoindre un salon vocal.").queue();
                 } else {
-                    String trackUrl = "./" + folder.getPath() + "/" + args[0].toLowerCase() + ".mp3";
-                    BotGlobalManager.getAudioPlayerManager().loadItem(new File(trackUrl).getPath(), new AudioLoadResultHandler() {
-                        @Override
-                        public void trackLoaded(AudioTrack audioTrack) {
-                            AudioPlayerSendHandler handler = new AudioPlayerSendHandler(player);
-                            guildAudioManager.setSendingHandler(handler);
-                            guildAudioManager.openAudioConnection(targetChannel);
-                            player.playTrack(audioTrack);
-                        }
-
-                        @Override
-                        public void playlistLoaded(AudioPlaylist audioPlaylist) {
-                            //unusued
-                        }
-
-                        @Override
-                        public void noMatches() {
-                            event.getTextChannel().sendMessage("Le son **" + args[0] + "** n'a pas été trouvé.").queue();
-                        }
-
-                        @Override
-                        public void loadFailed(FriendlyException e) {
-                            e.printStackTrace();
-                            event.getTextChannel().sendMessage("Je n'ai pas réussi à jouer le son. Peut-être qu'une météorite s'est abattue sur mon micro qui sait ?").queue();
-                        }
-                    });
+                    String trackUrl = "./" + folder.getPath() + "/" + args[0].toLowerCase() + ".mp3"; myAudioLoadResultHandler.setChanToWrite(event.getTextChannel());
+                    myAudioLoadResultHandler.setTargetVoicelChannel(targetChannel);
+                    BotGlobalManager.getAudioPlayerManager().loadItem(new File(trackUrl).getPath(),myAudioLoadResultHandler);
                 }
                 break;
         }

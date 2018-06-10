@@ -31,7 +31,6 @@ public class YoutubeApi {
                 }
             }).setApplicationName("youtube-cmdline-search-jacksonBot").build();
 
-
             YouTube.Search.List search = youtube.search().list("id,snippet");
 
             String apiKey = config.getYoutubeApiKey();
