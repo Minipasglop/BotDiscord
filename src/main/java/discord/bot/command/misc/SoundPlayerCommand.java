@@ -30,7 +30,7 @@ public class SoundPlayerCommand implements ICommand {
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         myAudioLoadResultHandler.setChanToWrite(event.getTextChannel());
         myAudioLoadResultHandler.setGuildAudioManager(guildAudioManager);
-
+        //TODO interaction avec l'utilisateur : Contenu de la playlist, skip etc...
         switch (args[0]) {
             case "skip":
                 if(!audioGlobalManager.skipTrack()){
