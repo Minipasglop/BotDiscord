@@ -29,7 +29,7 @@ public class AudioGlobalManager {
         if(playlist.hasMoreTrack()){
             playlist.skipTrack();
             loadNextTrack();
-            new SoundPlayingThread(this).execute();
+            new SoundPlaying(this).execute();
             return true;
         }else {
             emptyPlaylist();
@@ -52,7 +52,7 @@ public class AudioGlobalManager {
         }
         if (player.getPlayingTrack() == null) {
             loadNextTrack();
-            new SoundPlayingThread(this).execute();
+            new SoundPlaying(this).execute();
         }
     }
 
@@ -60,7 +60,7 @@ public class AudioGlobalManager {
         if(playlist.hasMoreTrack()){
             playlist.skipTrack();
             loadNextTrack();
-            new SoundPlayingThread(this).execute();
+            new SoundPlaying(this).execute();
         }else {
             emptyPlaylist();
         }
