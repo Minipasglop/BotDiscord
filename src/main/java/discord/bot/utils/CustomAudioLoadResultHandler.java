@@ -27,10 +27,12 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
         this.chanToWrite = chanToWrite;
     }
 
-    public CustomAudioLoadResultHandler(AudioManager guildAudioManager, AudioPlayer player) {
+    public void setPlayer(AudioPlayer player) { this.player = player; }
+
+    public void setGuildAudioManager(AudioManager guildAudioManager) {
         this.guildAudioManager = guildAudioManager;
-        this.player = player;
     }
+
 
     @Override
     public void trackLoaded(AudioTrack audioTrack) {
