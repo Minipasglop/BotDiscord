@@ -59,6 +59,10 @@ public class BotGlobalManager {
 
     public static YoutubeApi getYoutubeApi(){ return youtubeApi; }
 
+    public static PropertiesLoader getConfig() {
+        return config;
+    }
+
     public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
 
 }
