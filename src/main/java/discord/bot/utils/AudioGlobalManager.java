@@ -26,13 +26,11 @@ public class AudioGlobalManager {
     }
 
     public boolean skipTrack(){
-        if(playlist.hasMoreTrack()){
-            playlist.skipTrack();
-            loadNextTrack();
-            new SoundPlaying(this).execute();
+        if(playlist != null && playlist.hasMoreTrack()){
+            //On le passe à false, pour que le handlePlaylist sorte de la boucle while, et amorce le changement si il y a lieu :)
             return true;
         }else {
-            emptyPlaylist();
+            isPlaying = false;
             return false;
         }
     }
