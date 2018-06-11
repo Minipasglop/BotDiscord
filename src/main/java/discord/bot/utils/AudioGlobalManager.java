@@ -25,14 +25,10 @@ public class AudioGlobalManager {
         audioPlayerManager.loadItem(playlist.playCurrentTrack(),this.audioLoadResultHandler);
     }
 
+    //Méthode en interface, permettant de tout déléguer au handlePlaylist (On pars du principe qu'il joue un son), et nous dit si on peut skip ou non pour l'interaction avec l'utilisateur
     public boolean skipTrack(){
-        if(playlist != null && playlist.hasMoreTrack()){
-            //On le passe à false, pour que le handlePlaylist sorte de la boucle while, et amorce le changement si il y a lieu :)
-            return true;
-        }else {
-            isPlaying = false;
-            return false;
-        }
+        isPlaying = false;
+        return playlist.hasMoreTrack();
     }
 
     public void emptyPlaylist(){

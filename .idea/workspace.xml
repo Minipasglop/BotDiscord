@@ -6,10 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="">
+    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Optimisation de l'UC lié à un leak de memoire sur le skip">
       <change afterPath="$PROJECT_DIR$/src/main/java/discord/bot/gui/JacksonFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioGlobalManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioGlobalManager.java" afterDir="false" />
     </list>
     <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" afterDir="false" />
@@ -51,8 +50,8 @@
       <file leaf-file-name="AudioGlobalManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioGlobalManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            <state relative-caret-position="548">
+              <caret line="71" column="18" lean-forward="true" selection-start-line="71" selection-start-column="18" selection-end-line="71" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -646,7 +645,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528747552696</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Optimisation de l'UC lié à un leak de memoire sur le skip">
+      <created>1528748164432</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1528748164432</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -655,12 +661,13 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3264418" />
       <window_info id="Palette&#9;" order="2" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" weight="0.1748401" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32861805" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32861805" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2937976" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3297062" />
       <window_info id="Capture Tool" order="6" />
@@ -674,7 +681,6 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39825898" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3264418" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -742,7 +748,8 @@
     <MESSAGE value="Ajout d'un todo concernant les interactions user avec le systeme de playlist" />
     <MESSAGE value="Fix youtube commande type saumonerie" />
     <MESSAGE value="Suppresion Sout en trop" />
-    <option name="LAST_COMMIT_MESSAGE" value="Suppresion Sout en trop" />
+    <MESSAGE value="Optimisation de l'UC lié à un leak de memoire sur le skip" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimisation de l'UC lié à un leak de memoire sur le skip" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1086,8 +1093,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioGlobalManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+        <state relative-caret-position="548">
+          <caret line="71" column="18" lean-forward="true" selection-start-line="71" selection-start-column="18" selection-end-line="71" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
