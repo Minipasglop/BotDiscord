@@ -56,10 +56,11 @@ public class SoundPlayerCommand implements ICommand {
                     event.getTextChannel().sendMessage("Veuillez rejoindre un salon vocal.").queue();
                 } else {
                     String youtubeQuery = "";
-                    for(int i = 1; i  < args.length; ++i){
+                    for(int i = 0; i  < args.length; ++i){
                         youtubeQuery += args[i] + " ";
                     }
                     String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+                    System.out.println(youtubeSearch);
                     if (!("").equalsIgnoreCase(youtubeSearch)) {
                         String videoURL = "https://youtu.be/" + youtubeSearch;
                         myAudioLoadResultHandler.setTargetVoicelChannel(targetChannel);

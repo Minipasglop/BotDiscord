@@ -71,12 +71,12 @@ public class AudioGlobalManager {
         boolean hasPlayedTrack = false;
         while(isPlaying){
             if(player.getPlayingTrack() == null && !hasPlayedTrack) continue;
-            else hasPlayedTrack = true;
+            else {
+                hasPlayedTrack = true;
+            }
 
             if(player.getPlayingTrack() == null &&  hasPlayedTrack){
                 isPlaying = false;
-            }else {
-                Thread.sleep(1000);
             }
         }
         trackEnded();
