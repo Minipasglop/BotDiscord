@@ -60,7 +60,6 @@ public class SoundPlayerCommand implements ICommand {
                         youtubeQuery += args[i] + " ";
                     }
                     String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
-                    System.out.println(youtubeSearch);
                     if (!("").equalsIgnoreCase(youtubeSearch)) {
                         String videoURL = "https://youtu.be/" + youtubeSearch;
                         myAudioLoadResultHandler.setTargetVoicelChannel(targetChannel);
