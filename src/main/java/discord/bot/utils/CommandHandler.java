@@ -17,6 +17,8 @@ public class CommandHandler {
 
     private static CommandHandler instance;
 
+    private final static String PREFIX = "!";
+
     public static CommandHandler getInstance(){
         if(instance == null){
             instance = new CommandHandler();
@@ -25,14 +27,15 @@ public class CommandHandler {
     }
 
     public static void handleCommand(ChatCommandParser.CommandAttributes cmdAttributes) {
-        if(commands.containsKey(cmdAttributes.invoke)) {
-            boolean safe = commands.get(cmdAttributes.invoke).called(cmdAttributes.args, cmdAttributes.event);
-            if(safe) {
-                commands.get(cmdAttributes.invoke).action(cmdAttributes.args, cmdAttributes.event);
-                commands.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
-            }
-            else {
-                commands.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
+        if(cmdAttributes.raw.startsWith(PREFIX)) {
+            if(commands.containsKey(cmdAttributes.invoke)) {
+                boolean safe = commands.get(cmdAttributes.invoke).called(cmdAttributes.args, cmdAttributes.event);
+                if (safe) {
+                    commands.get(cmdAttributes.invoke).action(cmdAttributes.args, cmdAttributes.event);
+                    commands.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
+                } else {
+                    commands.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
+                }
             }
         }
     }
