@@ -33,8 +33,7 @@ public class AudioGlobalManager {
 
     public void emptyPlaylist(){
         playlist.resetPlayList();
-        player.destroy();
-        player = audioPlayerManager.createPlayer();
+        player.stopTrack();
     }
 
     public void loadTrack(String track) {
@@ -44,7 +43,9 @@ public class AudioGlobalManager {
         else {
             playlist.addTrack(track);
         }
-        if (!isPlaying && player.getPlayingTrack() == null) {
+        System.out.println(player.getPlayingTrack());
+        if (player.getPlayingTrack() == null) {
+            System.out.println(player);
             loadNextTrack();
             new SoundPlaying(this).execute();
         }
@@ -69,7 +70,7 @@ public class AudioGlobalManager {
                 hasPlayedTrack = true;
             }
 
-            if(player.getPlayingTrack() == null &&  hasPlayedTrack){
+            if(player.getPlayingTrack() == null){
                 isPlaying = false;
             }
         }
