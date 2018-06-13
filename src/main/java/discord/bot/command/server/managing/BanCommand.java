@@ -9,9 +9,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.List;
 
 public class BanCommand implements ICommand {
-    private final String HELP = "Ban un / plusieurs utilisateur(s) du seveur. \nUsage : `!ban @UserA @UserB @UserC ... Durée Raison `";
-    private final String BAN_MESSAGE = "Tu as été banni car : ";
-    private final String NOT_ALLOWED = "Tu n'es pas habilité à bannir... Dommage :)";
+    private final String HELP = "Ban one / many users from the server if you're allowed to. \nUsage : `!ban @UserA @UserB @UserC ... duration Reason `";
+    private final String BAN_MESSAGE = "You've been banned because of : ";
+    private final String NOT_ALLOWED = "You're not allowed to ban other users... Sadly :)";
     private final String ACTION_PERFORMED = "Bannir : ";
 
     @Override

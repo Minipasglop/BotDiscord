@@ -12,9 +12,9 @@ import java.util.List;
 
 public class MoveCommand implements ICommand {
 
-    private final String HELP = "Déplace un utilisateur d'un salon 1 vers un salon 2 . \nUsage : `!move @UserA @UserB @UserC ... SalonCible `";
-    private final String COMMAND_FAILED = "Il y a eu une erreur au moment de déplacer l'utilisateur. Veuillez vous assurer qu'il soit déjà connecté à un salon vocal.";
-    private final String NOT_ALLOWED = "Tu n'es pas habilité à déplacer d'autres utilisateurs... Dommage :)";
+    private final String HELP = "Moves an user to another VocalChannel if he is connected to any of the server. \nUsage : `!move @User TargettedChannel `";
+    private final String COMMAND_FAILED = "Something unexpected happened. Please make sur the user is already connected to a vocal channel.";
+    private final String NOT_ALLOWED = "You're not allowed to move others... Sadly :)";
     private final String ACTION_PERFORMED = "Déplacer : ";
 
 

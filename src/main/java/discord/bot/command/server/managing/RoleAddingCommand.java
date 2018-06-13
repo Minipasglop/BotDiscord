@@ -12,12 +12,12 @@ import java.util.List;
 public class RoleAddingCommand implements ICommand {
 
     private static PropertiesLoader config = new PropertiesLoader();
-    private final String HELP = "Commande d'ajout d'un role. \nUsage : `!addRole @user nomDuRole`";
+    private final String HELP = "Adds a role to an user. Creates the role if it doesn't exist, or use the one that exists. \nUsage : `!addRole @user roleName`";
     private final String ACTION_PERFORMED_CREATE = "Créer + Ajouter role : ";
     private final String ACTION_PERFORMED_ADD = "Ajouter role : ";
-    private final String NOT_ALLOWED = "Cette commande est désactivée pour le moment. Tu peux contacter Minipasglop#3347 pour plus d'informations.";
-    private final String NOT_REQUIRED = "Le membre identifié possède déjà le rôle assigné.";
-    private final String COMMAND_FAILED = "Il y a eu un problème lors de la création du rôle. Veuillez vous assurer que je suis Administrateur du serveur.";
+    private final String NOT_ALLOWED = "This command has been disabled at the moment. Please make sure to check the support server to get the latests news.";
+    private final String NOT_REQUIRED = "The user tagged already owns the role.";
+    private final String COMMAND_FAILED = "An unexpected error occured. Please make sure Jackson has administrations role on the server.";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

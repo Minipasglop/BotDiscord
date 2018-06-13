@@ -11,9 +11,9 @@ import java.util.List;
 
 public class PurgeCommand implements ICommand {
 
-    private final String HELP = "Commande de clean d'un salon. \nUsage : `!purge`";
-    private final String ACTION_PERFORMED = "La salle de chat a été nettoyée :see_no_evil:";
-    private final String NOT_ALLOWED = "Tu n'es pas habilité à clean le chat... Dommage :)";
+    private final String HELP = "Deletes the most message of the text channel. \nUsage : `!purge`";
+    private final String ACTION_PERFORMED = "ChatRoom has been cleaned :see_no_evil:";
+    private final String NOT_ALLOWED = "You're not allowed to purge the chatroom... Sadly :)";
 
 
     @Override

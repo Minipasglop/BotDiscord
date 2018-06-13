@@ -10,10 +10,10 @@ import java.util.List;
 
 public class MuteCommand implements ICommand {
 
-    private final String HELP = "Commande pour mute un / plusieurs kikous \nUsage : `!mute @user1 @userB raison durée(minutes)`";
-    private final String MUTE_MESSAGE = "Tu as été rendu muet car : ";
-    private final String UNMUTE_MESSAGE = "Tu as été unmute. Sois sage maintenant !";
-    private final String NOT_ALLOWED = "Tu n'es pas habilité à mute d'autres utilisateurs... Dommage :)";
+    private final String HELP = "Mute one / many users on the server. \nUsage : `!mute @user1 @userB Reason duration(minutes)`";
+    private final String MUTE_MESSAGE = "You've been muted because of : ";
+    private final String UNMUTE_MESSAGE = "You've been unmuted. Stay still now ;) !";
+    private final String NOT_ALLOWED = "You're not allowed to mute other users... Sadly:)";
     private final String ACTION_PERFORMED = "Rendre muet : ";
     private final String ACTION_CALLBACK = "Rendre parole possible : ";
 

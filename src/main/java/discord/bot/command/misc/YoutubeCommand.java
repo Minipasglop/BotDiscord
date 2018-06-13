@@ -7,9 +7,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class YoutubeCommand implements ICommand {
 
-    private final String HELP = "Cherche une vidéo depuis youtube. \nUsage : `!yt <nomDuSon>`";
+    private final String HELP = "Looks for a video in YouTube. \nUsage : `!yt query parameters`";
 
-    private final String NO_RESULT = "Pas de résultat pour la vidéo souhaitée.";
+    private final String NO_RESULT = "No result found for the requested video. Sorry bro :zipper_mouth: ";
 
     private final YoutubeApi youtubeApi = BotGlobalManager.getYoutubeApi();
 

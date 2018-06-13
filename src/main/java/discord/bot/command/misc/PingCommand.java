@@ -5,7 +5,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class PingCommand implements ICommand {
 
-    String HELP = "Premiere commande de test. \nUsage : `!ping`";
+    String HELP = "Command for testing bot ping. \nUsage : `!ping`";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -15,7 +15,7 @@ public class PingCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage("Le ping du bot est de : " + event.getJDA().getPing() + " ms").queue();
+        event.getTextChannel().sendMessage("The bot ping is : " + event.getJDA().getPing() + " ms").queue();
     }
 
     @Override

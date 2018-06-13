@@ -9,9 +9,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.List;
 
 public class KickCommand implements ICommand {
-    private final String HELP = "Kick un / plusieurs utilisateur(s) du seveur. \nUsage : `!kick @UserA @UserB @UserC ... Raison `";
-    private final String KICK_MESSAGE = "Tu as été exclu car : ";
-    private final String NOT_ALLOWED = "Tu n'es pas habilité à kick... Dommage :)";
+    private final String HELP = "Kick one / many users from the server if you're allowed to. \nUsage : `!kick @UserA @UserB @UserC ... Reason `";
+    private final String KICK_MESSAGE = "You've been kicked because of : ";
+    private final String NOT_ALLOWED = "You're not allowed to kick other users... Sadly :)";
     private final String ACTION_PERFORMED = "Exclure : ";
 
     @Override

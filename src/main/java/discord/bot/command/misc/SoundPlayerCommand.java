@@ -11,7 +11,8 @@ import net.dv8tion.jda.core.managers.AudioManager;
 
 public class SoundPlayerCommand implements ICommand {
 
-    private final String HELP = "Joue le son souhaité dans le salon vocal courant de l'utilisateur. \nUsage : `!sound <nomDuSon>`";
+    private final String HELP = "Plays a sound from the Youtube Video found with the query parameters. \nUsage : `!sound query parameters`";
+    private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
 
     private final YoutubeApi youtubeApi = BotGlobalManager.getYoutubeApi();
     private CustomAudioLoadResultHandler myAudioLoadResultHandler = new CustomAudioLoadResultHandler();
@@ -53,7 +54,7 @@ public class SoundPlayerCommand implements ICommand {
             default:
                 targetChannel = event.getMember().getVoiceState().getChannel();
                 if (targetChannel == null) {
-                    event.getTextChannel().sendMessage("Veuillez rejoindre un salon vocal.").queue();
+                    event.getTextChannel().sendMessage(JOIN_VOCAL_CHANNEL).queue();
                 } else {
                     String youtubeQuery = "";
                     for(int i = 0; i  < args.length; ++i){
