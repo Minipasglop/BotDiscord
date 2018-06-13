@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class UserMovementListener extends ListenerAdapter {
 
-    private final String ID_SERVEUR_MINI = "218753166815133696";
+    private final String ID_SERVEUR_MINI = "456585836826198016";
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
@@ -26,7 +26,7 @@ public class UserMovementListener extends ListenerAdapter {
     }
 
     private void autoRole(Guild serveur, Member user) {
-        serveur.getController().addRolesToMember(user, serveur.getRolesByName("Jackson Family",true)).complete();
+        serveur.getController().addRolesToMember(user, serveur.getRolesByName("Community",true)).complete();
     }
 
     private void messageBienvenueJoinServeur(User u, TextChannel c){
