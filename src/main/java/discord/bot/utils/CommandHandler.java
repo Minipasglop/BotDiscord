@@ -1,6 +1,7 @@
 package discord.bot.utils;
 
 import discord.bot.command.*;
+import discord.bot.command.misc.HelpCommand;
 import discord.bot.command.misc.PingCommand;
 import discord.bot.command.misc.SoundPlayerCommand;
 import discord.bot.command.misc.YoutubeCommand;
@@ -41,14 +42,19 @@ public class CommandHandler {
     }
 
     private CommandHandler(){
+        commands.put("addRole",new RoleAddingCommand());
+        commands.put("ban",new BanCommand());
+        commands.put("help",new HelpCommand());
+        commands.put("kick",new KickCommand());
+        commands.put("move",new MoveCommand());
+        commands.put("mute",new MuteCommand());
         commands.put("ping", new PingCommand());
         commands.put("purge", new PurgeCommand());
-        commands.put("move",new MoveCommand());
-        commands.put("kick",new KickCommand());
-        commands.put("ban",new BanCommand());
-        commands.put("mute",new MuteCommand());
-        commands.put("addRole",new RoleAddingCommand());
         commands.put("sound",new SoundPlayerCommand());
         commands.put("yt",new YoutubeCommand());
+    }
+
+    public Map<String,ICommand> getCommands(){
+        return commands;
     }
 }
