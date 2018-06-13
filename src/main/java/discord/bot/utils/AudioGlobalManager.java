@@ -43,9 +43,7 @@ public class AudioGlobalManager {
         else {
             playlist.addTrack(track);
         }
-        System.out.println(player.getPlayingTrack());
         if (player.getPlayingTrack() == null) {
-            System.out.println(player);
             loadNextTrack();
             new SoundPlaying(this).execute();
         }
