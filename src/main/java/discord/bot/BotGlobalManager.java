@@ -4,16 +4,20 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.local.LocalAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
+import discord.bot.listeners.GuildJoinListener;
 import discord.bot.listeners.MessageListener;
 import discord.bot.listeners.UserMovementListener;
+import discord.bot.utils.PropertiesLoader;
+import discord.bot.utils.SaveThread;
 import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import discord.bot.utils.PropertiesLoader;
+import net.dv8tion.jda.core.entities.Guild;
 
 import javax.security.auth.login.LoginException;
+import java.util.List;
 import java.util.Scanner;
 
 public class BotGlobalManager {
@@ -26,8 +30,12 @@ public class BotGlobalManager {
         try {
             jda = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.DEFAULT,"Work In Progress")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(new MessageListener());
+            jda.addEventListener(new GuildJoinListener());
             audioPlayerManager.registerSourceManager(new LocalAudioSourceManager());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
+            config.initializeSavedProperties();
+            SaveThread saveThread = new SaveThread();
+            saveThread.run();
 
             if(config.isUserMovementListenerEnabled()) {
                 jda.addEventListener(new UserMovementListener());
@@ -64,5 +72,7 @@ public class BotGlobalManager {
     }
 
     public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
+
+    public static List<Guild> getServers() { return jda.getGuilds(); }
 
 }

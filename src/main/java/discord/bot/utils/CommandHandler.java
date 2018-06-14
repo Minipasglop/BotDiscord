@@ -42,16 +42,19 @@ public class CommandHandler {
     }
 
     private CommandHandler(){
-        commands.put("addRole",new RoleAddingCommand());
-        commands.put("ban",new BanCommand());
-        commands.put("help",new HelpCommand());
-        commands.put("kick",new KickCommand());
-        commands.put("move",new MoveCommand());
-        commands.put("mute",new MuteCommand());
+        commands.put("addRole" ,new RoleAddingCommand());
+        commands.put("setAutoRole", new SetAutoRoleOnJoinCommand());
+        commands.put("setUserEventChannel", new SetUserEventChannelCommand());
+        commands.put("setUserEventStatus", new SetUserEventStatusCommand());
+        commands.put("ban", new BanCommand());
+        commands.put("help", new HelpCommand());
+        commands.put("kick", new KickCommand());
+        commands.put("move", new MoveCommand());
+        commands.put("mute", new MuteCommand());
         commands.put("ping", new PingCommand());
         commands.put("purge", new PurgeCommand());
-        commands.put("sound",new SoundPlayerCommand());
-        commands.put("yt",new YoutubeCommand());
+        commands.put("sound", new SoundPlayerCommand());
+        commands.put("yt", new YoutubeCommand());
     }
 
     public Map<String,ICommand> getCommands(){
