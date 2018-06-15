@@ -23,7 +23,7 @@ public class SetAutoRoleOnJoinCommand implements ICommand {
         for(int i = 0; i  < args.length; ++i){
             role += args[i] + (i+1 < args.length ? " " : "");
         }
-        if (!(event.getGuild().getRolesByName("pd", true).get(0) == null)) {
+        if (!(event.getGuild().getRolesByName(role, true).get(0) == null)) {
             ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(),"autoRole",role);
             event.getTextChannel().sendMessage(COMMAND_SUCCESS).queue();
         } else {
