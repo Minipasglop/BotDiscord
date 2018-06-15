@@ -2,12 +2,15 @@ package discord.bot.command.misc;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
-import discord.bot.utils.AudioGlobalManager;
+import discord.bot.utils.AudioServerManager;
 import discord.bot.utils.CustomAudioLoadResultHandler;
 import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SoundPlayerCommand implements ICommand {
 
@@ -15,10 +18,15 @@ public class SoundPlayerCommand implements ICommand {
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
 
     private final YoutubeApi youtubeApi = BotGlobalManager.getYoutubeApi();
-    private CustomAudioLoadResultHandler myAudioLoadResultHandler = new CustomAudioLoadResultHandler();
+    private Map<String,AudioServerManager> audioServerManagers = initGlobalManager();
 
-    private AudioGlobalManager audioGlobalManager = new AudioGlobalManager(myAudioLoadResultHandler);
-
+    private Map<String,AudioServerManager> initGlobalManager(){
+        Map<String, AudioServerManager> audioGlobalManagerMap = new HashMap<>();
+        for(int i = 0; i < BotGlobalManager.getServers().size(); i++){
+            audioGlobalManagerMap.put(BotGlobalManager.getServers().get(i).getId(),new AudioServerManager(new CustomAudioLoadResultHandler()));
+        }
+        return audioGlobalManagerMap;
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -29,19 +37,19 @@ public class SoundPlayerCommand implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         VoiceChannel targetChannel;
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
-        myAudioLoadResultHandler.setChanToWrite(event.getTextChannel());
-        myAudioLoadResultHandler.setGuildAudioManager(guildAudioManager);
+        audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setChanToWrite(event.getTextChannel());
+        audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setGuildAudioManager(guildAudioManager);
         //TODO interaction avec l'utilisateur : Contenu de la playlist, skip etc...
         switch (args[0]) {
             case "skip":
-                if(!audioGlobalManager.skipTrack()){
+                if(!audioServerManagers.get(event.getGuild().getId()).skipTrack()){
                     guildAudioManager.setSendingHandler(null);
                     guildAudioManager.closeAudioConnection();
                 }
                 break;
             case "stop":
                 try {
-                    audioGlobalManager.emptyPlaylist();
+                    audioServerManagers.get(event.getGuild().getId()).emptyPlaylist();
                     guildAudioManager.setSendingHandler(null);
                     guildAudioManager.closeAudioConnection();
                 } catch (Exception e) {
@@ -49,7 +57,7 @@ public class SoundPlayerCommand implements ICommand {
                 }
                 break;
             case "volume":
-                audioGlobalManager.setVolume(Integer.parseInt(args[args.length-1]));
+                audioServerManagers.get(event.getGuild().getId()).setVolume(Integer.parseInt(args[args.length-1]));
                 break;
             default:
                 targetChannel = event.getMember().getVoiceState().getChannel();
@@ -63,8 +71,8 @@ public class SoundPlayerCommand implements ICommand {
                     String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
                     if (!("").equalsIgnoreCase(youtubeSearch)) {
                         String videoURL = "https://youtu.be/" + youtubeSearch;
-                        myAudioLoadResultHandler.setTargetVoicelChannel(targetChannel);
-                        audioGlobalManager.loadTrack(videoURL);
+                        audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
+                        audioServerManagers.get(event.getGuild().getId()).loadTrack(videoURL);
                     }
                 }
                 break;

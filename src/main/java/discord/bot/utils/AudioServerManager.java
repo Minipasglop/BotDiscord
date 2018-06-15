@@ -5,7 +5,7 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 
 import discord.bot.BotGlobalManager;
 
-public class AudioGlobalManager {
+public class AudioServerManager {
 
     private CustomAudioLoadResultHandler audioLoadResultHandler;
     private CustomAudioPlaylist playlist;
@@ -13,7 +13,7 @@ public class AudioGlobalManager {
     private AudioPlayerManager audioPlayerManager;
     private Boolean isPlaying;
 
-    public AudioGlobalManager(CustomAudioLoadResultHandler audioLoadResultHandler) {
+    public AudioServerManager(CustomAudioLoadResultHandler audioLoadResultHandler) {
         this.audioLoadResultHandler = audioLoadResultHandler;
         this.audioPlayerManager = BotGlobalManager.getAudioPlayerManager();
         this.player = this.audioPlayerManager.createPlayer();
@@ -59,7 +59,7 @@ public class AudioGlobalManager {
         }
     }
 
-    public void handlePlaylist() throws InterruptedException {
+    public void handlePlaylist() {
         isPlaying = true;
         boolean hasPlayedTrack = false;
         while(isPlaying){
@@ -77,5 +77,9 @@ public class AudioGlobalManager {
 
     public void setVolume(int volume){
         player.setVolume(volume);
+    }
+
+    public CustomAudioLoadResultHandler getAudioLoadResultHandler() {
+        return audioLoadResultHandler;
     }
 }
