@@ -1,6 +1,8 @@
 package discord.bot.utils;
 
-import discord.bot.command.*;
+import discord.bot.command.ICommand;
+import discord.bot.command.bot.info.InfoCommand;
+import discord.bot.command.bot.managing.ForcePropertiesSaveCommand;
 import discord.bot.command.misc.HelpCommand;
 import discord.bot.command.misc.PingCommand;
 import discord.bot.command.misc.SoundPlayerCommand;
@@ -43,6 +45,8 @@ public class CommandHandler {
 
     private CommandHandler(){
         commands.put("addRole" ,new RoleAddingCommand());
+        commands.put("info", new InfoCommand());
+        commands.put("saveProperties", new ForcePropertiesSaveCommand());
         commands.put("setAutoRole", new SetAutoRoleOnJoinCommand());
         commands.put("setUserEventChannel", new SetUserEventChannelCommand());
         commands.put("setUserEventStatus", new SetUserEventStatusCommand());

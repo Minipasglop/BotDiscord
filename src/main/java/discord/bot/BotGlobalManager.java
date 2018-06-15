@@ -30,16 +30,13 @@ public class BotGlobalManager {
         try {
             jda = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.DEFAULT,"Work In Progress")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false).buildBlocking();
             jda.addEventListener(new MessageListener());
+            jda.addEventListener(new UserMovementListener());
             jda.addEventListener(new GuildJoinListener());
             audioPlayerManager.registerSourceManager(new LocalAudioSourceManager());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
             saveThread.run();
-
-            if(config.isUserMovementListenerEnabled()) {
-                jda.addEventListener(new UserMovementListener());
-            }
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
@@ -74,5 +71,7 @@ public class BotGlobalManager {
     public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
 
     public static List<Guild> getServers() { return jda.getGuilds(); }
+
+    public static JDA getJda() { return jda; }
 
 }

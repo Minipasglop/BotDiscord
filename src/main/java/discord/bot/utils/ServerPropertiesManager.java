@@ -30,6 +30,8 @@ public class ServerPropertiesManager {
     public void setPropertyForServer(String serverId,String property, String value){
         if(globalProperties.get(serverId) != null){
            serverProperties = globalProperties.get(serverId);
+        }else {
+            globalProperties.put(serverId,new HashMap<>());
         }
         serverProperties.put(property,value);
         globalProperties.put(serverId,serverProperties);

@@ -15,11 +15,11 @@ public class PropertiesLoader {
 
     private String botToken;
 
-    private String userEventStatus;
-
     private String addRoleCommandStatus;
 
     private String youtubeApiKey;
+
+    private String botOwnerUserId;
 
     private final String MAIN_CONFIG_FILE_PATH = "jackson.properties";
 
@@ -27,15 +27,15 @@ public class PropertiesLoader {
         return botToken;
     }
 
-    public boolean isUserMovementListenerEnabled() {
-        return ("true").equals(userEventStatus);
-    }
-
     public String getYoutubeApiKey() {
         return youtubeApiKey;
     }
 
     public boolean isRoleAddingCommandEnabled(){ return("true").equals(addRoleCommandStatus); }
+
+    public String getBotOwnerUserId() {
+        return botOwnerUserId;
+    }
 
     public void initializeSavedProperties() {
         List<Guild> guildList = BotGlobalManager.getServers();
@@ -53,7 +53,6 @@ public class PropertiesLoader {
                 ServerPropertiesManager.getInstance().setPropertiesForServer(guildList.get(i).getId(), propertiesValueForServer);
             } catch (IOException e) {
                 System.out.println("Fichier introuvable pour le serveur : " + guildList.get(i).getName());
-                e.printStackTrace();
             }
         }
     }
@@ -66,9 +65,9 @@ public class PropertiesLoader {
             properties.load(fileInput);
             fileInput.close();
             botToken = properties.getProperty("botToken");
-            userEventStatus = properties.getProperty("userEventStatus");
             addRoleCommandStatus = properties.getProperty("addRoleCommandStatus");
             youtubeApiKey = properties.getProperty("youtubeApiKey");
+            botOwnerUserId = properties.getProperty("botOwnerUserId");
         } catch (IOException e) {
             e.printStackTrace();
         }
