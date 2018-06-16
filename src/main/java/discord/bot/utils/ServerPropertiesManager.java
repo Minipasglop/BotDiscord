@@ -49,11 +49,15 @@ public class ServerPropertiesManager {
         globalProperties.put(serverId,properties);
     }
 
-    public Map<String,String> getPropertiesFromServer(String serverId){
-        return globalProperties.get(serverId);
-    }
-
     public String getPropertyFromServer(String serverId,String property){
         return globalProperties.get(serverId).get(property);
+    }
+
+    public String getPropertyOrBlankFromServer(String serverId,String property){
+        try{
+            return globalProperties.get(serverId).get(property);
+        }catch(NullPointerException e){
+            return "";
+        }
     }
 }

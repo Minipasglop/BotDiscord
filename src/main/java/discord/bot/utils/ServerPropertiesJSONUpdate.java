@@ -1,7 +1,8 @@
 package discord.bot.utils;
 
+import discord.bot.BotGlobalManager;
+
 import java.io.*;
-import java.util.Map;
 import java.util.Properties;
 
 public class ServerPropertiesJSONUpdate {
@@ -11,18 +12,17 @@ public class ServerPropertiesJSONUpdate {
     private String userEventChannel;
 
     public ServerPropertiesJSONUpdate(String serverID) {
-        Map<String,String> propertiesForServer = ServerPropertiesManager.getInstance().getPropertiesFromServer(serverID);
         try {
             //Opening properties file
             File configFile = new File("jackson-guild-"+serverID+".properties");
             if(configFile.createNewFile()){
-                System.out.println("File created for server id " + serverID);
+                System.out.println("Fichier créé pour le serveur : " + BotGlobalManager.getJda().getGuildById(serverID).getName());
             }
             FileInputStream fileInput = new FileInputStream(configFile);
             Properties properties = new Properties();
             properties.load(fileInput);
             fileInput.close();
-            initProperties(propertiesForServer);
+            initProperties(serverID);
             FileOutputStream fileOutput = new FileOutputStream(configFile);
             properties.setProperty("autoRole", autoRole);
             properties.setProperty("userEventEnabled", userEventEnabled);
@@ -36,16 +36,9 @@ public class ServerPropertiesJSONUpdate {
             e.printStackTrace();
         }
     }
-    private void initProperties( Map<String,String> propertiesForServer){
-        autoRole = propertiesForServer.get("autoRole");
-        userEventEnabled = propertiesForServer.get("userEventEnabled");
-        userEventChannel = propertiesForServer.get("userEventChannel");
-        if(autoRole == null){
-            autoRole = "null";
-        }if(userEventChannel == null){
-            userEventChannel = "null";
-        }if(userEventEnabled == null){
-            userEventEnabled = "false";
-        }
+    private void initProperties(String serverId){
+        autoRole = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"autoRole");
+        userEventEnabled = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled");
+        userEventChannel = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel");
     }
 }
