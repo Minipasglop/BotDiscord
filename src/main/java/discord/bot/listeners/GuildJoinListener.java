@@ -1,5 +1,6 @@
 package discord.bot.listeners;
 
+import discord.bot.utils.ServerPropertiesJSONUpdate;
 import discord.bot.utils.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -15,8 +16,9 @@ public class GuildJoinListener extends ListenerAdapter {
     public void onGuildJoin(GuildJoinEvent event){
         Map<String,String> propertiesForJoinedServer = new HashMap<>();
         for(int i = 0; i < ServerPropertiesManager.getInstance().getPropertiesList().size(); i++){
-            propertiesForJoinedServer.put(ServerPropertiesManager.getInstance().getPropertiesList().get(i),null);
+            propertiesForJoinedServer.put(ServerPropertiesManager.getInstance().getPropertiesList().get(i),"");
         }
         ServerPropertiesManager.getInstance().setPropertiesForServer(event.getGuild().getId(),propertiesForJoinedServer);
+        ServerPropertiesJSONUpdate saver = new ServerPropertiesJSONUpdate(event.getGuild().getId());
     }
 }
