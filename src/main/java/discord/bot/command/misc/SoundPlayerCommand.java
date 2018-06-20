@@ -37,7 +37,7 @@ public class SoundPlayerCommand implements ICommand {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return args.length != 0 && !args[0].equals("help") && args.length < 2;
+        return args.length != 0 && !args[0].equals("help");
     }
 
     @Override
@@ -55,6 +55,7 @@ public class SoundPlayerCommand implements ICommand {
             for(int i = 0; i  < args.length; ++i){
                 youtubeQuery += args[i] + " ";
             }
+            System.out.println(youtubeQuery);
             String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
             if (!("").equalsIgnoreCase(youtubeSearch)) {
                 String videoURL = "https://youtu.be/" + youtubeSearch;
