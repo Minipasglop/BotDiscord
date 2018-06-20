@@ -1,6 +1,9 @@
 package discord.bot.utils;
 
 import discord.bot.command.ICommand;
+import discord.bot.command.aliases.SkipSoundCommand;
+import discord.bot.command.aliases.SoundVolumeCommand;
+import discord.bot.command.aliases.StopSoundCommand;
 import discord.bot.command.bot.info.InfoCommand;
 import discord.bot.command.bot.managing.ForcePropertiesSaveCommand;
 import discord.bot.command.bot.managing.SetGameCommand;
@@ -45,6 +48,7 @@ public class CommandHandler {
     }
 
     private CommandHandler(){
+        SoundPlayerCommand soundPlayerCommandReference = new SoundPlayerCommand();
         commands.put("addRole" ,new RoleAddingCommand());
         commands.put("info", new InfoCommand());
         commands.put("setGame", new SetGameCommand());
@@ -59,7 +63,10 @@ public class CommandHandler {
         commands.put("mute", new MuteCommand());
         commands.put("ping", new PingCommand());
         commands.put("purge", new PurgeCommand());
-        commands.put("sound", new SoundPlayerCommand());
+        commands.put("sound", soundPlayerCommandReference);
+        commands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        commands.put("skip", new SkipSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        commands.put("stop", new StopSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
         commands.put("yt", new YoutubeCommand());
     }
 

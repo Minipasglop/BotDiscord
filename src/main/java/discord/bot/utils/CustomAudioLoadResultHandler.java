@@ -33,6 +33,7 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
         this.guildAudioManager = guildAudioManager;
     }
 
+    public AudioManager getGuildAudioManager() { return this.guildAudioManager; }
 
     @Override
     public void trackLoaded(AudioTrack audioTrack) {

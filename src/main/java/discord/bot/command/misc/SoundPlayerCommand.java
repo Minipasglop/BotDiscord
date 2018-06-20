@@ -17,10 +17,16 @@ public class SoundPlayerCommand implements ICommand {
     private final String HELP = "Plays a sound from the Youtube Video found with the query parameters. \nUsage : `!sound query parameters`";
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
 
-    private final YoutubeApi youtubeApi = BotGlobalManager.getYoutubeApi();
-    private Map<String,AudioServerManager> audioServerManagers = initGlobalManager();
+    private YoutubeApi youtubeApi;
+    private Map<String,AudioServerManager> audioServerManagers;
+    public SoundPlayerCommand(){
+        youtubeApi = BotGlobalManager.getYoutubeApi();
+        audioServerManagers = initServerManagers();
+    }
 
-    private Map<String,AudioServerManager> initGlobalManager(){
+    public Map<String,AudioServerManager> getAudioServerManagers() { return this.audioServerManagers; }
+
+    private Map<String,AudioServerManager> initServerManagers(){
         Map<String, AudioServerManager> audioGlobalManagerMap = new HashMap<>();
         for(int i = 0; i < BotGlobalManager.getServers().size(); i++){
             audioGlobalManagerMap.put(BotGlobalManager.getServers().get(i).getId(),new AudioServerManager(new CustomAudioLoadResultHandler()));
@@ -30,52 +36,29 @@ public class SoundPlayerCommand implements ICommand {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return args.length != 0 && !args[0].equals("help");
+        return args.length != 0 && !args[0].equals("help") && args.length < 2;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        VoiceChannel targetChannel;
+        VoiceChannel targetChannel = event.getMember().getVoiceState().getChannel();;
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setChanToWrite(event.getTextChannel());
         audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setGuildAudioManager(guildAudioManager);
         //TODO interaction avec l'utilisateur : Contenu de la playlist, skip etc...
-        switch (args[0]) {
-            case "skip":
-                if(!audioServerManagers.get(event.getGuild().getId()).skipTrack()){
-                    guildAudioManager.setSendingHandler(null);
-                    guildAudioManager.closeAudioConnection();
-                }
-                break;
-            case "stop":
-                try {
-                    audioServerManagers.get(event.getGuild().getId()).emptyPlaylist();
-                    guildAudioManager.setSendingHandler(null);
-                    guildAudioManager.closeAudioConnection();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "volume":
-                audioServerManagers.get(event.getGuild().getId()).setVolume(Integer.parseInt(args[args.length-1]));
-                break;
-            default:
-                targetChannel = event.getMember().getVoiceState().getChannel();
-                if (targetChannel == null) {
-                    event.getTextChannel().sendMessage(JOIN_VOCAL_CHANNEL).queue();
-                } else {
-                    String youtubeQuery = "";
-                    for(int i = 0; i  < args.length; ++i){
-                        youtubeQuery += args[i] + " ";
-                    }
-                    String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
-                    if (!("").equalsIgnoreCase(youtubeSearch)) {
-                        String videoURL = "https://youtu.be/" + youtubeSearch;
-                        audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
-                        audioServerManagers.get(event.getGuild().getId()).loadTrack(videoURL);
-                    }
-                }
-                break;
+        if (targetChannel == null) {
+            event.getTextChannel().sendMessage(JOIN_VOCAL_CHANNEL).queue();
+        } else {
+            String youtubeQuery = "";
+            for(int i = 0; i  < args.length; ++i){
+                youtubeQuery += args[i] + " ";
+            }
+            String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+            if (!("").equalsIgnoreCase(youtubeSearch)) {
+                String videoURL = "https://youtu.be/" + youtubeSearch;
+                audioServerManagers.get(event.getGuild().getId()).getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
+                audioServerManagers.get(event.getGuild().getId()).loadTrack(videoURL);
+            }
         }
     }
 

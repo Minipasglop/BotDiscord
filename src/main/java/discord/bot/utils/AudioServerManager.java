@@ -2,7 +2,6 @@ package discord.bot.utils;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
-
 import discord.bot.BotGlobalManager;
 
 public class AudioServerManager {
