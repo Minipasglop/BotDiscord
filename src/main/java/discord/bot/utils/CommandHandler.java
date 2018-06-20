@@ -2,6 +2,7 @@ package discord.bot.utils;
 
 import discord.bot.command.ICommand;
 import discord.bot.command.aliases.SkipSoundCommand;
+import discord.bot.command.aliases.SoundLoopCommand;
 import discord.bot.command.aliases.SoundVolumeCommand;
 import discord.bot.command.aliases.StopSoundCommand;
 import discord.bot.command.bot.info.InfoCommand;
@@ -67,6 +68,7 @@ public class CommandHandler {
         commands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
         commands.put("skip", new SkipSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
         commands.put("stop", new StopSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        commands.put("loop", new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers()));
         commands.put("yt", new YoutubeCommand());
     }
 

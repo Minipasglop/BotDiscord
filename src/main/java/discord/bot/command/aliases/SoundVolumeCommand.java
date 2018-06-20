@@ -26,7 +26,7 @@ public class SoundVolumeCommand implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         try{
             if(Integer.parseInt(args[0]) < 0 || Integer.parseInt(args[0]) > 200){
-                throw new Exception();
+                throw new Exception("Out of bounds.");
             }else {
                 audioServerManagers.get(event.getGuild().getId()).setVolume(Integer.parseInt(args[0]));
                 event.getTextChannel().sendMessage(VOLUME_MODIFIED).queue();

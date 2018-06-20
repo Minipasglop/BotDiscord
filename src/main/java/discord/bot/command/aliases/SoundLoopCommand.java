@@ -6,16 +6,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class SkipSoundCommand implements ICommand {
-    private final String HELP = "Skip the current sound played. \nUsage : `!skip`";
-    private final String SOUND_SKIPPED_NEXT = "Sound has been skipped. Next to be played : ";
-    private final String SOUND_SKIPPED_END = "Sound has been skipped. No more in queue, `disconnecting.`";
+public class SoundLoopCommand implements ICommand {
+    private final String HELP = "Enables / Disables the repetition of the current track. \nUsage : `!loop`";
+    private final String TRACK_LOOP_ENABLED = "Audio player will loop on current sound playing.";
+    private final String TRACK_LOOP_DISABLED = "Audio player will no longer loop on the current sound playing.";
     private final String COMMAND_FAILED = "Failed skipping the sound. Please make sure a sound was played.";
-    private final String NOTHING_TO_SKIP = "No sound to skip.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SkipSoundCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundLoopCommand(Map<String,AudioServerManager> audioServerManagers){
         this.audioServerManagers =  audioServerManagers;
     }
 
@@ -28,16 +27,12 @@ public class SkipSoundCommand implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.getTrackAmount() == 0){
-                event.getTextChannel().sendMessage(NOTHING_TO_SKIP).queue();
+            if(currAudioServerManager.isTrackLooping()){
+                event.getTextChannel().sendMessage(TRACK_LOOP_DISABLED).queue();
+            }else {
+                event.getTextChannel().sendMessage(TRACK_LOOP_ENABLED).queue();
             }
-            else if(!currAudioServerManager.skipTrack()){
-                currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
-                currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
-                event.getTextChannel().sendMessage(SOUND_SKIPPED_END).queue();
-            }else{
-                event.getTextChannel().sendMessage(SOUND_SKIPPED_NEXT + currAudioServerManager.getNextTrackURL()).queue();
-            }
+            currAudioServerManager.reverseTrackLoop();
         }catch (Exception e){
             e.printStackTrace();
             event.getTextChannel().sendMessage(COMMAND_FAILED).queue();

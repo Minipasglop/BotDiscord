@@ -11,22 +11,27 @@ public class AudioServerManager {
     private AudioPlayer player;
     private AudioPlayerManager audioPlayerManager;
     private Boolean isPlaying;
+    private Boolean forceSkipping;
 
     public AudioServerManager(CustomAudioLoadResultHandler audioLoadResultHandler) {
         this.audioLoadResultHandler = audioLoadResultHandler;
         this.audioPlayerManager = BotGlobalManager.getAudioPlayerManager();
         this.player = this.audioPlayerManager.createPlayer();
         this.audioLoadResultHandler.setPlayer(this.player);
-        this.isPlaying = true;
+        this.isPlaying = false;
+        this.forceSkipping = false;
     }
 
     private void loadNextTrack(){
-        audioPlayerManager.loadItem(playlist.playCurrentTrack(),this.audioLoadResultHandler);
+        audioPlayerManager.loadItem(playlist.getCurrentTrackURL(),this.audioLoadResultHandler);
     }
 
     //Méthode en interface, permettant de tout déléguer au handlePlaylist (On pars du principe qu'il joue un son), et nous dit si on peut skip ou non pour l'interaction avec l'utilisateur
     public boolean skipTrack(){
         isPlaying = false;
+        if(playlist.hasMoreTrack()){
+            forceSkipping = true;
+        }
         return playlist.hasMoreTrack();
     }
 
@@ -48,14 +53,21 @@ public class AudioServerManager {
         }
     }
 
-    private void trackEnded(){
-        if(playlist.hasMoreTrack()){
-            playlist.skipTrack();
+    public void reverseTrackLoop(){
+        this.playlist.loopOnTrack(!playlist.isLoopingOnTrack());
+    }
+
+    public boolean isTrackLooping() { return this.playlist.isLoopingOnTrack(); }
+
+    private void trackEnded( ){
+        if(playlist.hasMoreTrack() || playlist.isLoopingOnTrack()){
+            playlist.skipTrack(forceSkipping);
             loadNextTrack();
             new SoundPlaying(this).execute();
         }else {
             emptyPlaylist();
         }
+        forceSkipping = false;
     }
 
     public void handlePlaylist() {
@@ -81,4 +93,12 @@ public class AudioServerManager {
     public CustomAudioLoadResultHandler getAudioLoadResultHandler() {
         return audioLoadResultHandler;
     }
+
+    public Boolean isBotPlaying() {
+        return isPlaying;
+    }
+
+    public int getTrackAmount() { return playlist.getTrackAmount(); }
+
+    public String getNextTrackURL(){ return this.playlist.getNextTrackURL(); }
 }
