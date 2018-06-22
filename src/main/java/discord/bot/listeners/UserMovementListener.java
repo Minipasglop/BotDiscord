@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.core.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class UserMovementListener extends ListenerAdapter {
@@ -22,8 +23,12 @@ public class UserMovementListener extends ListenerAdapter {
                 messageBienvenueJoinServeur(event.getUser(), event.getGuild().getDefaultChannel());
             }
         }
-        if(ServerPropertiesManager.getInstance().getPropertyFromServer(event.getGuild().getId(),"autoRole") != null) {
-            autoRole(event.getGuild(), event.getMember());
+        try{
+            if(ServerPropertiesManager.getInstance().getPropertyFromServer(event.getGuild().getId(),"autoRole") != null) {
+                autoRole(event.getGuild(), event.getMember());
+            }
+        }catch(InsufficientPermissionException e){
+            System.out.println("Le bot n'a pas les permissions requises pour l'autoRole sur le serveur" + event.getGuild().getName());
         }
     }
 
