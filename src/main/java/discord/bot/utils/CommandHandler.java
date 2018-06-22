@@ -21,7 +21,10 @@ import java.util.Map;
 
 public class CommandHandler {
 
-    private static Map<String, ICommand> commands = new HashMap<>();
+    private static Map<String,ICommand> soundCommands;
+    private static Map<String, ICommand> serverCommands;
+    private static Map<String, ICommand> miscCommands;
+    private static Map<String, ICommand> ownerCommands;
 
     private static CommandHandler instance;
 
@@ -36,13 +39,18 @@ public class CommandHandler {
 
     public static void handleCommand(ChatCommandParser.CommandAttributes cmdAttributes) {
         if(cmdAttributes.raw.startsWith(PREFIX)) {
-            if(commands.containsKey(cmdAttributes.invoke)) {
-                boolean safe = commands.get(cmdAttributes.invoke).called(cmdAttributes.args, cmdAttributes.event);
+            Map<String, ICommand> localMap = new HashMap<>();
+            if(soundCommands.containsKey(cmdAttributes.invoke)) localMap = soundCommands;
+            if(serverCommands.containsKey(cmdAttributes.invoke)) localMap = serverCommands;
+            if(miscCommands.containsKey(cmdAttributes.invoke)) localMap = miscCommands;
+            if(ownerCommands.containsKey(cmdAttributes.invoke)) localMap = ownerCommands;
+            if(!localMap.isEmpty()) {
+                boolean safe = localMap.get(cmdAttributes.invoke).called(cmdAttributes.args, cmdAttributes.event);
                 if (safe) {
-                    commands.get(cmdAttributes.invoke).action(cmdAttributes.args, cmdAttributes.event);
-                    commands.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
+                    localMap.get(cmdAttributes.invoke).action(cmdAttributes.args, cmdAttributes.event);
+                    localMap.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
                 } else {
-                    commands.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
+                    localMap.get(cmdAttributes.invoke).executed(safe, cmdAttributes.event);
                 }
             }
         }
@@ -50,29 +58,50 @@ public class CommandHandler {
 
     private CommandHandler(){
         SoundPlayerCommand soundPlayerCommandReference = new SoundPlayerCommand();
-        commands.put("addRole" ,new RoleAddingCommand());
-        commands.put("info", new InfoCommand());
-        commands.put("setGame", new SetGameCommand());
-        commands.put("saveProperties", new ForcePropertiesSaveCommand());
-        commands.put("setAutoRole", new SetAutoRoleOnJoinCommand());
-        commands.put("setUserEventChannel", new SetUserEventChannelCommand());
-        commands.put("setUserEventStatus", new SetUserEventStatusCommand());
-        commands.put("ban", new BanCommand());
-        commands.put("help", new HelpCommand());
-        commands.put("kick", new KickCommand());
-        commands.put("move", new MoveCommand());
-        commands.put("mute", new MuteCommand());
-        commands.put("ping", new PingCommand());
-        commands.put("purge", new PurgeCommand());
-        commands.put("sound", soundPlayerCommandReference);
-        commands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        commands.put("skip", new SkipSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        commands.put("stop", new StopSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        commands.put("loop", new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        commands.put("yt", new YoutubeCommand());
+
+        soundCommands = new HashMap<>();
+        soundCommands.put("sound", soundPlayerCommandReference);
+        soundCommands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("skip", new SkipSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("stop", new StopSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("loop", new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers()));
+
+        serverCommands = new HashMap<>();
+        serverCommands.put("addRole" ,new RoleAddingCommand());
+        serverCommands.put("setAutoRole", new SetAutoRoleOnJoinCommand());
+        serverCommands.put("setUserEventChannel", new SetUserEventChannelCommand());
+        serverCommands.put("setUserEventStatus", new SetUserEventStatusCommand());
+        serverCommands.put("ban", new BanCommand());
+        serverCommands.put("help", new HelpCommand());
+        serverCommands.put("kick", new KickCommand());
+        serverCommands.put("move", new MoveCommand());
+        serverCommands.put("mute", new MuteCommand());
+        serverCommands.put("purge", new PurgeCommand());
+
+        miscCommands = new HashMap<>();
+        miscCommands.put("info", new InfoCommand());
+        miscCommands.put("ping", new PingCommand());
+        miscCommands.put("yt", new YoutubeCommand());
+
+        ownerCommands = new HashMap<>();
+        ownerCommands.put("setGame", new SetGameCommand());
+        ownerCommands.put("saveProperties", new ForcePropertiesSaveCommand());
     }
 
-    public Map<String,ICommand> getCommands(){
-        return commands;
+
+    public static Map<String, ICommand> getSoundCommands() {
+        return soundCommands;
+    }
+
+    public static Map<String, ICommand> getServerCommands() {
+        return serverCommands;
+    }
+
+    public static Map<String, ICommand> getMiscCommands() {
+        return miscCommands;
+    }
+
+    public static Map<String, ICommand> getOwnerCommands() {
+        return ownerCommands;
     }
 }
