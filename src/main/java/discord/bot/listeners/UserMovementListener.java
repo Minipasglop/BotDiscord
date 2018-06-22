@@ -28,7 +28,7 @@ public class UserMovementListener extends ListenerAdapter {
                 autoRole(event.getGuild(), event.getMember());
             }
         }catch(InsufficientPermissionException e){
-            System.out.println("Le bot n'a pas les permissions requises pour l'autoRole sur le serveur" + event.getGuild().getName());
+            System.out.println("Le bot n'a pas les permissions requises pour l'autoRole sur le serveur " + event.getGuild().getName());
         }
     }
 
