@@ -50,10 +50,10 @@ public class UserMovementListener extends ListenerAdapter {
     }
 
     private void messageBienvenueJoinServeur(User user,TextChannel channel){
-        channel.sendMessage(":punch: Bienvenue à : " + user.getAsMention() + " [Join]").complete();
+        channel.sendMessage(":punch: Welcome : " + user.getAsMention() + " [Join]").complete();
     }
     private void messageDepartServeur(User u, TextChannel c){
-        c.sendMessage("Adieu : " + u.getName() + " [Leave] :cry:").complete();
+        c.sendMessage("See you in a better world : " + u.getName() + " [Leave] :cry:").complete();
     }
 
 
