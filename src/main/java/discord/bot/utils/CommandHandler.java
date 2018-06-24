@@ -69,8 +69,8 @@ public class CommandHandler {
         serverCommands = new HashMap<>();
         serverCommands.put("addRole" ,new RoleAddingCommand());
         serverCommands.put("setAutoRole", new SetAutoRoleOnJoinCommand());
-        serverCommands.put("setUserEventChannel", new SetUserEventChannelCommand());
-        serverCommands.put("setUserEventStatus", new SetUserEventStatusCommand());
+        serverCommands.put("greetingschannel", new SetUserEventChannelCommand());
+        serverCommands.put("greetingsmessage", new SetUserEventStatusCommand());
         serverCommands.put("ban", new BanCommand());
         serverCommands.put("help", new HelpCommand());
         serverCommands.put("kick", new KickCommand());

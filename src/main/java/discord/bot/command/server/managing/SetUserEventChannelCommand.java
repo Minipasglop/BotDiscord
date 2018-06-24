@@ -7,8 +7,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class SetUserEventChannelCommand implements ICommand {
 
-    private final String HELP = "Sets the channel where you whant the join / leave message to be send. \nUsage : `!setUserEventChannel channelName`";
-    private final String COMMAND_SUCCESS = "Successfully set the greetings message channel destination.\nMake sure you have `!setUserEventStatus true` to activate the feature.";
+    private final String HELP = "Sets the channel where you whant the join / leave message to be send. \nUsage : `!greetingschannel channelName`";
+    private final String COMMAND_SUCCESS = "Successfully set the greetings message channel destination.\nMake sure you have `!greetingsmessage on` to activate the feature.";
     private final String COMMAND_FAILED = "An unexpected error occured. Please make sure Jackson has administrations role on the server.";
 
     @Override
