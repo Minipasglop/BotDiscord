@@ -26,11 +26,12 @@ public class CustomAudioPlaylist {
         return playList.get(0);
     }
 
-    public boolean skipTrack(boolean forceSkip){
-        if((playList.size() > 1 && !loop) || (playList.size() > 1 && forceSkip)){
-            playList = playList.subList(1, playList.size());
+    public boolean skipTrack(){
+        if(loop){
             return true;
-        }else if(playList.size() > 1){
+        }
+        if(playList.size() > 1 ){
+            playList = playList.subList(1, playList.size());
             return true;
         }
         resetPlayList();
@@ -38,7 +39,7 @@ public class CustomAudioPlaylist {
     }
 
     public boolean hasMoreTrack(){
-        return playList.size() > 1;
+        return playList.size() > 1 || loop;
     }
 
     public void addTrack(String track){
@@ -52,7 +53,10 @@ public class CustomAudioPlaylist {
     public int getTrackAmount() { return playList.size(); }
 
     public String getNextTrackURL() {
-        if(playList.size() > 1){
+        if(loop){
+            return playList.get(0);
+        }
+        else if(playList.size() > 1){
             return playList.get(1);
         }
         return NO_MORE_SOUND_QUEUED;
