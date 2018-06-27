@@ -30,7 +30,7 @@ public class YoutubeApi {
     public Map<String,String> searchVideo(String query){
         try {
             youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-                public void initialize(HttpRequest request) throws IOException {
+                public void initialize(HttpRequest request)  {
                 }
             }).setApplicationName("youtube-cmdline-search-jacksonBot").build();
 
@@ -42,7 +42,7 @@ public class YoutubeApi {
 
             search.setType("video");
 
-            search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
+            search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url,snippet/channelTitle)");
             search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
 
             SearchListResponse searchResponse = search.execute();
@@ -51,6 +51,7 @@ public class YoutubeApi {
             if (searchResultList != null) {
                 SearchResultSnippet snippet = searchResultList.get(0).getSnippet();
                 result.put("title", snippet.getTitle());
+                result.put("channelTitle", snippet.getChannelTitle());
                 result.put("thumbnailUrl", snippet.getThumbnails().getDefault().getUrl());
                 result.put("videoUrl", searchResultList.get(0).getId().getVideoId());
                 return result;

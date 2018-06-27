@@ -18,7 +18,7 @@ public class SoundPlayerCommand implements ICommand {
 
     private final String HELP = "Plays a sound from the Youtube Video found with the query parameters. \nUsage : `!sound query parameters`";
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
-    private final String SOUND_QUEUED = "Sound has been queued. The bot playlist has a number of ";
+    private final String SOUND_QUEUED = "Sound has been queued";
 
     private YoutubeApi youtubeApi;
     private Map<String,AudioServerManager> audioServerManagers;
@@ -63,10 +63,11 @@ public class SoundPlayerCommand implements ICommand {
                 currAudioServerManager.getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
                 currAudioServerManager.loadTrack(videoURL);
                 EmbedBuilder builder = new EmbedBuilder();
+                builder.setAuthor(SOUND_QUEUED);
                 builder.setColor(Color.ORANGE);
                 builder.setThumbnail(youtubeSearch.get("thumbnailUrl"));
-                builder.addField("Video Title :movie_camera: ", youtubeSearch.get("title") + "\n̔̏", false);
-                builder.addField("Playlist status :bulb:", String.valueOf(currAudioServerManager.getTrackAmount()) + " track" + (currAudioServerManager.getTrackAmount() == 1 ? "" : "s") + " queued.", false);
+                builder.addField("Video Title :play_pause: ", youtubeSearch.get("title") + " - " + youtubeSearch.get("channelTitle") + "\n̔̏", false);
+                builder.addField("Playlist status :bulb:", String.valueOf(currAudioServerManager.getTrackAmount()) + " track" + (currAudioServerManager.getTrackAmount() == 1 ? "" : "s") + " listed.", false);
                 event.getTextChannel().sendMessage(builder.build()).queue();
             }
         }
