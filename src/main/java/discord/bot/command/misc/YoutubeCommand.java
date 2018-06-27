@@ -2,10 +2,9 @@ package discord.bot.command.misc;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
+import discord.bot.utils.Track;
 import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-
-import java.util.Map;
 
 public class YoutubeCommand implements ICommand {
 
@@ -27,10 +26,9 @@ public class YoutubeCommand implements ICommand {
         for(int i = 0; i  < args.length; ++i){
             youtubeQuery += args[i] + " ";
         }
-        Map<String,String> youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+        Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
         if(youtubeSearch != null){
-            String videoURL = "https://youtu.be/" + youtubeSearch.get("videoUrl");
-            event.getTextChannel().sendMessage(videoURL).queue();
+            event.getTextChannel().sendMessage(youtubeSearch.getVideoUrl()).queue();
         }else {
             event.getTextChannel().sendMessage(NO_RESULT).queue();
         }

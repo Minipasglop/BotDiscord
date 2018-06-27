@@ -11,9 +11,7 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.SearchResultSnippet;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class YoutubeApi {
@@ -22,12 +20,11 @@ public class YoutubeApi {
 
     private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
 
-    private Map<String,String> result;
 
     private static YouTube youtube;
 
 
-    public Map<String,String> searchVideo(String query){
+    public Track searchVideo(String query){
         try {
             youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
                 public void initialize(HttpRequest request)  {
@@ -47,13 +44,12 @@ public class YoutubeApi {
 
             SearchListResponse searchResponse = search.execute();
             List<SearchResult> searchResultList = searchResponse.getItems();
-            result = new HashMap<>();
             if (searchResultList != null) {
                 SearchResultSnippet snippet = searchResultList.get(0).getSnippet();
-                result.put("title", snippet.getTitle());
-                result.put("channelTitle", snippet.getChannelTitle());
-                result.put("thumbnailUrl", snippet.getThumbnails().getDefault().getUrl());
-                result.put("videoUrl", searchResultList.get(0).getId().getVideoId());
+                Track result = new Track(searchResultList.get(0).getId().getVideoId());
+                result.setChannelTitle(snippet.getChannelTitle());
+                result.setThumbnailUrl(snippet.getThumbnails().getDefault().getUrl());
+                result.setTitle(snippet.getTitle());
                 return result;
             }
         } catch (GoogleJsonResponseException e) {

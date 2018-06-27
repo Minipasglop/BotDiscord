@@ -4,6 +4,7 @@ import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.AudioServerManager;
 import discord.bot.utils.CustomAudioLoadResultHandler;
+import discord.bot.utils.Track;
 import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.VoiceChannel;
@@ -57,16 +58,15 @@ public class SoundPlayerCommand implements ICommand {
                 youtubeQuery += args[i] + " ";
             }
             System.out.println(youtubeQuery);
-            Map<String,String> youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+            Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
             if (youtubeSearch != null) {
-                String videoURL = "https://youtu.be/" + youtubeSearch.get("videoUrl");
                 currAudioServerManager.getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
-                currAudioServerManager.loadTrack(videoURL);
+                currAudioServerManager.loadTrack(youtubeSearch);
                 EmbedBuilder builder = new EmbedBuilder();
                 builder.setAuthor(SOUND_QUEUED);
                 builder.setColor(Color.ORANGE);
-                builder.setThumbnail(youtubeSearch.get("thumbnailUrl"));
-                builder.addField("Video Title :play_pause: ", youtubeSearch.get("title") + " - " + youtubeSearch.get("channelTitle") + "\n̔̏", false);
+                builder.setThumbnail(youtubeSearch.getThumbnailUrl());
+                builder.addField("Video Title :movie_camera: ", youtubeSearch.getTitle() + " - " + youtubeSearch.getChannelTitle() + "\n̔̏", false);
                 builder.addField("Playlist status :bulb:", String.valueOf(currAudioServerManager.getTrackAmount()) + " track" + (currAudioServerManager.getTrackAmount() == 1 ? "" : "s") + " listed.", false);
                 event.getTextChannel().sendMessage(builder.build()).queue();
             }

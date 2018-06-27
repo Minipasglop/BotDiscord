@@ -35,7 +35,7 @@ public class AudioServerManager {
         player.stopTrack();
     }
 
-    public void loadTrack(String track) {
+    public void loadTrack(Track track) {
         if(playlist == null){
             playlist = new CustomAudioPlaylist(track);
         }
@@ -49,7 +49,7 @@ public class AudioServerManager {
     }
 
     public void reverseTrackLoop(){
-        this.playlist.loopOnTrack(!playlist.isLoopingOnTrack());
+        this.playlist.loopOnTrack();
     }
 
     public boolean isTrackLooping() { return this.playlist.isLoopingOnTrack(); }
