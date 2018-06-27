@@ -87,10 +87,6 @@ public class AudioServerManager {
         return audioLoadResultHandler;
     }
 
-    public Boolean isBotPlaying() {
-        return isPlaying;
-    }
-
     public int getTrackAmount() { return playlist.getTrackAmount(); }
 
     public String getNextTrackURL(){ return this.playlist.getNextTrackURL(); }
