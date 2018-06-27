@@ -5,10 +5,12 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.AudioServerManager;
 import discord.bot.utils.CustomAudioLoadResultHandler;
 import discord.bot.utils.YoutubeApi;
+import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +49,6 @@ public class SoundPlayerCommand implements ICommand {
         AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
         currAudioServerManager.getAudioLoadResultHandler().setChanToWrite(event.getTextChannel());
         currAudioServerManager.getAudioLoadResultHandler().setGuildAudioManager(guildAudioManager);
-        //TODO interaction avec l'utilisateur : Contenu de la playlist, skip etc...
         if (targetChannel == null) {
             event.getTextChannel().sendMessage(JOIN_VOCAL_CHANNEL).queue();
         } else {
@@ -56,14 +57,17 @@ public class SoundPlayerCommand implements ICommand {
                 youtubeQuery += args[i] + " ";
             }
             System.out.println(youtubeQuery);
-            String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
-            if (!("").equalsIgnoreCase(youtubeSearch)) {
-                String videoURL = "https://youtu.be/" + youtubeSearch;
+            Map<String,String> youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+            if (youtubeSearch != null) {
+                String videoURL = "https://youtu.be/" + youtubeSearch.get("videoUrl");
                 currAudioServerManager.getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
                 currAudioServerManager.loadTrack(videoURL);
-                if(currAudioServerManager.isBotPlaying()){
-                    event.getTextChannel().sendMessage(SOUND_QUEUED + "`" + currAudioServerManager.getTrackAmount() + " tracks.`").queue();
-                }
+                EmbedBuilder builder = new EmbedBuilder();
+                builder.setColor(Color.ORANGE);
+                builder.setThumbnail(youtubeSearch.get("thumbnailUrl"));
+                builder.addField("Video Title :movie_camera: ", youtubeSearch.get("title") + "\n̔̏", false);
+                builder.addField("Playlist status :bulb:", String.valueOf(currAudioServerManager.getTrackAmount()) + " track" + (currAudioServerManager.getTrackAmount() == 1 ? "" : "s") + " queued.", false);
+                event.getTextChannel().sendMessage(builder.build()).queue();
             }
         }
     }

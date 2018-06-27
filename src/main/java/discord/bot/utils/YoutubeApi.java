@@ -8,9 +8,12 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
+import com.google.api.services.youtube.model.SearchResultSnippet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class YoutubeApi {
@@ -19,12 +22,12 @@ public class YoutubeApi {
 
     private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
 
-    private final String EMPTY_RESULT = "";
+    private Map<String,String> result;
 
     private static YouTube youtube;
 
 
-    public String searchVideo(String query){
+    public Map<String,String> searchVideo(String query){
         try {
             youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
                 public void initialize(HttpRequest request) throws IOException {
@@ -44,8 +47,13 @@ public class YoutubeApi {
 
             SearchListResponse searchResponse = search.execute();
             List<SearchResult> searchResultList = searchResponse.getItems();
+            result = new HashMap<>();
             if (searchResultList != null) {
-                return searchResultList.get(0).getId().getVideoId();
+                SearchResultSnippet snippet = searchResultList.get(0).getSnippet();
+                result.put("title", snippet.getTitle());
+                result.put("thumbnailUrl", snippet.getThumbnails().getDefault().getUrl());
+                result.put("videoUrl", searchResultList.get(0).getId().getVideoId());
+                return result;
             }
         } catch (GoogleJsonResponseException e) {
             System.err.println("There was a service error: " + e.getDetails().getCode() + " : "
@@ -55,7 +63,7 @@ public class YoutubeApi {
         } catch (Throwable t) {
             t.printStackTrace();
         }
-        return EMPTY_RESULT;
+        return null;
     }
 
 }

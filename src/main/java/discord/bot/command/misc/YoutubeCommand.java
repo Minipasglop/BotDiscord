@@ -5,6 +5,8 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.YoutubeApi;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.util.Map;
+
 public class YoutubeCommand implements ICommand {
 
     private final String HELP = "Looks for a video in YouTube. \nUsage : `!yt query parameters`";
@@ -25,9 +27,9 @@ public class YoutubeCommand implements ICommand {
         for(int i = 0; i  < args.length; ++i){
             youtubeQuery += args[i] + " ";
         }
-        String youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
-        if(!("").equalsIgnoreCase(youtubeSearch)){
-            String videoURL = "https://youtu.be/" + youtubeSearch;
+        Map<String,String> youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+        if(youtubeSearch != null){
+            String videoURL = "https://youtu.be/" + youtubeSearch.get("videoUrl");
             event.getTextChannel().sendMessage(videoURL).queue();
         }else {
             event.getTextChannel().sendMessage(NO_RESULT).queue();
