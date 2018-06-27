@@ -9,7 +9,7 @@ import java.util.Map;
 public class SoundVolumeCommand implements ICommand {
     private final String HELP = "Set the volume (must be between 0 and 200). \nUsage : `!vol 20`";
     private final String VOLUME_MODIFIED = "The volume has been modified.";
-    private final String COMMAND_FAILED = "Failed modifying the volume. Please make sure you set it between 0 and 200";
+    private final String COMMAND_FAILED = "Failed modifying the volume. Please make sure you set it between 0 and 100";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
@@ -25,7 +25,7 @@ public class SoundVolumeCommand implements ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         try{
-            if(Integer.parseInt(args[0]) < 0 || Integer.parseInt(args[0]) > 200){
+            if(Integer.parseInt(args[0]) < 0 || Integer.parseInt(args[0]) > 100){
                 throw new Exception("Out of bounds.");
             }else {
                 audioServerManagers.get(event.getGuild().getId()).setVolume(Integer.parseInt(args[0]));
