@@ -24,7 +24,6 @@ public class InfoCommand implements ICommand {
         int serversNumber = BotGlobalManager.getJda().getGuilds().size();
         int channelNumber = BotGlobalManager.getJda().getTextChannels().size();
         int voiceChannelNumber = BotGlobalManager.getJda().getVoiceChannels().size();
-        String game = BotGlobalManager.getJda().getPresence().getGame().getName();
         //Taken from Almighty Alpaca
         //https://github.com/Java-Discord-Bot-System/Plugin-Uptime/blob/master/src/main/java/com/almightyalpaca/discord/bot/plugin/uptime/UptimePlugin.java#L28-L42
         final long duration = ManagementFactory.getRuntimeMXBean().getUptime();
@@ -42,16 +41,13 @@ public class InfoCommand implements ICommand {
         uptime = replaceLast(uptime, ",", " and");
 
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setAuthor(BotGlobalManager.getJda().getSelfUser().getName());
+        builder.setAuthor("Info");
         builder.setColor(Color.ORANGE);
         builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
-        builder.addField("Owner :white_check_mark:", BotGlobalManager.getJda().getUserById(BotGlobalManager.getConfig().getBotOwnerUserId()).getName() + "#" + BotGlobalManager.getJda().getUserById(BotGlobalManager.getConfig().getBotOwnerUserId()).getDiscriminator(), true);
-        builder.addBlankField(true);
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);
         builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
-        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels", true);
+        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels \n̔̏", true);
         builder.addBlankField(true);
-        builder.addField("Current activity :video_game:", game, true);
         builder.addField("Uptime :timer:", uptime, true);
         event.getTextChannel().sendMessage(builder.build()).queue();
     }
