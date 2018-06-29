@@ -18,7 +18,7 @@ public class YoutubeApi {
 
     private static PropertiesLoader config = new PropertiesLoader();
 
-    private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
+    private static final long NUMBER_OF_VIDEOS_RETURNED = 1;
 
 
     private static YouTube youtube;
