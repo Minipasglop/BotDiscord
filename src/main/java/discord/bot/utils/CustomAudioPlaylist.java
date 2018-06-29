@@ -58,4 +58,8 @@ public class CustomAudioPlaylist {
         return NO_MORE_SOUND_QUEUED;
     }
 
+    public List<Track> getTrackList() {
+        return this.playList;
+    }
+
 }

@@ -4,6 +4,8 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import discord.bot.BotGlobalManager;
 
+import java.util.List;
+
 public class AudioServerManager {
 
     private CustomAudioLoadResultHandler audioLoadResultHandler;
@@ -52,7 +54,10 @@ public class AudioServerManager {
         this.playlist.loopOnTrack();
     }
 
-    public boolean isTrackLooping() { return this.playlist.isLoopingOnTrack(); }
+    public boolean isTrackLooping() {
+        if(playlist == null) return false;
+        return this.playlist.isLoopingOnTrack();
+    }
 
     private void trackEnded( ){
         if(playlist.hasMoreTrack()){
@@ -87,7 +92,12 @@ public class AudioServerManager {
         return audioLoadResultHandler;
     }
 
-    public int getTrackAmount() { return playlist.getTrackAmount(); }
+    public int getTrackAmount() {
+        if(playlist == null) return 0;
+        return playlist.getTrackAmount();
+    }
 
     public String getNextTrackURL(){ return this.playlist.getNextTrackURL(); }
+
+    public List<Track> getTrackList() { return this.playlist.getTrackList(); }
 }

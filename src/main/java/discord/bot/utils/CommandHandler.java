@@ -1,10 +1,7 @@
 package discord.bot.utils;
 
 import discord.bot.command.ICommand;
-import discord.bot.command.aliases.SkipSoundCommand;
-import discord.bot.command.aliases.SoundLoopCommand;
-import discord.bot.command.aliases.SoundVolumeCommand;
-import discord.bot.command.aliases.StopSoundCommand;
+import discord.bot.command.aliases.*;
 import discord.bot.command.bot.info.InfoCommand;
 import discord.bot.command.bot.managing.ForcePropertiesSaveCommand;
 import discord.bot.command.bot.managing.SetGameCommand;
@@ -65,6 +62,7 @@ public class CommandHandler {
         soundCommands.put("skip", new SkipSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
         soundCommands.put("stop", new StopSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
         soundCommands.put("loop", new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("queue", new QueueCommand(soundPlayerCommandReference.getAudioServerManagers()));
 
         serverCommands = new HashMap<>();
         serverCommands.put("addRole" ,new RoleAddingCommand());
