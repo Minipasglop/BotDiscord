@@ -69,11 +69,11 @@ public class AudioServerManager {
     }
 
     private void trackEnded( ){
-        if(playlist.hasMoreTrack() && forceSkip){
+        if(playlist.hasMoreTrack() && (!isTrackLooping() || forceSkip)){
             playlist.skipTrack();
             loadNextTrack();
             new SoundPlaying(this).execute();
-        }else if(playlist.hasMoreTrack() && !forceSkip){
+        }else if(playlist.hasMoreTrack() && (this.playlist.isLoopingOnTrack() && !forceSkip)){
             loadNextTrack();
             new SoundPlaying(this).execute();
         }else {
