@@ -13,6 +13,7 @@ public class AudioServerManager {
     private AudioPlayer player;
     private AudioPlayerManager audioPlayerManager;
     private Boolean isPlaying;
+    private Boolean forceSkip;
 
     public AudioServerManager(CustomAudioLoadResultHandler audioLoadResultHandler) {
         this.audioLoadResultHandler = audioLoadResultHandler;
@@ -20,6 +21,7 @@ public class AudioServerManager {
         this.player = this.audioPlayerManager.createPlayer();
         this.audioLoadResultHandler.setPlayer(this.player);
         this.isPlaying = false;
+        this.forceSkip = false;
     }
 
     private void loadNextTrack(){
@@ -29,6 +31,7 @@ public class AudioServerManager {
     //Méthode en interface, permettant de tout déléguer au handlePlaylist (On pars du principe qu'il joue un son), et nous dit si on peut skip ou non pour l'interaction avec l'utilisateur
     public boolean skipTrack(){
         isPlaying = false;
+        forceSkip = true;
         return playlist.hasMoreTrack();
     }
 
@@ -60,13 +63,17 @@ public class AudioServerManager {
     }
 
     private void trackEnded( ){
-        if(playlist.hasMoreTrack()){
+        if(playlist.hasMoreTrack() && forceSkip){
             playlist.skipTrack();
+            loadNextTrack();
+            new SoundPlaying(this).execute();
+        }else if(playlist.hasMoreTrack() && !forceSkip){
             loadNextTrack();
             new SoundPlaying(this).execute();
         }else {
             emptyPlaylist();
         }
+        forceSkip = false;
     }
 
     public void handlePlaylist() {

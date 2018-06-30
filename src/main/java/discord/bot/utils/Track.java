@@ -8,18 +8,10 @@ public class Track {
     private String thumbnailUrl;
     private String title;
     private String channelTitle;
-    private boolean isLooping;
 
     public Track(String videoUrl) {
         this.videoUrl = YOUTUBE_PREFIX + videoUrl;
-        isLooping = false;
     }
-
-    public void revertLooping(){
-        isLooping = !isLooping;
-    }
-
-    public boolean isLooping() { return isLooping; }
 
     public String getVideoUrl() {
         return videoUrl;

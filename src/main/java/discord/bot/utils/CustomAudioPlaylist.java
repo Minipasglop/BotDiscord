@@ -7,25 +7,23 @@ public class CustomAudioPlaylist {
 
     private List<Track> playList;
     private final String NO_MORE_SOUND_QUEUED = "No more sound queued.";
-
+    private Boolean isLooping;
 
     public CustomAudioPlaylist(Track track) {
         playList = new ArrayList<>();
         playList.add(track);
+        isLooping = false;
     }
 
-    public void loopOnTrack(){ this.playList.get(0).revertLooping(); }
+    public void loopOnTrack(){ isLooping = !isLooping; }
 
-    public boolean isLoopingOnTrack() { return this.playList.get(0).isLooping(); }
+    public boolean isLoopingOnTrack() { return this.isLooping; }
 
     public String getCurrentTrackURL(){
         return playList.get(0).getVideoUrl();
     }
 
     public boolean skipTrack(){
-        if(isLoopingOnTrack()){
-            return true;
-        }
         if(playList.size() > 1 ){
             playList = playList.subList(1, playList.size());
             return true;
@@ -35,7 +33,7 @@ public class CustomAudioPlaylist {
     }
 
     public boolean hasMoreTrack(){
-        return playList.size() > 1 || isLoopingOnTrack();
+        return playList.size() > 1;
     }
 
     public void addTrack(Track track){
@@ -49,10 +47,7 @@ public class CustomAudioPlaylist {
     public int getTrackAmount() { return playList.size(); }
 
     public String getNextTrackURL() {
-        if(isLoopingOnTrack()){
-            return playList.get(0).getVideoUrl();
-        }
-        else if(playList.size() > 1){
+        if(playList.size() > 1){
             return playList.get(1).getVideoUrl();
         }
         return NO_MORE_SOUND_QUEUED;
