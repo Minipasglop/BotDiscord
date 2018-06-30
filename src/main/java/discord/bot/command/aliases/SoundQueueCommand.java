@@ -47,18 +47,19 @@ public class SoundQueueCommand implements ICommand {
                 currentTrack = getFormattedTrackName(trackList.get(0)) + "̔̏";
                 trackTitleList = "";
                 for(int i = 1; i < trackList.size(); i++){
-                    trackTitleList += getFormattedTrackName(trackList.get(i));
+                    trackTitleList += i + " - " + getFormattedTrackName(trackList.get(i));
                 }
-            }if(currAudioServerManager.getTrackAmount() == 1){
-                trackTitleList = NO_MORE_SOUND;
             }else {
                 builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
             }
+            if(currAudioServerManager.getTrackAmount() == 1){
+                trackTitleList = NO_MORE_SOUND;
+            }
             builder.setAuthor(PLAYLIST_STATUS);
             builder.setColor(Color.ORANGE);
-            builder.addField("Current sound :loud_sound: ", currentTrack, false);
-            builder.addField("Loop :repeat_one: ", (currAudioServerManager.isTrackLooping() ? "Enabled. \n̔̏" : "Disabled. \n̔̏"), false );
-            builder.addField("Sound to come :bulb:", trackTitleList, false);
+            builder.addField("Current track :loud_sound:", currentTrack, false);
+            builder.addField("Loop :repeat_one:", (currAudioServerManager.isTrackLooping() ? "Enabled. \n̔̏" : "Disabled. \n̔̏"), false );
+            builder.addField("Queued tracks :bulb:", trackTitleList, false);
             event.getTextChannel().sendMessage(builder.build()).queue();
         }catch (Exception e){
             e.printStackTrace();
