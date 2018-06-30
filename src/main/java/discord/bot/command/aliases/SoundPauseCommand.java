@@ -6,14 +6,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class StopSoundCommand implements ICommand {
-    private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!stop`";
-    private final String SOUND_SKIPPED = "Sound has been stopped.";
-    private final String COMMAND_FAILED = "Failed skipping the sound. Please make sure a sound was played.";
+public class SoundPauseCommand implements ICommand {
+    private final String HELP = "Pauses / Resumes the current track. \nUsage : `!p`";
+    private final String PAUSED = "Current track has been paused.";
+    private final String RESUMED = "Current track has been resumed.";
+    private final String COMMAND_FAILED = "Failed pausing the sound. Please make sure a sound is currently being played.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public StopSoundCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundPauseCommand(Map<String,AudioServerManager> audioServerManagers){
         this.audioServerManagers =  audioServerManagers;
     }
 
@@ -24,14 +25,17 @@ public class StopSoundCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            currAudioServerManager.emptyPlaylist();
-            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
-            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
-            event.getTextChannel().sendMessage(SOUND_SKIPPED).queue();
+            if(currAudioServerManager.isTrackPaused()){
+                event.getTextChannel().sendMessage(RESUMED).queue();
+                currAudioServerManager.setTrackPaused(false);
+            }else {
+                event.getTextChannel().sendMessage(PAUSED).queue();
+                currAudioServerManager.setTrackPaused(true);
+            }
         }catch (Exception e){
+            e.printStackTrace();
             event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
         }
     }

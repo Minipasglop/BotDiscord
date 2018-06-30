@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
-public class QueueCommand implements ICommand {
+public class SoundQueueCommand implements ICommand {
     private final String HELP = "Display the current playlist status played. \nUsage : `!queue`";
     private final String PLAYLIST_STATUS = "Playlist current status : ";
     private final String NO_MORE_SOUND = "No more sound to be played.";
@@ -21,7 +21,7 @@ public class QueueCommand implements ICommand {
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public QueueCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundQueueCommand(Map<String,AudioServerManager> audioServerManagers){
         this.audioServerManagers =  audioServerManagers;
     }
 

@@ -28,6 +28,12 @@ public class AudioServerManager {
         audioPlayerManager.loadItem(playlist.getCurrentTrackURL(),this.audioLoadResultHandler);
     }
 
+    public Boolean isTrackPaused(){ return player.isPaused(); }
+
+    public void setTrackPaused(boolean paused){
+        player.setPaused(paused);
+    }
+
     //Méthode en interface, permettant de tout déléguer au handlePlaylist (On pars du principe qu'il joue un son), et nous dit si on peut skip ou non pour l'interaction avec l'utilisateur
     public boolean skipTrack(){
         isPlaying = false;

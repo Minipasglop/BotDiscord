@@ -59,10 +59,11 @@ public class CommandHandler {
         soundCommands = new HashMap<>();
         soundCommands.put("sound", soundPlayerCommandReference);
         soundCommands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("skip", new SkipSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("stop", new StopSoundCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("skip", new SoundSkipCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("stop", new SoundStopCommand(soundPlayerCommandReference.getAudioServerManagers()));
         soundCommands.put("loop", new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("queue", new QueueCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("queue", new SoundQueueCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put("p", new SoundPauseCommand(soundPlayerCommandReference.getAudioServerManagers()));
 
         serverCommands = new HashMap<>();
         serverCommands.put("addRole" ,new RoleAddingCommand());

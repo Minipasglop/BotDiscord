@@ -6,16 +6,14 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class SkipSoundCommand implements ICommand {
-    private final String HELP = "Skip the current sound played. \nUsage : `!skip`";
-    private final String SOUND_SKIPPED_NEXT = "Sound has been skipped. Next to be played : ";
-    private final String SOUND_SKIPPED_END = "Sound has been skipped. No more in queue, `disconnecting.`";
+public class SoundStopCommand implements ICommand {
+    private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!stop`";
+    private final String SOUND_SKIPPED = "Sound has been stopped.";
     private final String COMMAND_FAILED = "Failed skipping the sound. Please make sure a sound was played.";
-    private final String NOTHING_TO_SKIP = "No sound to skip.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SkipSoundCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundStopCommand(Map<String,AudioServerManager> audioServerManagers){
         this.audioServerManagers =  audioServerManagers;
     }
 
@@ -26,20 +24,14 @@ public class SkipSoundCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
+
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.getTrackAmount() == 0){
-                event.getTextChannel().sendMessage(NOTHING_TO_SKIP).queue();
-            }
-            else if(!currAudioServerManager.skipTrack()){
-                currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
-                currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
-                event.getTextChannel().sendMessage(SOUND_SKIPPED_END).queue();
-            }else{
-                event.getTextChannel().sendMessage(SOUND_SKIPPED_NEXT + currAudioServerManager.getNextTrackURL()).queue();
-            }
+            currAudioServerManager.emptyPlaylist();
+            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
+            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
+            event.getTextChannel().sendMessage(SOUND_SKIPPED).queue();
         }catch (Exception e){
-            e.printStackTrace();
             event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
         }
     }
