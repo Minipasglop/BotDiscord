@@ -13,7 +13,7 @@ public class HelpCommand implements ICommand {
 
     private String HELP = "The command `help` displays the commands available at the moment. \nUsage: `!help`";
     private String MESSAGE_HEADER = "The commands available at the moment are listed below. All commands must be prefixed with a `!`. \nTo obtain more information on a command, just type `!command help`\n\n";
-    private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThank's for using *Jackson* :heart: :smirk:";
+    private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThanks for using *Jackson* :heart: :smirk:";
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
