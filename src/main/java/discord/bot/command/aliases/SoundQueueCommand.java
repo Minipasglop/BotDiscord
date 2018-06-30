@@ -14,7 +14,7 @@ import java.util.Map;
 public class SoundQueueCommand implements ICommand {
     private final String HELP = "Display the current playlist status played. \nUsage : `!queue`";
     private final String PLAYLIST_STATUS = "Playlist current status : ";
-    private final String NO_MORE_SOUND = "No more sound to be played.";
+    private final String NO_MORE_SOUND = "No more track to be played.";
     private final String NO_SOUND_PLAYING = "No sound is currently being played.";
     private final String COMMAND_FAILED = "Failed displaying the playlist.";
     private final String EMPTY_QUEUE = "Playlist is empty.";

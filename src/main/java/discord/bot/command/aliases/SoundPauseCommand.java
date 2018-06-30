@@ -10,7 +10,7 @@ public class SoundPauseCommand implements ICommand {
     private final String HELP = "Pauses / Resumes the current track. \nUsage : `!p`";
     private final String PAUSED = "Current track has been paused.";
     private final String RESUMED = "Current track has been resumed.";
-    private final String COMMAND_FAILED = "Failed pausing the sound. Please make sure a sound is currently being played.";
+    private final String COMMAND_FAILED = "Failed pausing the sound. Please make sure a track is currently being played.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 

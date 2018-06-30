@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class SoundPlayerCommand implements ICommand {
 
-    private final String HELP = "Plays a sound from the Youtube Video found with the query parameters. \nUsage : `!sound query parameters`";
+    private final String HELP = "Plays a track from Youtube using the name. \nUsage : `!sound songName`";
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
     private final String SOUND_QUEUED = "Sound has been queued";
 

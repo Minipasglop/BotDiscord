@@ -9,7 +9,7 @@ import java.util.Map;
 public class SoundStopCommand implements ICommand {
     private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!stop`";
     private final String SOUND_SKIPPED = "Sound has been stopped.";
-    private final String COMMAND_FAILED = "Failed skipping the sound. Please make sure a sound was played.";
+    private final String COMMAND_FAILED = "Failed executing this command. Please make sure a track is being played.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
