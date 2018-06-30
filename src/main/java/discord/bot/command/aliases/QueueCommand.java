@@ -40,8 +40,10 @@ public class QueueCommand implements ICommand {
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
             String trackTitleList = EMPTY_QUEUE;
             String currentTrack = NO_SOUND_PLAYING + "\n̔̏";
+            EmbedBuilder builder = new EmbedBuilder();
             if(currAudioServerManager.getTrackAmount() > 0){
                 List<Track> trackList = currAudioServerManager.getTrackList();
+                builder.setThumbnail(trackList.get(0).getThumbnailUrl());
                 currentTrack = getFormattedTrackName(trackList.get(0)) + "̔̏";
                 trackTitleList = "";
                 for(int i = 1; i < trackList.size(); i++){
@@ -49,11 +51,11 @@ public class QueueCommand implements ICommand {
                 }
             }if(currAudioServerManager.getTrackAmount() == 1){
                 trackTitleList = NO_MORE_SOUND;
+            }else {
+                builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
             }
-            EmbedBuilder builder = new EmbedBuilder();
             builder.setAuthor(PLAYLIST_STATUS);
             builder.setColor(Color.ORANGE);
-            builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
             builder.addField("Current sound :loud_sound: ", currentTrack, false);
             builder.addField("Loop :repeat_one: ", (currAudioServerManager.isTrackLooping() ? "Enabled. \n̔̏" : "Disabled. \n̔̏"), false );
             builder.addField("Sound to come :bulb:", trackTitleList, false);
