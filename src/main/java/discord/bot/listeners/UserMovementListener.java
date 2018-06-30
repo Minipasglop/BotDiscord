@@ -46,7 +46,11 @@ public class UserMovementListener extends ListenerAdapter {
     }
 
     private void autoRole(Guild serveur, Member user) {
-        serveur.getController().addRolesToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyFromServer(serveur.getId(),"autoRole"),true)).complete();
+        try{
+            serveur.getController().addRolesToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyFromServer(serveur.getId(),"autoRole"),true)).complete();
+        }catch (Exception e){
+            System.out.println("Erreur lors de l'autorole sur le serveur : " + serveur.getName());
+        }
     }
 
     private void messageBienvenueJoinServeur(User user,TextChannel channel){

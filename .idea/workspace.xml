@@ -6,17 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/QueueCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SkipSoundCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundSkipCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/StopSoundCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundStopCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java" afterDir="false" />
-    </list>
     <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" afterDir="false" />
+    </list>
+    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" afterDir="false" />
     </list>
     <ignored path="BotDiscord.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,8 +59,8 @@
       <file leaf-file-name="AudioServerManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
+            <state relative-caret-position="323">
+              <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
               <folding>
                 <element signature="e#1090#1091#0" expanded="true" />
                 <element signature="e#1124#1125#0" expanded="true" />
@@ -77,8 +72,8 @@
       <file leaf-file-name="SoundPauseCommand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+            <state relative-caret-position="374">
+              <caret line="26" column="66" lean-forward="true" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -92,11 +87,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HelpCommand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="15" column="130" selection-start-line="15" selection-start-column="130" selection-end-line="15" selection-end-column="130" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMovementListener.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="63" column="110" lean-forward="true" selection-start-line="63" selection-start-column="110" selection-end-line="63" selection-end-column="110" />
+            <state relative-caret-position="1020">
+              <caret line="72" column="52" lean-forward="true" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -167,10 +180,8 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/PingCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/StopSoundCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/MoveCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SkipSoundCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundVolumeCommand.java" />
@@ -182,8 +193,10 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/QueueCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" />
       </list>
     </option>
   </component>
@@ -295,6 +308,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bot" type="462c0819:PsiDirectoryNode" />
               <item name="command" type="462c0819:PsiDirectoryNode" />
+              <item name="bot" type="462c0819:PsiDirectoryNode" />
+              <item name="managing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Jackson" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bot" type="462c0819:PsiDirectoryNode" />
+              <item name="command" type="462c0819:PsiDirectoryNode" />
               <item name="misc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -306,6 +330,15 @@
               <item name="bot" type="462c0819:PsiDirectoryNode" />
               <item name="command" type="462c0819:PsiDirectoryNode" />
               <item name="managing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Jackson" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bot" type="462c0819:PsiDirectoryNode" />
+              <item name="listeners" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
@@ -497,20 +530,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1474045783590</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Utilisation d'une constante pour le chemin vers le fichier de constantes (c'est plus joli quand même...)">
-      <created>1525190404849</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1525190404849</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Modification statut du bot">
-      <created>1525601076349</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1525601076350</updated>
     </task>
     <task id="LOCAL-00012" summary="Optimisation de la commande move en évitant de recréer un objet déja généré qui ne bouge pas">
       <created>1525601320305</created>
@@ -841,7 +860,21 @@
       <option name="project" value="LOCAL" />
       <updated>1530398822683</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Added a primary version of a Pause command, to pause the sound playing + refactored the name of some command aliases">
+      <created>1530399274080</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1530399274080</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Deleted a trailing '">
+      <created>1530399568717</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1530399568717</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView">
@@ -934,8 +967,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Customization, first brick : Users can now set for each server the role they want when an user join. If they want a greeting / bye message and in which channel. Also added a mechanics that allows the bot to save stuff into files, one file for each server." />
-    <MESSAGE value="Customization, second brick : More interaction with user + some securization on properties file Saving" />
     <MESSAGE value="Added some commands for the owner (me hehe) to manage a reboot or simply change the game :)" />
     <MESSAGE value="Fixed multi sound + refactoring on AudioGlobalManager -&gt; AudioServerManager" />
     <MESSAGE value="Fixed an issue on setAutoRole" />
@@ -959,7 +990,9 @@
     <MESSAGE value="Added the QueueCommand to fetch the status of the playlist (upcoming tracks and currently played sound)" />
     <MESSAGE value="Fixed the skip command to work with the loop command. Works well now !" />
     <MESSAGE value="Little enhancment on the QueueCommand to make the thumbnail the video url as default, or use the bot avatar if none" />
-    <option name="LAST_COMMIT_MESSAGE" value="Little enhancment on the QueueCommand to make the thumbnail the video url as default, or use the bot avatar if none" />
+    <MESSAGE value="Added a primary version of a Pause command, to pause the sound playing + refactored the name of some command aliases" />
+    <MESSAGE value="Deleted a trailing '" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted a trailing '" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1185,13 +1218,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/RandomColorGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1259,13 +1285,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="86" column="11" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="43" column="74" selection-start-line="43" selection-end-line="44" />
         </state>
       </provider>
     </entry>
@@ -1356,10 +1375,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="72" column="52" lean-forward="true" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
+        <state relative-caret-position="323">
+          <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
           <folding>
             <element signature="e#1090#1091#0" expanded="true" />
             <element signature="e#1124#1125#0" expanded="true" />
@@ -1369,15 +1395,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+        <state relative-caret-position="374">
+          <caret line="26" column="66" lean-forward="true" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="63" column="110" lean-forward="true" selection-start-line="63" selection-start-column="110" selection-end-line="63" selection-end-column="110" />
+        <state relative-caret-position="114">
+          <caret line="15" column="130" selection-start-line="15" selection-start-column="130" selection-end-line="15" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
         </state>
       </provider>
     </entry>
