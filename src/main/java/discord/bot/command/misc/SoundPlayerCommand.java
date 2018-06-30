@@ -57,7 +57,7 @@ public class SoundPlayerCommand implements ICommand {
             for(int i = 0; i  < args.length; ++i){
                 youtubeQuery += args[i] + " ";
             }
-            System.out.println(youtubeQuery);
+            System.out.println(event.getAuthor().getName() + " searched : " + youtubeQuery + " on server : " + event.getGuild().getName());
             Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
             if (youtubeSearch != null) {
                 currAudioServerManager.getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);

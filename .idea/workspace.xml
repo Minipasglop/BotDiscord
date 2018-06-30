@@ -6,12 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" afterDir="false" />
-    </list>
-    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Made the Queue Command a bit more graphic">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" afterDir="false" />
     </list>
     <ignored path="BotDiscord.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +53,8 @@
       <file leaf-file-name="AudioServerManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+            <state relative-caret-position="221">
+              <caret line="80" column="9" lean-forward="true" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
               <folding>
                 <element signature="e#1090#1091#0" expanded="true" />
                 <element signature="e#1124#1125#0" expanded="true" />
@@ -78,11 +77,12 @@
       <file leaf-file-name="CustomAudioPlaylist.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="340">
+              <caret line="34" column="34" lean-forward="true" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
               <folding>
                 <element signature="method#CustomAudioPlaylist#0;class#CustomAudioPlaylist#0" />
                 <element signature="method#skipTrack#0;class#CustomAudioPlaylist#0" />
+                <element signature="e#910#911#0" expanded="true" />
                 <element signature="method#getNextTrackURL#0;class#CustomAudioPlaylist#0" />
               </folding>
             </state>
@@ -220,7 +220,6 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/bot/info/InfoCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/YoutubeApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/Track.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/QueueCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java" />
@@ -228,6 +227,7 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" />
       </list>
     </option>
@@ -562,13 +562,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1474045783590</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Typo suppression d'un double point">
-      <created>1525603524874</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1525603524874</updated>
     </task>
     <task id="LOCAL-00015" summary="Refacto logs : Nom d'utilisateur et plus pseudo">
       <created>1525604038728</created>
@@ -906,7 +899,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530400161300</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Fixed a bug that would appear with the new way of !loop to work with !skip command">
+      <created>1530402341600</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1530402341600</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TodoView">
@@ -928,10 +928,10 @@
       <window_info id="Palette&#9;" order="2" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010661" side_tool="true" visible="true" weight="0.39825898" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5021322" side_tool="true" visible="true" weight="0.2937976" />
       <window_info anchor="right" id="Maven Projects" order="4" weight="0.1748401" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32861805" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" weight="0.2937976" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4978678" visible="true" weight="0.2937976" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3297062" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="right" id="Designer" order="6" />
@@ -942,7 +942,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" sideWeight="0.5082353" side_tool="true" weight="0.24304539" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" visible="true" weight="0.39825898" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4989339" weight="0.39825898" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32995737" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -999,7 +999,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed an issue on setAutoRole" />
     <MESSAGE value="Added aliases on sound command, like !skip !sound and !vol which are more user friendly ;)" />
     <MESSAGE value="Added the possibility to !loop on a playing track, and some fixed on !skip and !vol" />
     <MESSAGE value="Fixed multi criteria youtube search... #IAmASalmonBruh" />
@@ -1024,7 +1023,8 @@
     <MESSAGE value="Deleted a trailing '" />
     <MESSAGE value="Securization on the autoRole" />
     <MESSAGE value="Made the Queue Command a bit more graphic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made the Queue Command a bit more graphic" />
+    <MESSAGE value="Fixed a bug that would appear with the new way of !loop to work with !skip command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a bug that would appear with the new way of !loop to work with !skip command" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1053,44 +1053,8 @@
           <properties />
           <option name="timeStamp" value="111" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java</url>
-          <line>73</line>
-          <properties />
-          <option name="timeStamp" value="136" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java</url>
-          <line>77</line>
-          <properties />
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java</url>
-          <line>80</line>
-          <properties />
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java</url>
-          <line>78</line>
-          <properties />
-          <option name="timeStamp" value="139" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java</url>
-          <line>81</line>
-          <properties />
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java</url>
-          <line>19</line>
-          <properties />
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="149" />
+      <option name="time" value="150" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -1463,11 +1427,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="340">
+          <caret line="34" column="34" lean-forward="true" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
           <folding>
             <element signature="method#CustomAudioPlaylist#0;class#CustomAudioPlaylist#0" />
             <element signature="method#skipTrack#0;class#CustomAudioPlaylist#0" />
+            <element signature="e#910#911#0" expanded="true" />
             <element signature="method#getNextTrackURL#0;class#CustomAudioPlaylist#0" />
           </folding>
         </state>
@@ -1475,8 +1440,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+        <state relative-caret-position="221">
+          <caret line="80" column="9" lean-forward="true" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
           <folding>
             <element signature="e#1090#1091#0" expanded="true" />
             <element signature="e#1124#1125#0" expanded="true" />
