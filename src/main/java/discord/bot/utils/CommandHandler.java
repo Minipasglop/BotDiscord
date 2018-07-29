@@ -57,7 +57,7 @@ public class CommandHandler {
         SoundPlayerCommand soundPlayerCommandReference = new SoundPlayerCommand();
 
         soundCommands = new HashMap<>();
-        soundCommands.put("sound", soundPlayerCommandReference);
+        soundCommands.put("play", soundPlayerCommandReference);
         soundCommands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
         soundCommands.put("skip", new SoundSkipCommand(soundPlayerCommandReference.getAudioServerManagers()));
         soundCommands.put("stop", new SoundStopCommand(soundPlayerCommandReference.getAudioServerManagers()));
