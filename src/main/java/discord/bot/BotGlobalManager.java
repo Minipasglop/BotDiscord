@@ -36,7 +36,7 @@ public class BotGlobalManager {
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
-            saveThread.run();
+            saveThread.start();
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
