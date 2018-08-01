@@ -8,6 +8,7 @@ public class ServerPropertiesJSONUpdate {
     private String autoRole;
     private String userEventEnabled;
     private String userEventChannel;
+    private String volume;
 
     public ServerPropertiesJSONUpdate(String serverID) {
         try {
@@ -25,6 +26,7 @@ public class ServerPropertiesJSONUpdate {
             properties.setProperty("autoRole", autoRole);
             properties.setProperty("userEventEnabled", userEventEnabled);
             properties.setProperty("userEventChannel", userEventChannel);
+            properties.setProperty("volume", volume);
 
             properties.store(fileOutput, null);
 
@@ -38,5 +40,6 @@ public class ServerPropertiesJSONUpdate {
         autoRole = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"autoRole");
         userEventEnabled = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled");
         userEventChannel = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel");
+        volume = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"volume");
     }
 }

@@ -2,10 +2,7 @@ package discord.bot.command.misc;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
-import discord.bot.utils.AudioServerManager;
-import discord.bot.utils.CustomAudioLoadResultHandler;
-import discord.bot.utils.Track;
-import discord.bot.utils.YoutubeApi;
+import discord.bot.utils.*;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -47,6 +44,7 @@ public class SoundPlayerCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
+        int volume = 50;
         VoiceChannel targetChannel = event.getMember().getVoiceState().getChannel();
         AudioManager guildAudioManager = event.getGuild().getAudioManager();
         AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
@@ -55,6 +53,9 @@ public class SoundPlayerCommand implements ICommand {
         if (targetChannel == null) {
             event.getTextChannel().sendMessage(JOIN_VOCAL_CHANNEL).queue();
         } else {
+            if(!("").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume")) && ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume") != null){
+                volume = Integer.parseInt(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume"));
+            }
             String youtubeQuery = "";
             for(int i = 0; i  < args.length; ++i){
                 youtubeQuery += args[i] + " ";
@@ -64,6 +65,7 @@ public class SoundPlayerCommand implements ICommand {
             if (youtubeSearch != null) {
                 currAudioServerManager.getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
                 currAudioServerManager.loadTrack(youtubeSearch);
+                currAudioServerManager.setVolume(volume);
                 EmbedBuilder builder = new EmbedBuilder();
                 builder.setAuthor(SOUND_QUEUED);
                 builder.setColor(Color.ORANGE);

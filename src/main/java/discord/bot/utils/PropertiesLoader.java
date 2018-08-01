@@ -50,6 +50,7 @@ public class PropertiesLoader {
                 propertiesValueForServer.put("autoRole", (String) serverProperties.get("autoRole"));
                 propertiesValueForServer.put("userEventEnabled", (String) serverProperties.get("userEventEnabled"));
                 propertiesValueForServer.put("userEventChannel", (String) serverProperties.get("userEventChannel"));
+                propertiesValueForServer.put("volume", (String) serverProperties.get("volume"));
                 ServerPropertiesManager.getInstance().setPropertiesForServer(guildList.get(i).getId(), propertiesValueForServer);
             } catch (IOException e) {
                 System.out.println("Fichier introuvable pour le serveur : " + guildList.get(i).getName());

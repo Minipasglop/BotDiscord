@@ -1,5 +1,7 @@
 package discord.bot.utils;
 
+import discord.bot.BotGlobalManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +10,8 @@ import java.util.Map;
 public class ServerPropertiesManager {
 
     private Map<String,Map<String,String>> globalProperties;
-    private Map<String,String> serverProperties;
     private List<String> propertiesList;
+    private ServerPropertiesInjector injector;
 
     private static ServerPropertiesManager instance;
 
@@ -18,6 +20,7 @@ public class ServerPropertiesManager {
         propertiesList.add("autoRole");
         propertiesList.add("userEventChannel");
         propertiesList.add("userEventEnabled");
+        propertiesList.add("volume");
     }
 
     public static ServerPropertiesManager getInstance(){
@@ -28,18 +31,23 @@ public class ServerPropertiesManager {
     }
 
     public void setPropertyForServer(String serverId,String property, String value){
+        Map<String,String> buffMap = new HashMap<>();
         if(globalProperties.get(serverId) != null){
-           serverProperties = globalProperties.get(serverId);
+            buffMap = globalProperties.get(serverId);
         }else {
             globalProperties.put(serverId,new HashMap<>());
         }
-        serverProperties.put(property,value);
-        globalProperties.put(serverId,serverProperties);
+        buffMap.put(property,value);
+        globalProperties.put(serverId,buffMap);
     }
 
     private ServerPropertiesManager(){
-        serverProperties = new HashMap<>();
         globalProperties = new HashMap<>();
+        injector = new ServerPropertiesInjector();
+        for(int i = 0; i < BotGlobalManager.getServers().size(); i++){
+            String currServerId = BotGlobalManager.getServers().get(i).getId();
+            globalProperties.put(currServerId, injector.getPropertiesFromFile(currServerId));
+        }
         createPropertiesList();
     }
 
