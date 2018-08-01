@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.Map;
 
 public class SoundVolumeCommand implements ICommand {
-    private final String HELP = "Set the volume (must be between 0 and 200). \nUsage : `!vol 20`";
+    private final String HELP = "Set the volume (must be between 0 and 100). \nUsage : `!vol 20`";
     private final String VOLUME_MODIFIED = "The volume has been modified.";
     private final String COMMAND_FAILED = "Failed modifying the volume. Please make sure you set it between 0 and 100";
 
