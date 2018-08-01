@@ -1,6 +1,5 @@
 package discord.bot.command.aliases;
 
-import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.AudioServerManager;
 import discord.bot.utils.Track;
@@ -50,7 +49,7 @@ public class SoundQueueCommand implements ICommand {
                     trackTitleList += i + " - " + getFormattedTrackName(trackList.get(i));
                 }
             }else {
-                builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
+                builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
             }
             if(currAudioServerManager.getTrackAmount() == 1){
                 trackTitleList = NO_MORE_SOUND;

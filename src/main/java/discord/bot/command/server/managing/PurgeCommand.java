@@ -14,6 +14,7 @@ public class PurgeCommand implements ICommand {
     private final String HELP = "Deletes the most message of the text channel. \nUsage : `!purge`";
     private final String ACTION_PERFORMED = "ChatRoom has been cleaned :see_no_evil:";
     private final String NOT_ALLOWED = "You're not allowed to purge the chatroom... Sadly :)";
+    private final String ACTION_FAILED = "Failed deleting the chat room.";
 
 
     @Override
@@ -24,6 +25,7 @@ public class PurgeCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event)  {
+        try {
         if(event.getMember().getPermissions().contains(Permission.MESSAGE_MANAGE)) {
             TextChannel currChannel = event.getTextChannel();
             List<Message> history = currChannel.getIterableHistory().complete();
@@ -33,6 +35,10 @@ public class PurgeCommand implements ICommand {
             event.getMessage().delete().queue();
             PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
             chanToTalk.sendMessage(NOT_ALLOWED).queue();
+            }
+        }catch (IllegalArgumentException e){
+            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
+            chanToTalk.sendMessage(ACTION_FAILED).queue();
         }
     }
 

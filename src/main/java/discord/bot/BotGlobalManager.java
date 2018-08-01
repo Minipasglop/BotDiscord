@@ -7,6 +7,7 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import discord.bot.listeners.GuildJoinListener;
 import discord.bot.listeners.MessageListener;
 import discord.bot.listeners.UserMovementListener;
+import discord.bot.utils.CommandHandler;
 import discord.bot.utils.PropertiesLoader;
 import discord.bot.utils.SaveThread;
 import discord.bot.utils.YoutubeApi;
@@ -17,44 +18,35 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
 
 import javax.security.auth.login.LoginException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class BotGlobalManager {
-    private static JDA jda;
+    private static List<JDA> shards;
     private static PropertiesLoader config = new PropertiesLoader();
     private static AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
     private static YoutubeApi youtubeApi = new YoutubeApi();
+    private final int SHARD_AMMOUNT = 10;
 
     BotGlobalManager() {
         try {
-            jda = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"!help")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false).buildBlocking();
-            jda.addEventListener(new MessageListener());
-            jda.addEventListener(new UserMovementListener());
-            jda.addEventListener(new GuildJoinListener());
+            shards = new ArrayList<>();
+            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"!help")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
+            shardBuilder.addEventListener(new MessageListener());
+            shardBuilder.addEventListener(new UserMovementListener());
+            shardBuilder.addEventListener(new GuildJoinListener());
+            for(int i = 0; i < SHARD_AMMOUNT; i++){
+                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT)
+                        .buildAsync());
+            }
             audioPlayerManager.registerSourceManager(new LocalAudioSourceManager());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
             saveThread.start();
-        } catch (LoginException | InterruptedException e) {
+        } catch (LoginException e) {
             e.printStackTrace();
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
-            return;
-        }
-        boolean stop = false;
-        while (!stop) {
-            Scanner scanner = new Scanner(System.in);
-            String cmd = scanner.next();
-            if (cmd.equalsIgnoreCase("stop")) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-                jda.shutdown();
-                stop = true;
-            }//Arreter le bot proprement en tapant "stop" dans la console, il nous affichera alors le nombre de commande qu'il a effectué et attendra 5 secondes avant de mourir... Pauvre Jackson :'(
         }
     }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console
 
@@ -70,8 +62,12 @@ public class BotGlobalManager {
 
     public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
 
-    public static List<Guild> getServers() { return jda.getGuilds(); }
-
-    public static JDA getJda() { return jda; }
+    public static List<Guild> getServers() {
+        List<Guild> serverCount = new ArrayList<>();
+        for(int i = 0; i < shards.size(); i++){
+            serverCount.addAll(shards.get(i).getGuilds());
+        }
+        return serverCount;
+    }
 
 }

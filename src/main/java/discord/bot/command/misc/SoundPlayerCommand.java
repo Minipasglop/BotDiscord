@@ -25,21 +25,23 @@ public class SoundPlayerCommand implements ICommand {
     private Map<String,AudioServerManager> audioServerManagers;
     public SoundPlayerCommand(){
         youtubeApi = BotGlobalManager.getYoutubeApi();
-        audioServerManagers = initServerManagers();
+        audioServerManagers = new HashMap<>();
     }
 
     public Map<String,AudioServerManager> getAudioServerManagers() { return this.audioServerManagers; }
 
-    private Map<String,AudioServerManager> initServerManagers(){
-        Map<String, AudioServerManager> audioGlobalManagerMap = new HashMap<>();
+    private void initServerManagers(){
         for(int i = 0; i < BotGlobalManager.getServers().size(); i++){
-            audioGlobalManagerMap.put(BotGlobalManager.getServers().get(i).getId(),new AudioServerManager(new CustomAudioLoadResultHandler()));
+            if(audioServerManagers.get(BotGlobalManager.getServers().get(i).getId()) == null)
+                audioServerManagers.put(BotGlobalManager.getServers().get(i).getId(),new AudioServerManager(new CustomAudioLoadResultHandler()));
         }
-        return audioGlobalManagerMap;
     }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
+        if(audioServerManagers.isEmpty() || audioServerManagers.size() == BotGlobalManager.getServers().size()){
+            initServerManagers();
+        }
         return args.length != 0 && !args[0].equals("help");
     }
 

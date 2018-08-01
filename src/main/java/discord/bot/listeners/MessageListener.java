@@ -17,6 +17,5 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         CommandHandler.handleCommand(this.parser.parse(event.getMessage().getContentRaw(),event));
-
     }
 }

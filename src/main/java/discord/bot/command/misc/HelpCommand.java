@@ -39,9 +39,9 @@ public class HelpCommand implements ICommand {
         String miscCommandsList = getFormattedStringFromCommandMap(CommandHandler.getMiscCommands());
         String ownerCommandsList = getFormattedStringFromCommandMap(CommandHandler.getOwnerCommands());
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setAuthor(BotGlobalManager.getJda().getSelfUser().getName());
+        builder.setAuthor(event.getJDA().getSelfUser().getName());
         builder.setColor(Color.ORANGE);
-        builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
+        builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
         builder.addField("Help :bulb: ", MESSAGE_HEADER, true);
         builder.addField("Sound commands :loudspeaker:", soundCommandsList + "\n̔̏", true);
         builder.addField("Server commands :desktop:", serverCommandsList + "\n̔̏", true);

@@ -20,10 +20,10 @@ public class InfoCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        int usersNumber = BotGlobalManager.getJda().getUsers().size();
-        int serversNumber = BotGlobalManager.getJda().getGuilds().size();
-        int channelNumber = BotGlobalManager.getJda().getTextChannels().size();
-        int voiceChannelNumber = BotGlobalManager.getJda().getVoiceChannels().size();
+        int usersNumber = event.getJDA().getUsers().size();
+        int serversNumber = event.getJDA().getGuilds().size();
+        int channelNumber = event.getJDA().getTextChannels().size();
+        int voiceChannelNumber = event.getJDA().getVoiceChannels().size();
         //Taken from Almighty Alpaca
         //https://github.com/Java-Discord-Bot-System/Plugin-Uptime/blob/master/src/main/java/com/almightyalpaca/discord/bot/plugin/uptime/UptimePlugin.java#L28-L42
         final long duration = ManagementFactory.getRuntimeMXBean().getUptime();
@@ -43,7 +43,7 @@ public class InfoCommand implements ICommand {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setAuthor("Info");
         builder.setColor(Color.ORANGE);
-        builder.setThumbnail(BotGlobalManager.getJda().getSelfUser().getAvatarUrl());
+        builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);
         builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
         builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels \n̔̏", true);

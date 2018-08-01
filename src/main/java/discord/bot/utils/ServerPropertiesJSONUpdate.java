@@ -1,7 +1,5 @@
 package discord.bot.utils;
 
-import discord.bot.BotGlobalManager;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -16,7 +14,7 @@ public class ServerPropertiesJSONUpdate {
             //Opening properties file
             File configFile = new File("jackson-guild-"+serverID+".properties");
             if(configFile.createNewFile()){
-                System.out.println("Fichier créé pour le serveur : " + BotGlobalManager.getJda().getGuildById(serverID).getName());
+                System.out.println("Fichier créé pour le serveur : " + serverID);
             }
             FileInputStream fileInput = new FileInputStream(configFile);
             Properties properties = new Properties();

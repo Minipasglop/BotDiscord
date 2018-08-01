@@ -29,13 +29,13 @@ public class SetGameCommand implements ICommand {
             }
             switch(type){
                 case "playing":
-                    BotGlobalManager.getJda().getPresence().setGame(Game.playing(game));
+                    event.getJDA().getPresence().setGame(Game.playing(game));
                     break;
                 case "watching":
-                    BotGlobalManager.getJda().getPresence().setGame(Game.watching(game));
+                    event.getJDA().getPresence().setGame(Game.watching(game));
                     break;
                 case "listening":
-                    BotGlobalManager.getJda().getPresence().setGame(Game.listening(game));
+                    event.getJDA().getPresence().setGame(Game.listening(game));
                     break;
                 default:
                     event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(WRONG_TYPE).queue()));
