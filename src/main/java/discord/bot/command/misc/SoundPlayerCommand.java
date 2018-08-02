@@ -36,7 +36,7 @@ public class SoundPlayerCommand implements ICommand {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        if(audioServerManagers.isEmpty() || audioServerManagers.size() == BotGlobalManager.getServers().size()){
+        if(audioServerManagers.isEmpty() || audioServerManagers.size() != BotGlobalManager.getServers().size()){
             initServerManagers();
         }
         return args.length != 0 && !args[0].equals("help");
