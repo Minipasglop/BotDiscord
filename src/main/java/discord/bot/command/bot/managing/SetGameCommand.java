@@ -2,8 +2,11 @@ package discord.bot.command.bot.managing;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.util.List;
 
 public class SetGameCommand implements ICommand {
 
@@ -11,6 +14,32 @@ public class SetGameCommand implements ICommand {
     private String COMMAND_SUCCESS = "Successfully updated game.";
     private String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
     private String WRONG_TYPE = "Wrong type specified bruh :cold_sweat:";
+
+
+    private boolean setGameWithType(String type, String gameToSet){
+        boolean success = true;
+        Game game = null;
+        List<JDA> shards = BotGlobalManager.getShards();
+        switch(type){
+            case "playing":
+                game = Game.playing(gameToSet);
+                break;
+            case "watching":
+                game = Game.watching(gameToSet);
+                break;
+            case "listening":
+                game = Game.listening(gameToSet);
+                break;
+            default:
+                success = false;
+        }
+        if(game != null){
+            for(int i = 0; i < shards.size(); i++){
+                shards.get(i).getPresence().setGame(game);
+            }
+        }
+        return success;
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -27,17 +56,7 @@ public class SetGameCommand implements ICommand {
             for(int i = 1; i  < args.length; ++i){
                 game += args[i] + (i+1 < args.length ? " " : "");
             }
-            switch(type){
-                case "playing":
-                    event.getJDA().getPresence().setGame(Game.playing(game));
-                    break;
-                case "watching":
-                    event.getJDA().getPresence().setGame(Game.watching(game));
-                    break;
-                case "listening":
-                    event.getJDA().getPresence().setGame(Game.listening(game));
-                    break;
-                default:
+            if(!setGameWithType(type,game)){
                     event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(WRONG_TYPE).queue()));
             }
             event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(COMMAND_SUCCESS).queue()));
