@@ -3,10 +3,12 @@ package discord.bot.command.bot.info;
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.awt.*;
+import java.awt.Color;
 import java.lang.management.ManagementFactory;
+import java.util.List;
 
 public class InfoCommand implements ICommand {
 
@@ -20,10 +22,17 @@ public class InfoCommand implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        int usersNumber = event.getJDA().getUsers().size();
-        int serversNumber = event.getJDA().getGuilds().size();
-        int channelNumber = event.getJDA().getTextChannels().size();
-        int voiceChannelNumber = event.getJDA().getVoiceChannels().size();
+        int usersNumber = 0;
+        int serversNumber = 0;
+        int channelNumber = 0;
+        int voiceChannelNumber = 0;
+        List<JDA> shards = BotGlobalManager.getShards();
+        for(int i = 0; i < shards.size(); i++){
+            usersNumber += shards.get(i).getUsers().size();
+            serversNumber += shards.get(i).getGuilds().size();
+            channelNumber += shards.get(i).getTextChannels().size();
+            voiceChannelNumber += shards.get(i).getVoiceChannels().size();
+        }
         //Taken from Almighty Alpaca
         //https://github.com/Java-Discord-Bot-System/Plugin-Uptime/blob/master/src/main/java/com/almightyalpaca/discord/bot/plugin/uptime/UptimePlugin.java#L28-L42
         final long duration = ManagementFactory.getRuntimeMXBean().getUptime();

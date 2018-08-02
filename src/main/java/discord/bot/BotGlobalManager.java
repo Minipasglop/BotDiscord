@@ -7,7 +7,6 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import discord.bot.listeners.GuildJoinListener;
 import discord.bot.listeners.MessageListener;
 import discord.bot.listeners.UserMovementListener;
-import discord.bot.utils.CommandHandler;
 import discord.bot.utils.PropertiesLoader;
 import discord.bot.utils.SaveThread;
 import discord.bot.utils.YoutubeApi;
@@ -70,4 +69,7 @@ public class BotGlobalManager {
         return serverCount;
     }
 
+    public static List<JDA> getShards() {
+        return shards;
+    }
 }
