@@ -69,8 +69,10 @@ public class ServerPropertiesManager {
     }
 
     public String getPropertyOrBlankFromServer(String serverId,String property){
+        String value = globalProperties.get(serverId).get(property);
         try{
-            return globalProperties.get(serverId).get(property);
+            if( value == null) return "";
+            else return value;
         }catch(NullPointerException e){
             return "";
         }
