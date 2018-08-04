@@ -15,8 +15,8 @@ public class UserMovementListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         String serverId = event.getGuild().getId();
-        if("true".equals(ServerPropertiesManager.getInstance().getPropertyFromServer(serverId,"userEventEnabled"))){
-            TextChannel customizedChannel = event.getGuild().getTextChannelsByName(ServerPropertiesManager.getInstance().getPropertyFromServer(serverId,"userEventChannel"),true).get(0);
+        if("true".equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled"))){
+            TextChannel customizedChannel = event.getGuild().getTextChannelsByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel"),true).get(0);
             if(customizedChannel != null){
                 messageBienvenueJoinServeur(event.getUser(),customizedChannel);
             }else {
@@ -24,7 +24,7 @@ public class UserMovementListener extends ListenerAdapter {
             }
         }
         try{
-            if(ServerPropertiesManager.getInstance().getPropertyFromServer(event.getGuild().getId(),"autoRole") != null) {
+            if(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"autoRole") != "") {
                 autoRole(event.getGuild(), event.getMember());
             }
         }catch(InsufficientPermissionException e){
@@ -35,8 +35,8 @@ public class UserMovementListener extends ListenerAdapter {
     @Override
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
         String serverId = event.getGuild().getId();
-        if("true".equals(ServerPropertiesManager.getInstance().getPropertyFromServer(serverId,"userEventEnabled"))){
-            TextChannel customizedChannel = event.getGuild().getTextChannelsByName(ServerPropertiesManager.getInstance().getPropertyFromServer(serverId,"userEventChannel"),true).get(0);
+        if("true".equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled"))){
+            TextChannel customizedChannel = event.getGuild().getTextChannelsByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel"),true).get(0);
             if(customizedChannel != null){
                 messageDepartServeur(event.getUser(),customizedChannel);
             }else {
@@ -47,7 +47,7 @@ public class UserMovementListener extends ListenerAdapter {
 
     private void autoRole(Guild serveur, Member user) {
         try{
-            serveur.getController().addRolesToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyFromServer(serveur.getId(),"autoRole"),true)).complete();
+            serveur.getController().addRolesToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serveur.getId(),"autoRole"),true)).complete();
         }catch (Exception e){
             System.out.println("Erreur lors de l'autorole sur le serveur : " + serveur.getName());
         }
