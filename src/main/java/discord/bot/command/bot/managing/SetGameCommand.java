@@ -8,12 +8,16 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class SetGameCommand implements ICommand {
+public class SetGameCommand extends ICommand {
 
-    private String HELP = "This command allows the Owner to change the current game status of the bot. \nUsage: `!setGame type game`";
+    private String HELP = "This command allows the Owner to change the current game status of the bot. \nUsage: `!" + this.commandName + " type game`";
     private String COMMAND_SUCCESS = "Successfully updated game.";
     private String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
     private String WRONG_TYPE = "Wrong type specified bruh :cold_sweat:";
+
+    public SetGameCommand(String commandName) {
+        super(commandName);
+    }
 
 
     private boolean setGameWithType(String type, String gameToSet){

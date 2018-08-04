@@ -9,12 +9,16 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class PurgeCommand implements ICommand {
+public class PurgeCommand extends ICommand {
 
-    private final String HELP = "Deletes the most message of the text channel. \nUsage : `!purge`";
+    private final String HELP = "Deletes the most message of the text channel. \nUsage :`!"+ this.commandName +"`";
     private final String ACTION_PERFORMED = "ChatRoom has been cleaned :see_no_evil:";
     private final String NOT_ALLOWED = "You're not allowed to purge the chatroom... Sadly :)";
     private final String ACTION_FAILED = "Failed deleting the chat room.";
+
+    public PurgeCommand(String commandName) {
+        super(commandName);
+    }
 
 
     @Override

@@ -6,15 +6,16 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class SoundPauseCommand implements ICommand {
-    private final String HELP = "Pauses / Resumes the current track. \nUsage : `!p`";
+public class SoundPauseCommand extends ICommand {
+    private final String HELP = "Pauses / Resumes the current track. \nUsage : `!" + this.commandName + "`";
     private final String PAUSED = "Current track has been paused.";
     private final String RESUMED = "Current track has been resumed.";
     private final String COMMAND_FAILED = "Failed pausing the sound. Please make sure a track is currently being played.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SoundPauseCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundPauseCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+        super(commandName);
         this.audioServerManagers =  audioServerManagers;
     }
 

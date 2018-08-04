@@ -6,12 +6,16 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class SetUserEventStatusCommand implements ICommand {
+public class SetUserEventStatusCommand extends ICommand {
 
-    private final String HELP = "Toggle the user join / leave message. \nUsage : `!greetingsmessage (on | off)`";
+    private final String HELP = "Toggle the user join / leave message. \nUsage : `!"+ this.commandName +" (on | off)`";
     private final String COMMAND_SUCCESS_ON = "Successfully toggled on the greetings message.";
     private final String COMMAND_SUCCESS_OFF = "Successfully toggled off the greetings message";
     private final String COMMAND_FAILED = "An unexpected error occured. Please make sure you have administration rights.";
+
+    public SetUserEventStatusCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

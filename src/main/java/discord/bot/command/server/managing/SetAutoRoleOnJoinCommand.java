@@ -5,11 +5,15 @@ import discord.bot.utils.ServerPropertiesManager;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class SetAutoRoleOnJoinCommand implements ICommand {
+public class SetAutoRoleOnJoinCommand extends ICommand {
 
-    private final String HELP = "Adds a role to an user. Creates the role if it doesn't exist, or use the one that exists. \nUsage : `!setAutoRole roleName`";
+    private final String HELP = "Adds a role to an user. Creates the role if it doesn't exist, or use the one that exists. \nUsage : `!"+ this.commandName +" roleName`";
     private final String COMMAND_SUCCESS = "Successfully added the chosen role as default role on join.";
     private final String COMMAND_FAILED = "An unexpected error occured. Please make sure the role exist.";
+
+    public SetAutoRoleOnJoinCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

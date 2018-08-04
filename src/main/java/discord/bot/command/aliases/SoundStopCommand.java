@@ -6,14 +6,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class SoundStopCommand implements ICommand {
-    private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!stop`";
+public class SoundStopCommand extends ICommand {
+    private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!" + this.commandName + "`";
     private final String SOUND_SKIPPED = "Sound has been stopped.";
     private final String COMMAND_FAILED = "Failed executing this command. Please make sure a track is being played.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SoundStopCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundStopCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+        super(commandName);
         this.audioServerManagers =  audioServerManagers;
     }
 

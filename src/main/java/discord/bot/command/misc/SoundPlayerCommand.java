@@ -12,15 +12,16 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SoundPlayerCommand implements ICommand {
+public class SoundPlayerCommand extends ICommand {
 
-    private final String HELP = "Plays a track from Youtube using the name. \nUsage : `!play songName`";
+    private final String HELP = "Plays a track from Youtube using the name. \nUsage : `!" + this.commandName + " songName`";
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
     private final String SOUND_QUEUED = "Sound has been queued";
 
     private YoutubeApi youtubeApi;
     private Map<String,AudioServerManager> audioServerManagers;
-    public SoundPlayerCommand(){
+    public SoundPlayerCommand(String commandName){
+        super(commandName);
         youtubeApi = BotGlobalManager.getYoutubeApi();
         audioServerManagers = new HashMap<>();
     }

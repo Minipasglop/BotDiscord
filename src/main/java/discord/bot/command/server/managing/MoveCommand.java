@@ -10,12 +10,16 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.util.Arrays;
 import java.util.List;
 
-public class MoveCommand implements ICommand {
+public class MoveCommand extends ICommand {
 
-    private final String HELP = "Moves an user to another VocalChannel if he is connected to any of the server. \nUsage : `!move @User TargettedChannel `";
+    private final String HELP = "Moves an user to another VocalChannel if he is connected to any of the server. \nUsage : `!"+ this.commandName +" @User TargettedChannel `";
     private final String COMMAND_FAILED = "Something unexpected happened. Please make sure the user is already connected to a vocal channel.";
     private final String NOT_ALLOWED = "You're not allowed to move others... Sadly :)";
     private final String ACTION_PERFORMED = "Déplacer : ";
+
+    public MoveCommand(String commandName) {
+        super(commandName);
+    }
 
 
     @Override

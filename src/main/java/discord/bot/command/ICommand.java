@@ -1,12 +1,16 @@
 package discord.bot.command;
 
-//Code from https://github.com/thibautbessone
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public interface ICommand {
-    boolean called(String[] args, MessageReceivedEvent event);
-    void action(String[] args, MessageReceivedEvent event);
-    String help();
-    void executed(boolean success, MessageReceivedEvent event);
+public abstract class ICommand {
+    protected String commandName;
+
+    public ICommand(String commandName){
+        this.commandName = commandName;
+    }
+    public abstract boolean called(String[] args, MessageReceivedEvent event);
+    public abstract void action(String[] args, MessageReceivedEvent event);
+    public abstract String help();
+    public abstract void executed(boolean success, MessageReceivedEvent event);
 }

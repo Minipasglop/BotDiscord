@@ -10,9 +10,14 @@ import java.awt.Color;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 
-public class InfoCommand implements ICommand {
+public class InfoCommand extends ICommand {
 
-    private String HELP = "The command `info` displays some infos about the bot status at the moment. \nUsage: `!info`";
+    private String HELP = "The command `info` displays some infos about the bot status at the moment. \nUsage: `!" + this.commandName + "`";
+
+    public InfoCommand(String commandName) {
+        super(commandName);
+    }
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         if (args.length != 0 && args[0].equals("help") || args.length != 0) {

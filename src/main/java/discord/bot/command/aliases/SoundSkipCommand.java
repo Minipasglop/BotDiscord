@@ -6,8 +6,8 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class SoundSkipCommand implements ICommand {
-    private final String HELP = "Skip the current track played. \nUsage : `!skip`";
+public class SoundSkipCommand extends ICommand {
+    private final String HELP = "Skip the current track played. \nUsage : `!" + this.commandName + "`";
     private final String SOUND_SKIPPED_NEXT = "Track has been skipped. Next to be played : ";
     private final String SOUND_SKIPPED_END = "Track has been skipped. No more in queue, `disconnecting.`";
     private final String COMMAND_FAILED = "Failed skipping the track. Please make sure a track is being played.";
@@ -15,7 +15,8 @@ public class SoundSkipCommand implements ICommand {
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SoundSkipCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundSkipCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+        super(commandName);
         this.audioServerManagers =  audioServerManagers;
     }
 

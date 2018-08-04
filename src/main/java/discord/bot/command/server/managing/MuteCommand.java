@@ -8,14 +8,18 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class MuteCommand implements ICommand {
+public class MuteCommand extends ICommand {
 
-    private final String HELP = "Mute one / many users on the server. \nUsage : `!mute @user1 @userB Reason duration(minutes)`";
+    private final String HELP = "Mute one / many users on the server. \nUsage : `!"+ this.commandName +" @user1 @userB Reason duration(minutes)`";
     private final String MUTE_MESSAGE = "You've been muted because of : ";
     private final String UNMUTE_MESSAGE = "You've been unmuted. Stay still now ;) !";
     private final String NOT_ALLOWED = "You're not allowed to mute other users... Sadly:)";
     private final String ACTION_PERFORMED = "Rendre muet : ";
     private final String ACTION_CALLBACK = "Rendre parole possible : ";
+
+    public MuteCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

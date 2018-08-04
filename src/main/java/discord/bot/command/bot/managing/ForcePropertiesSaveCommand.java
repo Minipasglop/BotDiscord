@@ -8,11 +8,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class ForcePropertiesSaveCommand implements ICommand {
+public class ForcePropertiesSaveCommand extends ICommand {
 
-    private String HELP = "This command allows the Owner to force the save of properties before a reboot. \nUsage: `!saveProperties`";
+    private String HELP = "This command allows the Owner to force the save of properties before a reboot. \nUsage: `!" + this.commandName + "`";
     private String COMMAND_SUCCESS = "Successfully saved properties files";
     private String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
+
+    public ForcePropertiesSaveCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

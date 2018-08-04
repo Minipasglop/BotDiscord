@@ -1,5 +1,6 @@
 package discord.bot.utils;
 
+import discord.bot.command.CommandEnum;
 import discord.bot.command.ICommand;
 import discord.bot.command.aliases.*;
 import discord.bot.command.bot.info.InfoCommand;
@@ -54,37 +55,37 @@ public class CommandHandler {
     }
 
     private CommandHandler(){
-        SoundPlayerCommand soundPlayerCommandReference = new SoundPlayerCommand();
+        SoundPlayerCommand soundPlayerCommandReference = new SoundPlayerCommand(CommandEnum.SOUND.getCommandName());
 
         soundCommands = new HashMap<>();
-        soundCommands.put("play", soundPlayerCommandReference);
-        soundCommands.put("vol", new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("skip", new SoundSkipCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("stop", new SoundStopCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("loop", new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("queue", new SoundQueueCommand(soundPlayerCommandReference.getAudioServerManagers()));
-        soundCommands.put("p", new SoundPauseCommand(soundPlayerCommandReference.getAudioServerManagers()));
+        soundCommands.put(CommandEnum.SOUND.getCommandName(), soundPlayerCommandReference);
+        soundCommands.put(CommandEnum.VOLUME.getCommandName(), new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.VOLUME.getCommandName()));
+        soundCommands.put(CommandEnum.SKIP.getCommandName(), new SoundSkipCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.SKIP.getCommandName()));
+        soundCommands.put(CommandEnum.STOP.getCommandName(), new SoundStopCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.STOP.getCommandName()));
+        soundCommands.put(CommandEnum.LOOP.getCommandName(), new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.LOOP.getCommandName()));
+        soundCommands.put(CommandEnum.QUEUE.getCommandName(), new SoundQueueCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.QUEUE.getCommandName()));
+        soundCommands.put(CommandEnum.PLAY_PAUSE.getCommandName(), new SoundPauseCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.PLAY_PAUSE.getCommandName()));
 
         serverCommands = new HashMap<>();
-        serverCommands.put("addRole" ,new RoleAddingCommand());
-        serverCommands.put("setAutoRole", new SetAutoRoleOnJoinCommand());
-        serverCommands.put("greetingschannel", new SetUserEventChannelCommand());
-        serverCommands.put("greetingsmessage", new SetUserEventStatusCommand());
-        serverCommands.put("ban", new BanCommand());
-        serverCommands.put("help", new HelpCommand());
-        serverCommands.put("kick", new KickCommand());
-        serverCommands.put("move", new MoveCommand());
-        serverCommands.put("mute", new MuteCommand());
-        serverCommands.put("purge", new PurgeCommand());
+        serverCommands.put(CommandEnum.ADD_ROLE.getCommandName() ,new RoleAddingCommand(CommandEnum.ADD_ROLE.getCommandName()));
+        serverCommands.put(CommandEnum.SET_AUTO_ROLE_ON_JOIN.getCommandName(), new SetAutoRoleOnJoinCommand(CommandEnum.SET_AUTO_ROLE_ON_JOIN.getCommandName()));
+        serverCommands.put(CommandEnum.USER_EVENT_CHANNEL.getCommandName(), new SetUserEventChannelCommand(CommandEnum.USER_EVENT_CHANNEL.getCommandName()));
+        serverCommands.put(CommandEnum.USER_EVENT_TOGGLING.getCommandName(), new SetUserEventStatusCommand(CommandEnum.USER_EVENT_TOGGLING.getCommandName()));
+        serverCommands.put(CommandEnum.BAN.getCommandName(), new BanCommand(CommandEnum.BAN.getCommandName()));
+        serverCommands.put(CommandEnum.HELP.getCommandName(), new HelpCommand(CommandEnum.HELP.getCommandName()));
+        serverCommands.put(CommandEnum.KICK.getCommandName(), new KickCommand(CommandEnum.KICK.getCommandName()));
+        serverCommands.put(CommandEnum.MOVE.getCommandName(), new MoveCommand(CommandEnum.MOVE.getCommandName()));
+        serverCommands.put(CommandEnum.MUTE.getCommandName(), new MuteCommand(CommandEnum.MUTE.getCommandName()));
+        serverCommands.put(CommandEnum.PURGE.getCommandName(), new PurgeCommand(CommandEnum.PURGE.getCommandName()));
 
         miscCommands = new HashMap<>();
-        miscCommands.put("info", new InfoCommand());
-        miscCommands.put("ping", new PingCommand());
-        miscCommands.put("yt", new YoutubeCommand());
+        miscCommands.put(CommandEnum.INFO.getCommandName(), new InfoCommand(CommandEnum.INFO.getCommandName()));
+        miscCommands.put(CommandEnum.PING.getCommandName(), new PingCommand(CommandEnum.PING.getCommandName()));
+        miscCommands.put(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName(), new YoutubeCommand(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName()));
 
         ownerCommands = new HashMap<>();
-        ownerCommands.put("setGame", new SetGameCommand());
-        ownerCommands.put("saveProperties", new ForcePropertiesSaveCommand());
+        ownerCommands.put(CommandEnum.SET_BOT_GAME.getCommandName(), new SetGameCommand(CommandEnum.SET_BOT_GAME.getCommandName()));
+        ownerCommands.put(CommandEnum.FORCE_PROPERTIES_SAVING.getCommandName(), new ForcePropertiesSaveCommand(CommandEnum.FORCE_PROPERTIES_SAVING.getCommandName()));
     }
 
 

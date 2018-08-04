@@ -3,9 +3,13 @@ package discord.bot.command.misc;
 import discord.bot.command.ICommand;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class PingCommand implements ICommand {
+public class PingCommand extends ICommand {
 
-    String HELP = "Command for testing bot ping. \nUsage : `!ping`";
+    String HELP = "Command for testing bot ping. \nUsage : `!" + this.commandName + "`";
+
+    public PingCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

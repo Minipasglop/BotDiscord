@@ -1,6 +1,5 @@
 package discord.bot.command.misc;
 
-import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.CommandHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -9,11 +8,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import java.awt.*;
 import java.util.Map;
 
-public class HelpCommand implements ICommand {
+public class HelpCommand extends ICommand {
 
-    private String HELP = "The command `help` displays the commands available at the moment. \nUsage: `!help`";
+    private String HELP = "The command `help` displays the commands available at the moment. \nUsage: `!" + this.commandName + "`";
     private String MESSAGE_HEADER = "The commands available at the moment are listed below. All commands must be prefixed with a `!`. \nTo obtain more information on a command, just type `!command help`\n\n";
     private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThanks for using *Jackson* :heart: :smirk:";
+
+    public HelpCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

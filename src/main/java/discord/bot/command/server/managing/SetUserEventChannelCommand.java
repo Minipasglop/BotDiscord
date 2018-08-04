@@ -5,11 +5,15 @@ import discord.bot.utils.ServerPropertiesManager;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class SetUserEventChannelCommand implements ICommand {
+public class SetUserEventChannelCommand extends ICommand {
 
-    private final String HELP = "Sets the channel where you whant the join / leave message to be send. \nUsage : `!greetingschannel channelName`";
+    private final String HELP = "Sets the channel where you whant the join / leave message to be send. \nUsage : `!"+ this.commandName +" channelName`";
     private final String COMMAND_SUCCESS = "Successfully set the greetings message channel destination.\nMake sure you have `!greetingsmessage on` to activate the feature.";
     private final String COMMAND_FAILED = "An unexpected error occured. Please make sure Jackson has administrations role on the server.";
+
+    public SetUserEventChannelCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

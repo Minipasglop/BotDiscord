@@ -10,8 +10,8 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
-public class SoundQueueCommand implements ICommand {
-    private final String HELP = "Display the current playlist status played. \nUsage : `!queue`";
+public class SoundQueueCommand extends ICommand {
+    private final String HELP = "Display the current playlist status played. \nUsage : `!" + this.commandName + "`";
     private final String PLAYLIST_STATUS = "Playlist current status : ";
     private final String NO_MORE_SOUND = "No more track to be played.";
     private final String NO_SOUND_PLAYING = "No sound is currently being played.";
@@ -20,7 +20,8 @@ public class SoundQueueCommand implements ICommand {
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SoundQueueCommand(Map<String,AudioServerManager> audioServerManagers){
+    public SoundQueueCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+        super(commandName);
         this.audioServerManagers =  audioServerManagers;
     }
 

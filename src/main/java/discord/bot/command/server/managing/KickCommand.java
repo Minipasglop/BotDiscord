@@ -8,11 +8,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class KickCommand implements ICommand {
-    private final String HELP = "Kick one / many users from the server if you're allowed to. \nUsage : `!kick @UserA @UserB @UserC ... Reason `";
+public class KickCommand extends ICommand {
+    private final String HELP = "Kick one / many users from the server if you're allowed to. \nUsage : `!"+ this.commandName +"@UserA @UserB @UserC ... Reason `";
     private final String KICK_MESSAGE = "You've been kicked because of : ";
     private final String NOT_ALLOWED = "You're not allowed to kick other users... Sadly :)";
     private final String ACTION_PERFORMED = "Exclure : ";
+
+    public KickCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

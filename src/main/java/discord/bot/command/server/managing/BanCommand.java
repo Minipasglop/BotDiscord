@@ -8,11 +8,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
-public class BanCommand implements ICommand {
-    private final String HELP = "Ban one / many users from the server if you're allowed to. \nUsage : `!ban @UserA @UserB @UserC ... duration Reason `";
+public class BanCommand extends ICommand {
+    private final String HELP = "Ban one / many users from the server if you're allowed to. \nUsage : `!"+ this.commandName +" @UserA @UserB @UserC ... duration Reason `";
     private final String BAN_MESSAGE = "You've been banned because of : ";
     private final String NOT_ALLOWED = "You're not allowed to ban other users... Sadly :)";
     private final String ACTION_PERFORMED = "Bannir : ";
+
+    public BanCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

@@ -9,15 +9,19 @@ import discord.bot.utils.RandomColorGenerator;
 import java.util.Arrays;
 import java.util.List;
 
-public class RoleAddingCommand implements ICommand {
+public class RoleAddingCommand extends ICommand {
 
     private static PropertiesLoader config = new PropertiesLoader();
-    private final String HELP = "Adds a role to an user. Creates the role if it doesn't exist, or use the one that exists. \nUsage : `!addRole @user roleName`";
+    private final String HELP = "Adds a role to an user. Creates the role if it doesn't exist, or use the one that exists. \nUsage : `!"+ this.commandName +" @user roleName`";
     private final String ACTION_PERFORMED_CREATE = "Créer + Ajouter role : ";
     private final String ACTION_PERFORMED_ADD = "Ajouter role : ";
     private final String NOT_ALLOWED = "This command has been disabled at the moment. Please make sure to check the support server to get the latests news.";
     private final String NOT_REQUIRED = "The user tagged already owns the role.";
     private final String COMMAND_FAILED = "An unexpected error occured. Please make sure Jackson has administrations role on the server.";
+
+    public RoleAddingCommand(String commandName) {
+        super(commandName);
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
