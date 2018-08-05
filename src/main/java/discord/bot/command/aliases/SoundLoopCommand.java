@@ -2,6 +2,7 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.AudioServerManager;
+import discord.bot.utils.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
@@ -28,9 +29,11 @@ public class SoundLoopCommand extends ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.isTrackLooping()){
+            if(currAudioServerManager.isTrackLooping() || ("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "loop"))){
+                ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "false");
                 event.getTextChannel().sendMessage(TRACK_LOOP_DISABLED).queue();
             }else {
+                ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "true");
                 event.getTextChannel().sendMessage(TRACK_LOOP_ENABLED).queue();
             }
             currAudioServerManager.reverseTrackLoop();

@@ -26,6 +26,6 @@ public class SaveThread extends Thread {
                 System.out.println("Propriétés sauvegardées.");
             }
         };
-        timer.scheduleAtFixedRate(autoSaveTask, 1000, 1000*60*60);
+        timer.scheduleAtFixedRate(autoSaveTask, 1000*60*3, 1000*60*60);
     }
 }

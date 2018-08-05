@@ -16,8 +16,8 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
     private TextChannel chanToWrite;
     private VoiceChannel targetVoicelChannel;
 
-    private final String SOUND_NOT_FOUND = "Le son n'a pas été trouvé.";
-    private final String SOUND_PLAY_FAILED = "Je n'ai pas réussi à jouer le son. Peut-être qu'une météorite s'est abattue sur mon micro qui sait ?";
+    private final String SOUND_NOT_FOUND = "Track not found.";
+    private final String SOUND_PLAY_FAILED = "Can't play the track at the moment.";
 
     public void setTargetVoicelChannel(VoiceChannel targetVoicelChannel) {
         this.targetVoicelChannel = targetVoicelChannel;

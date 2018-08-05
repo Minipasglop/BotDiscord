@@ -2,7 +2,6 @@ package discord.bot;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.source.local.LocalAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 import discord.bot.listeners.GuildJoinListener;
 import discord.bot.listeners.MessageListener;
@@ -30,24 +29,31 @@ public class BotGlobalManager {
     BotGlobalManager() {
         try {
             shards = new ArrayList<>();
-            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"!help")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
+            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
             shardBuilder.addEventListener(new MessageListener());
             shardBuilder.addEventListener(new UserMovementListener());
             shardBuilder.addEventListener(new GuildJoinListener());
+            audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             for(int i = 0; i < SHARD_AMMOUNT; i++){
                 shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT)
-                        .buildAsync());
+                        .buildBlocking());
+                shards.get(i).getPresence().setGame(Game.of(Game.GameType.WATCHING,"Service starting"));
             }
-            audioPlayerManager.registerSourceManager(new LocalAudioSourceManager());
-            audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
             saveThread.start();
-        } catch (LoginException e) {
+            ServiceStartedNotification();
+        } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
         }
     }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console
+
+    private static void ServiceStartedNotification(){
+        for(int i = 0; i < shards.size(); i++){
+            shards.get(i).getPresence().setGame(Game.watching("!help | !play"));
+        }
+    }
 
     public static void main(String[] args) {
         new BotGlobalManager();
@@ -62,11 +68,11 @@ public class BotGlobalManager {
     public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
 
     public static List<Guild> getServers() {
-        List<Guild> serverCount = new ArrayList<>();
+        List<Guild> servers = new ArrayList<>();
         for(int i = 0; i < shards.size(); i++){
-            serverCount.addAll(shards.get(i).getGuilds());
+            servers.addAll(shards.get(i).getGuilds());
         }
-        return serverCount;
+        return servers;
     }
 
     public static List<JDA> getShards() {

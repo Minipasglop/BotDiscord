@@ -6,11 +6,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Refacto on the help system, more clean and adaptive way">
+    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Fixed some NPE that would be logged by the bot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioLoadResultHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioLoadResultHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesManager.java" afterDir="false" />
     </list>
-    <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="" />
+    <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" afterDir="false" />
+    </list>
     <ignored path="BotDiscord.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -34,35 +43,35 @@
     <session id="165420843">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.4" value="2" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3738" />
-          <entry key="txt" value="417" />
+          <entry key="java" value="4605" />
+          <entry key="txt" value="494" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3738" />
-          <entry key="PLAIN_TEXT" value="417" />
+          <entry key="JAVA" value="4605" />
+          <entry key="PLAIN_TEXT" value="494" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="109" />
+          <entry key="java" value="144" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="109" />
+          <entry key="JAVA" value="144" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -76,59 +85,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesInjector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="508">
+              <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundVolumeCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundStopCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="138" selection-start-line="9" selection-start-column="138" selection-end-line="9" selection-end-column="138" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundSkipCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="99" selection-start-line="9" selection-start-column="99" selection-end-line="9" selection-end-column="99" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="112" selection-start-line="13" selection-start-column="112" selection-end-line="13" selection-end-column="112" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="104" selection-start-line="9" selection-start-column="104" selection-end-line="9" selection-end-column="104" />
             </state>
           </provider>
         </entry>
@@ -136,32 +97,47 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+            <state relative-caret-position="314">
+              <caret line="28" column="67" lean-forward="true" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/CommandEnum.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+            <state relative-caret-position="488">
+              <caret line="69" column="83" selection-start-line="69" selection-start-column="83" selection-end-line="69" selection-end-column="83" />
               <folding>
-                <element signature="e#138#139#0" expanded="true" />
-                <element signature="e#184#185#0" expanded="true" />
-                <element signature="e#219#220#0" expanded="true" />
-                <element signature="e#257#258#0" expanded="true" />
+                <element signature="e#4538#4539#0" expanded="true" />
+                <element signature="e#4565#4566#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundStopCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="41" column="91" lean-forward="true" selection-start-line="41" selection-start-column="91" selection-end-line="41" selection-end-column="91" />
+            <state relative-caret-position="-221">
+              <caret line="9" column="138" selection-start-line="9" selection-start-column="138" selection-end-line="9" selection-end-column="138" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+              <folding>
+                <element signature="e#2649#2650#0" expanded="true" />
+                <element signature="e#2687#2688#0" expanded="true" />
+                <element signature="e#2820#2821#0" expanded="true" />
+                <element signature="e#2849#2850#0" expanded="true" />
+                <element signature="e#3221#3222#0" expanded="true" />
+                <element signature="e#3250#3251#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -170,7 +146,34 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="383">
-              <caret line="66" column="12" lean-forward="true" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+              <caret line="69" column="41" lean-forward="true" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="13" column="56" lean-forward="true" selection-start-line="13" selection-start-column="56" selection-end-line="14" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildJoinListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="43" column="79" lean-forward="true" selection-start-line="43" selection-start-column="79" selection-end-line="43" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -194,6 +197,7 @@
       <find>MainBot</find>
       <find>Snippet</find>
       <find>videoId</find>
+      <find>Le son n'a pas</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -216,23 +220,15 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildJoinListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioGlobalManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/VolumeCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioLoadResultHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SkipCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/StopSoundCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SkipSoundCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/YoutubeApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/Track.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/QueueCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/MessageListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesInjector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/ICommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/BanCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/KickCommand.java" />
@@ -244,7 +240,6 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/SetAutoRoleOnJoinCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/RoleAddingCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/YoutubeCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/PingCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/bot/managing/SetGameCommand.java" />
@@ -255,9 +250,18 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundSkipCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundPauseCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/CommandEnum.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesInjector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioLoadResultHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesManager.java" />
       </list>
     </option>
@@ -290,6 +294,7 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -297,6 +302,11 @@
             <path>
               <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
               <item name="Jackson" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Jackson" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
@@ -362,17 +372,6 @@
               <item name="bot" type="462c0819:PsiDirectoryNode" />
               <item name="command" type="462c0819:PsiDirectoryNode" />
               <item name="bot" type="462c0819:PsiDirectoryNode" />
-              <item name="info" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Jackson" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bot" type="462c0819:PsiDirectoryNode" />
-              <item name="command" type="462c0819:PsiDirectoryNode" />
-              <item name="bot" type="462c0819:PsiDirectoryNode" />
               <item name="managing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -384,16 +383,6 @@
               <item name="bot" type="462c0819:PsiDirectoryNode" />
               <item name="command" type="462c0819:PsiDirectoryNode" />
               <item name="misc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Jackson" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="bot" type="462c0819:PsiDirectoryNode" />
-              <item name="command" type="462c0819:PsiDirectoryNode" />
-              <item name="managing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Jackson" type="b2602c69:ProjectViewProjectNode" />
@@ -417,7 +406,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,11 +416,11 @@
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="botdiscord" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533423532694" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533463525331" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.14806202" />
+    <property name="project.structure.side.proportion" value="0.09293681" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -599,20 +587,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1474045783590</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Correction prefixe pas obligatoire MDR">
-      <created>1528755200881</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1528755200881</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Ajout getter fichier de configuration sur la classe main du bot">
-      <created>1528755495782</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1528755495782</updated>
     </task>
     <task id="LOCAL-00028" summary="Fix bug pouvant apparaitre dans un état un peu batard de played / no played">
       <created>1528756832052</created>
@@ -936,14 +910,28 @@
       <option name="project" value="LOCAL" />
       <updated>1533230461054</updated>
     </task>
-    <task id="LOCAL-00074" summary="Refacto on the help system, more clean and adaptive way">
-      <created>1533423367059</created>
+    <task id="LOCAL-00074" summary="Securization on property saving :)">
+      <created>1533425679016</created>
       <option name="number" value="00074" />
       <option name="presentableId" value="LOCAL-00074" />
       <option name="project" value="LOCAL" />
-      <updated>1533423367059</updated>
+      <updated>1533425679016</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Fixed a bug that would appear if NPE on property">
+      <created>1533425774286</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1533425774286</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Fixed some NPE that would be logged by the bot">
+      <created>1533426047500</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1533426047500</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TodoView">
@@ -959,7 +947,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4917647" visible="true" weight="0.20575693" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4917647" visible="true" weight="0.20788912" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Palette&#9;" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -968,7 +956,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49733475" visible="true" weight="0.2936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49733475" visible="true" weight="0.2936078" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49840087" weight="0.39761648" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1036,8 +1024,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Made a little embed message for the sound command, to be enhanced, but yet better looking then past" />
-    <MESSAGE value="Updated the embedded message on sound command to make it a bit more sexy" />
     <MESSAGE value="Deleted unused code due to the embedded message" />
     <MESSAGE value="Refacto the !loop Command adding a medium item that is the &quot;Track&quot;" />
     <MESSAGE value="Reworked the info command" />
@@ -1060,8 +1046,10 @@
     <MESSAGE value="Fixed info command, work now with sharding" />
     <MESSAGE value="Fixed setGame command to impact all servers" />
     <MESSAGE value="Fixed a bug on soundPlayerCommand" />
-    <MESSAGE value="Refacto on the help system, more clean and adaptive way" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refacto on the help system, more clean and adaptive way" />
+    <MESSAGE value="Securization on property saving :)" />
+    <MESSAGE value="Fixed a bug that would appear if NPE on property" />
+    <MESSAGE value="Fixed some NPE that would be logged by the bot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some NPE that would be logged by the bot" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1105,77 +1093,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20160810/json-20160810-sources.jar!/org/json/JSONObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="639" selection-start-line="639" selection-end-line="639" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/Track.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/PauseCommand.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/RandomColorGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="90" column="38" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioPlayerSendHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/YoutubeApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/TimerTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="84" column="50" selection-start-line="84" selection-start-column="50" selection-end-line="84" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/function/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1204,66 +1121,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/impl/TextChannelImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="205" selection-start-line="205" selection-end-line="205" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/impl/ReceivedMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="625" selection-start-line="625" selection-end-line="625" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/events/message/MessageReceivedEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="132" selection-start-line="132" selection-end-line="132" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/ISnowflake.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="70" column="70" lean-forward="true" selection-start-line="70" selection-start-column="70" selection-end-line="70" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="71" column="39" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="39" column="74" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
         </state>
       </provider>
     </entry>
@@ -1366,20 +1227,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="16" column="89" lean-forward="true" selection-start-line="16" selection-start-column="89" selection-end-line="16" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/PingCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="84" selection-start-line="7" selection-start-column="84" selection-end-line="7" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1391,19 +1238,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="137" selection-start-line="12" selection-start-column="137" selection-end-line="12" selection-end-column="137" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/bot/managing/ForcePropertiesSaveCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="12" column="140" selection-start-line="12" selection-start-column="140" selection-end-line="12" selection-end-column="140" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1417,27 +1251,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundStopCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="138" selection-start-line="9" selection-start-column="138" selection-end-line="9" selection-end-column="138" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundSkipCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="9" column="99" selection-start-line="9" selection-start-column="99" selection-end-line="9" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="112" selection-start-line="13" selection-start-column="112" selection-end-line="13" selection-end-column="112" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1448,54 +1265,265 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
+        <state relative-caret-position="334">
+          <caret line="1542" column="14" lean-forward="true" selection-start-line="1542" selection-start-column="14" selection-end-line="1542" selection-end-column="14" />
+          <folding>
+            <element signature="e#56763#56769#0" expanded="true" />
+            <element signature="e#56771#56777#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundVolumeCommand.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="255">
+          <caret line="15" column="40" lean-forward="true" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/CommandEnum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
+        <state relative-caret-position="272">
           <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-          <folding>
-            <element signature="e#138#139#0" expanded="true" />
-            <element signature="e#184#185#0" expanded="true" />
-            <element signature="e#219#220#0" expanded="true" />
-            <element signature="e#257#258#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CommandHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
-          <caret line="41" column="91" lean-forward="true" selection-start-line="41" selection-start-column="91" selection-end-line="41" selection-end-column="91" />
+          <caret line="41" column="91" selection-start-line="41" selection-start-column="91" selection-end-line="41" selection-end-column="91" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesInjector.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/Properties.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="299">
+          <caret line="164" column="31" selection-start-line="164" selection-start-column="31" selection-end-line="164" selection-end-column="31" />
+          <folding>
+            <element signature="e#5711#5712#0" expanded="true" />
+            <element signature="e#5749#5750#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/UserMovementListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundVolumeCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="33" column="98" lean-forward="true" selection-start-line="33" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/bot/managing/ForcePropertiesSaveCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="29" column="85" selection-start-line="29" selection-start-column="85" selection-end-line="29" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="55" column="47" lean-forward="true" selection-start-line="55" selection-start-column="47" selection-end-line="55" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/impl/TextChannelImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="205" selection-start-line="205" selection-end-line="205" />
+          <folding>
+            <element signature="e#7084#7085#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/impl/ReceivedMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="625" selection-start-line="625" selection-end-line="625" />
+          <folding>
+            <element signature="e#19160#19161#0" expanded="true" />
+            <element signature="e#19207#19208#0" expanded="true" />
+            <element signature="e#19268#19269#0" expanded="true" />
+            <element signature="e#19308#19309#0" expanded="true" />
+            <element signature="e#20103#20104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/events/message/MessageReceivedEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
+          <folding>
+            <element signature="e#5256#5257#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/impl/GuildImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="617" selection-start-line="617" selection-end-line="617" />
+          <folding>
+            <element signature="e#18894#18895#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/entities/ISnowflake.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="e#1175#1176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/PingCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="84" selection-start-line="7" selection-start-column="84" selection-end-line="7" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesInjector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioPlaylist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding>
+            <element signature="e#868#869#0" expanded="true" />
+            <element signature="e#923#924#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/AudioServerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="16" />
+          <folding>
+            <element signature="e#2007#2008#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/SaveThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="30" column="1" lean-forward="true" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/CustomAudioLoadResultHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="18" column="62" lean-forward="true" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/YoutubeApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="28" column="67" lean-forward="true" selection-start-line="28" selection-start-column="67" selection-end-line="28" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/misc/SoundPlayerCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="69" column="83" selection-start-line="69" selection-start-column="83" selection-end-line="69" selection-end-column="83" />
+          <folding>
+            <element signature="e#4538#4539#0" expanded="true" />
+            <element signature="e#4565#4566#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundStopCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="9" column="138" selection-start-line="9" selection-start-column="138" selection-end-line="9" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="e#2649#2650#0" expanded="true" />
+            <element signature="e#2687#2688#0" expanded="true" />
+            <element signature="e#2820#2821#0" expanded="true" />
+            <element signature="e#2849#2850#0" expanded="true" />
+            <element signature="e#3221#3222#0" expanded="true" />
+            <element signature="e#3250#3251#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildJoinListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/PropertiesLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="43" column="79" lean-forward="true" selection-start-line="43" selection-start-column="79" selection-end-line="43" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesJSONUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="56" lean-forward="true" selection-start-line="13" selection-start-column="56" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/ServerPropertiesManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
-          <caret line="66" column="12" lean-forward="true" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+          <caret line="69" column="41" lean-forward="true" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1509,7 +1537,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.14806202" />
+                <option value="0.09293681" />
                 <option value="0.5" />
               </list>
             </option>
@@ -1522,7 +1550,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.47829458" />
+                <option value="0.09293681" />
               </list>
             </option>
           </splitter-proportions>
@@ -1583,7 +1611,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.47829458" />
+                <option value="0.09293681" />
               </list>
             </option>
           </splitter-proportions>

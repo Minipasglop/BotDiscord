@@ -15,12 +15,18 @@ public class ServerPropertiesManager {
 
     private static ServerPropertiesManager instance;
 
+    /* Pour ajouter une propriété : Il faut l'ajouter dans cette property list
+        La gérer au niveau du ServerpropertiesJSONUpdate
+        L'impacter dans la méthode initializeSavedProperties du PropertiesLoader
+     */
+
     private void createPropertiesList(){
         propertiesList = new ArrayList<>();
         propertiesList.add("autoRole");
         propertiesList.add("userEventChannel");
         propertiesList.add("userEventEnabled");
         propertiesList.add("volume");
+        propertiesList.add("loop");
     }
 
     public static ServerPropertiesManager getInstance(){
@@ -44,6 +50,7 @@ public class ServerPropertiesManager {
     private ServerPropertiesManager(){
         globalProperties = new HashMap<>();
         injector = new ServerPropertiesInjector();
+        System.out.println( BotGlobalManager.getServers().size());
         for(int i = 0; i < BotGlobalManager.getServers().size(); i++){
             String currServerId = BotGlobalManager.getServers().get(i).getId();
             globalProperties.put(currServerId, injector.getPropertiesFromFile(currServerId));

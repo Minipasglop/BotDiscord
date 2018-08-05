@@ -9,6 +9,7 @@ public class ServerPropertiesJSONUpdate {
     private String userEventEnabled;
     private String userEventChannel;
     private String volume;
+    private String loop;
 
     public ServerPropertiesJSONUpdate(String serverID) {
         try {
@@ -27,6 +28,7 @@ public class ServerPropertiesJSONUpdate {
             properties.setProperty("userEventEnabled", userEventEnabled);
             properties.setProperty("userEventChannel", userEventChannel);
             properties.setProperty("volume", volume);
+            properties.setProperty("loop",loop);
 
             properties.store(fileOutput, null);
 
@@ -41,5 +43,6 @@ public class ServerPropertiesJSONUpdate {
         userEventEnabled = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled");
         userEventChannel = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel");
         volume = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"volume");
+        loop = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"loop");
     }
 }

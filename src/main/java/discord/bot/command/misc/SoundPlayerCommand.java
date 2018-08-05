@@ -67,6 +67,9 @@ public class SoundPlayerCommand extends ICommand {
                 currAudioServerManager.getAudioLoadResultHandler().setTargetVoicelChannel(targetChannel);
                 currAudioServerManager.loadTrack(youtubeSearch);
                 currAudioServerManager.setVolume(volume);
+                if(("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "loop")) && !currAudioServerManager.isTrackLooping()){
+                    currAudioServerManager.reverseTrackLoop();
+                }
                 EmbedBuilder builder = new EmbedBuilder();
                 builder.setAuthor(SOUND_QUEUED);
                 builder.setColor(Color.ORANGE);
