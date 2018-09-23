@@ -24,7 +24,7 @@ public class BotGlobalManager {
     private static PropertiesLoader config = new PropertiesLoader();
     private static AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
     private static YoutubeApi youtubeApi = new YoutubeApi();
-    private final int SHARD_AMMOUNT = 1;
+    private final int SHARD_AMMOUNT = 5;
 
     BotGlobalManager() {
         try {
