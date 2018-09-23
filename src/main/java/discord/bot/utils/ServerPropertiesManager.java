@@ -50,7 +50,6 @@ public class ServerPropertiesManager {
     private ServerPropertiesManager(){
         globalProperties = new HashMap<>();
         injector = new ServerPropertiesInjector();
-        System.out.println( BotGlobalManager.getServers().size());
         for(int i = 0; i < BotGlobalManager.getServers().size(); i++){
             String currServerId = BotGlobalManager.getServers().get(i).getId();
             globalProperties.put(currServerId, injector.getPropertiesFromFile(currServerId));
