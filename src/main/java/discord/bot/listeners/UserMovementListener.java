@@ -15,7 +15,7 @@ public class UserMovementListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         String serverId = event.getGuild().getId();
-        if("true".equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled"))){
+        if(("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled"))){
             TextChannel customizedChannel = event.getGuild().getTextChannelsByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel"),true).get(0);
             if(customizedChannel != null){
                 messageBienvenueJoinServeur(event.getUser(),customizedChannel);
@@ -24,7 +24,7 @@ public class UserMovementListener extends ListenerAdapter {
             }
         }
         try{
-            if(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"autoRole") != "") {
+            if(!ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"autoRole").isEmpty()) {
                 autoRole(event.getGuild(), event.getMember());
             }
         }catch(InsufficientPermissionException e){
@@ -35,7 +35,7 @@ public class UserMovementListener extends ListenerAdapter {
     @Override
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
         String serverId = event.getGuild().getId();
-        if("true".equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled"))){
+        if(("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled"))){
             TextChannel customizedChannel = event.getGuild().getTextChannelsByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel"),true).get(0);
             if(customizedChannel != null){
                 messageDepartServeur(event.getUser(),customizedChannel);
