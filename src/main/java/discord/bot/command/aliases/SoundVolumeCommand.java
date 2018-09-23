@@ -1,8 +1,8 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.AudioServerManager;
-import discord.bot.utils.ServerPropertiesManager;
+import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;

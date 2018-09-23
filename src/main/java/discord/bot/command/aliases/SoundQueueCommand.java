@@ -1,8 +1,8 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.AudioServerManager;
-import discord.bot.utils.Track;
+import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.Track;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

@@ -1,7 +1,7 @@
 package discord.bot.command.misc;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.CommandHandler;
+import discord.bot.utils.commands.CommandHandler;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

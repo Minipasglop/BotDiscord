@@ -1,4 +1,4 @@
-package discord.bot.utils;
+package discord.bot.utils.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -113,4 +113,7 @@ public class AudioServerManager {
     public String getNextTrackURL(){ return this.playlist.getNextTrackURL(); }
 
     public List<Track> getTrackList() { return this.playlist.getTrackList(); }
+
+    public void shufflePlaylist() { this.playlist.shuffle();
+    }
 }

@@ -8,6 +8,7 @@ public enum CommandEnum {
     LOOP("loop"),
     QUEUE("queue"),
     PLAY_PAUSE("p"),
+    SHUFFLE("shuffle"),
     ADD_ROLE("addRole"),
     SET_AUTO_ROLE_ON_JOIN("setAutoRole"),
     USER_EVENT_CHANNEL("greetingschannel"),

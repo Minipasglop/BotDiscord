@@ -2,7 +2,7 @@ package discord.bot.command.bot.managing;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
-import discord.bot.utils.ServerPropertiesJSONUpdate;
+import discord.bot.utils.save.ServerPropertiesJSONUpdate;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

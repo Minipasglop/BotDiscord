@@ -1,7 +1,7 @@
 package discord.bot.listeners;
 
-import discord.bot.utils.ServerPropertiesJSONUpdate;
-import discord.bot.utils.ServerPropertiesManager;
+import discord.bot.utils.save.ServerPropertiesJSONUpdate;
+import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 

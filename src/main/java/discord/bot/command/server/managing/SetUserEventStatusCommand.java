@@ -1,7 +1,7 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.ServerPropertiesManager;
+import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

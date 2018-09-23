@@ -6,14 +6,15 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
-public class SoundStopCommand extends ICommand {
-    private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!" + this.commandName + "`";
-    private final String SOUND_SKIPPED = "Sound has been stopped.";
-    private final String COMMAND_FAILED = "Failed executing this command. Please make sure a track is being played.";
+public class SoundShuffleCommand extends ICommand {
+    private final String HELP = "Shuffles the playlist order. \nUsage : `!" + this.commandName + "`";
+    private final String PLAYLIST_SHUFFLED = "Playlist has been successfully shuffled.";
+    private final String NO_TRACK_TO_SHUFFLE = "Playlist don't have enough tracks to be shuffled :thinking:";
+    private final String COMMAND_FAILED = "Failed shuffleing the playlist. Please make sure tracks are queued.";
 
     private Map<String,AudioServerManager> audioServerManagers;
 
-    public SoundStopCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundShuffleCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
         super(commandName);
         this.audioServerManagers =  audioServerManagers;
     }
@@ -25,14 +26,16 @@ public class SoundStopCommand extends ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            currAudioServerManager.emptyPlaylist();
-            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
-            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
-            event.getTextChannel().sendMessage(SOUND_SKIPPED).queue();
+            if(currAudioServerManager.getTrackAmount() > 1){
+                currAudioServerManager.shufflePlaylist();
+                event.getTextChannel().sendMessage(PLAYLIST_SHUFFLED).queue();
+            }else {
+                event.getTextChannel().sendMessage(NO_TRACK_TO_SHUFFLE).queue();
+            }
         }catch (Exception e){
+            e.printStackTrace();
             event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
         }
     }

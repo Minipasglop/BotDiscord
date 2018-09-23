@@ -1,4 +1,4 @@
-package discord.bot.utils;
+package discord.bot.utils.commands;
 
 import discord.bot.command.CommandEnum;
 import discord.bot.command.ICommand;
@@ -65,6 +65,7 @@ public class CommandHandler {
         soundCommands.put(CommandEnum.LOOP.getCommandName(), new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.LOOP.getCommandName()));
         soundCommands.put(CommandEnum.QUEUE.getCommandName(), new SoundQueueCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.QUEUE.getCommandName()));
         soundCommands.put(CommandEnum.PLAY_PAUSE.getCommandName(), new SoundPauseCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.PLAY_PAUSE.getCommandName()));
+        soundCommands.put(CommandEnum.SHUFFLE.getCommandName(), new SoundShuffleCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.SHUFFLE.getCommandName()));
 
         serverCommands = new HashMap<>();
         serverCommands.put(CommandEnum.ADD_ROLE.getCommandName() ,new RoleAddingCommand(CommandEnum.ADD_ROLE.getCommandName()));

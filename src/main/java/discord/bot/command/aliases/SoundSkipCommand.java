@@ -1,14 +1,13 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.AudioServerManager;
+import discord.bot.utils.audio.AudioServerManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
 public class SoundSkipCommand extends ICommand {
     private final String HELP = "Skip the current track played. \nUsage : `!" + this.commandName + "`";
-    private final String SOUND_SKIPPED_NEXT = "Track has been skipped. Next to be played : ";
     private final String SOUND_SKIPPED_END = "Track has been skipped. No more in queue, `disconnecting.`";
     private final String COMMAND_FAILED = "Failed skipping the track. Please make sure a track is being played.";
     private final String NOTHING_TO_SKIP = "No track to skip.";
@@ -36,8 +35,6 @@ public class SoundSkipCommand extends ICommand {
                 currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
                 currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
                 event.getTextChannel().sendMessage(SOUND_SKIPPED_END).queue();
-            }else{
-                event.getTextChannel().sendMessage(SOUND_SKIPPED_NEXT + currAudioServerManager.getNextTrackURL()).queue();
             }
         }catch (Exception e){
             e.printStackTrace();

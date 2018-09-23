@@ -1,4 +1,4 @@
-package discord.bot.utils;
+package discord.bot.utils.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;

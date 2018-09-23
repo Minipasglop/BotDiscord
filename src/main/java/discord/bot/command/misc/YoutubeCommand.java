@@ -2,8 +2,8 @@ package discord.bot.command.misc;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
-import discord.bot.utils.Track;
-import discord.bot.utils.YoutubeApi;
+import discord.bot.utils.audio.Track;
+import discord.bot.utils.misc.YoutubeApi;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class YoutubeCommand extends ICommand {

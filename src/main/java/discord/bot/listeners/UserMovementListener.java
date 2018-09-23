@@ -1,6 +1,6 @@
 package discord.bot.listeners;
 
-import discord.bot.utils.ServerPropertiesManager;
+import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;

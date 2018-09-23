@@ -1,4 +1,4 @@
-package discord.bot.utils;
+package discord.bot.utils.commands;
 //Code from https://github.com/thibautbessone
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 

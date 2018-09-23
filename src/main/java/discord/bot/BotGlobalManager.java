@@ -6,9 +6,9 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import discord.bot.listeners.GuildJoinListener;
 import discord.bot.listeners.MessageListener;
 import discord.bot.listeners.UserMovementListener;
-import discord.bot.utils.PropertiesLoader;
-import discord.bot.utils.SaveThread;
-import discord.bot.utils.YoutubeApi;
+import discord.bot.utils.save.PropertiesLoader;
+import discord.bot.utils.save.SaveThread;
+import discord.bot.utils.misc.YoutubeApi;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
@@ -24,7 +24,7 @@ public class BotGlobalManager {
     private static PropertiesLoader config = new PropertiesLoader();
     private static AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
     private static YoutubeApi youtubeApi = new YoutubeApi();
-    private final int SHARD_AMMOUNT = 10;
+    private final int SHARD_AMMOUNT = 1;
 
     BotGlobalManager() {
         try {

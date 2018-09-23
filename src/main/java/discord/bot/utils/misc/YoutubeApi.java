@@ -1,4 +1,4 @@
-package discord.bot.utils;
+package discord.bot.utils.misc;
 
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpRequest;
@@ -9,6 +9,8 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.SearchResultSnippet;
+import discord.bot.utils.audio.Track;
+import discord.bot.utils.save.PropertiesLoader;
 
 import java.io.IOException;
 import java.util.List;

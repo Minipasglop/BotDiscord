@@ -1,6 +1,7 @@
-package discord.bot.utils;
+package discord.bot.utils.audio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CustomAudioPlaylist {
@@ -57,4 +58,7 @@ public class CustomAudioPlaylist {
         return this.playList;
     }
 
+    public void shuffle() {
+        Collections.shuffle(this.playList);
+    }
 }
