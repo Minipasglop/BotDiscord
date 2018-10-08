@@ -2,6 +2,7 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
@@ -29,15 +30,15 @@ public class SoundPauseCommand extends ICommand {
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
             if(currAudioServerManager.isTrackPaused()){
-                event.getTextChannel().sendMessage(RESUMED).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),RESUMED);
                 currAudioServerManager.setTrackPaused(false);
             }else {
-                event.getTextChannel().sendMessage(PAUSED).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),PAUSED);
                 currAudioServerManager.setTrackPaused(true);
             }
         }catch (Exception e){
             e.printStackTrace();
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -46,10 +47,4 @@ public class SoundPauseCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

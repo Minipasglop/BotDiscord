@@ -2,6 +2,7 @@ package discord.bot.command.misc;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.commands.CommandHandler;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -51,8 +52,7 @@ public class HelpCommand extends ICommand {
         builder.addField("Misc commands :keyboard:", miscCommandsList + "\n̔̏", true);
         builder.addField("Owner only commands :warning:", ownerCommandsList + "\n̔̏", true);
         builder.addField("More infos :file_folder:", MESSAGE_FOOTER,true);
-        event.getAuthor().openPrivateChannel().queue((channel) -> channel.sendMessage(builder.build()).queue());
-
+        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),builder.build());
     }
 
     @Override
@@ -60,10 +60,4 @@ public class HelpCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if (!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

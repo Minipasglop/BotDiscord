@@ -3,6 +3,7 @@ package discord.bot.command.aliases;
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.audio.Track;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -60,10 +61,10 @@ public class SoundQueueCommand extends ICommand {
             builder.addField("Current track :loud_sound:", currentTrack, false);
             builder.addField("Loop :repeat_one:", (currAudioServerManager.isTrackLooping() ? "Enabled. \n̔̏" : "Disabled. \n̔̏"), false );
             builder.addField("Queued tracks :bulb:", trackTitleList, false);
-            event.getTextChannel().sendMessage(builder.build()).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
         }catch (Exception e){
             e.printStackTrace();
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -72,10 +73,4 @@ public class SoundQueueCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

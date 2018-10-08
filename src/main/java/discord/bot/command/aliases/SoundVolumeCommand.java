@@ -2,6 +2,7 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -32,10 +33,10 @@ public class SoundVolumeCommand extends ICommand {
             }else {
                 audioServerManagers.get(event.getGuild().getId()).setVolume(Integer.parseInt(args[0]));
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "volume", args[0]);
-                event.getTextChannel().sendMessage(VOLUME_MODIFIED).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),VOLUME_MODIFIED);
             }
         }catch (Exception e){
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -44,10 +45,4 @@ public class SoundVolumeCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

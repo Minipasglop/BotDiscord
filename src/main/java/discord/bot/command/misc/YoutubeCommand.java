@@ -3,6 +3,7 @@ package discord.bot.command.misc;
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.Track;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.YoutubeApi;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -32,9 +33,9 @@ public class YoutubeCommand extends ICommand {
         }
         Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
         if(youtubeSearch != null){
-            event.getTextChannel().sendMessage(youtubeSearch.getVideoUrl()).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),youtubeSearch.getVideoUrl());
         }else {
-            event.getTextChannel().sendMessage(NO_RESULT).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_RESULT);
         }
     }
 
@@ -43,10 +44,4 @@ public class YoutubeCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

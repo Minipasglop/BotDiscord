@@ -2,6 +2,7 @@ package discord.bot.command.bot.managing;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesJSONUpdate;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -33,10 +34,10 @@ public class ForcePropertiesSaveCommand extends ICommand {
             for (int i = 0; i < guildList.size(); i++) {
                 saver = new ServerPropertiesJSONUpdate(guildList.get(i).getId());
             }
-            event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(COMMAND_SUCCESS).queue()));
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_SUCCESS);
         }else {
             event.getMessage().delete().queue();
-            event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(NOT_ALLOWED).queue()));
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
         }
     }
 
@@ -45,10 +46,4 @@ public class ForcePropertiesSaveCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if (!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

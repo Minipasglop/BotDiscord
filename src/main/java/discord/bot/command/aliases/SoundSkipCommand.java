@@ -2,6 +2,7 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
@@ -29,16 +30,16 @@ public class SoundSkipCommand extends ICommand {
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
             if(currAudioServerManager.getTrackAmount() == 0){
-                event.getTextChannel().sendMessage(NOTHING_TO_SKIP).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NOTHING_TO_SKIP);
             }
             else if(!currAudioServerManager.skipTrack()){
                 currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
                 currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
-                event.getTextChannel().sendMessage(SOUND_SKIPPED_END).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),SOUND_SKIPPED_END);
             }
         }catch (Exception e){
             e.printStackTrace();
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -47,10 +48,4 @@ public class SoundSkipCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

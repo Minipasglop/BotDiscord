@@ -1,8 +1,8 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class SetAutoRoleOnJoinCommand extends ICommand {
@@ -29,11 +29,10 @@ public class SetAutoRoleOnJoinCommand extends ICommand {
         }
         if (!(event.getGuild().getRolesByName(role, true).get(0) == null)) {
             ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(),"autoRole",role);
-            event.getTextChannel().sendMessage(COMMAND_SUCCESS).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS);
         } else {
             event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
         }
     }
 
@@ -42,10 +41,4 @@ public class SetAutoRoleOnJoinCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if (!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

@@ -1,10 +1,11 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
-import net.dv8tion.jda.core.entities.*;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import discord.bot.utils.save.PropertiesLoader;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.RandomColorGenerator;
+import discord.bot.utils.save.PropertiesLoader;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,18 +45,16 @@ public class RoleAddingCommand extends ICommand {
                         System.out.println(ACTION_PERFORMED_ADD + args[args.length - 1] + " a l'utilisateur " + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                     }else {
                         event.getMessage().delete().queue();
-                        PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-                        chanToTalk.sendMessage(NOT_REQUIRED).queue();
+                        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_REQUIRED);
                     }
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
-                    event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+                    MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
                 }
             }
         }else {
             event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(NOT_ALLOWED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
         }
     }
 
@@ -64,10 +63,4 @@ public class RoleAddingCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

@@ -1,9 +1,9 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -39,13 +39,13 @@ public class MoveCommand extends ICommand {
                     System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
                 } catch (Exception e) {
                     System.out.println(Arrays.toString(e.getStackTrace()));
-                    event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+                    MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
                 }
             }
         }else {
             event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(NOT_ALLOWED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
+
         }
     }
 
@@ -54,10 +54,4 @@ public class MoveCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

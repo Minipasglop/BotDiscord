@@ -2,6 +2,7 @@ package discord.bot.command.bot.info;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.UptimeFactory;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
@@ -50,7 +51,7 @@ public class InfoCommand extends ICommand {
         builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels \n̔̏", true);
         builder.addBlankField(true);
         builder.addField("Uptime :timer:", uptime, true);
-        event.getTextChannel().sendMessage(builder.build()).queue();
+        MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
     }
 
 
@@ -59,10 +60,4 @@ public class InfoCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if (!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

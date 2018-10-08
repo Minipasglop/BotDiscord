@@ -1,9 +1,9 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
@@ -34,8 +34,7 @@ public class BanCommand extends ICommand {
             }
         }else{
             event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(NOT_ALLOWED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
         }
     }
 
@@ -44,10 +43,4 @@ public class BanCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

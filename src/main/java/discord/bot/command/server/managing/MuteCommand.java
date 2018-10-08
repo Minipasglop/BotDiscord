@@ -1,9 +1,9 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.List;
@@ -34,14 +34,13 @@ public class MuteCommand extends ICommand {
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().setMute(curr, true).queue();
                 System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
-                PrivateChannel chanToTalk = curr.getUser().openPrivateChannel().complete();
-                chanToTalk.sendMessage(MUTE_MESSAGE + args[args.length - 2] + " et ce pour " + args[args.length - 1] + " minute." + (Integer.parseInt(args[args.length - 1]) > 1 ? "s" : "")).queue();
+                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), buildMuteMessage(args[args.length -2], args[args.length -1]));
                 Runnable waitUntilDemute = () -> {
                     try {
                         Thread.sleep(Integer.parseInt(args[args.length - 1]) * 60000);
                         event.getGuild().getController().setMute(curr, false).queue();
                         System.out.println(ACTION_CALLBACK + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
-                        chanToTalk.sendMessage(UNMUTE_MESSAGE).queue();
+                        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),UNMUTE_MESSAGE);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -50,21 +49,17 @@ public class MuteCommand extends ICommand {
             }
         } else {
             event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(NOT_ALLOWED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
         }
+    }
+
+    private String buildMuteMessage(String reason, String time) {
+        return MUTE_MESSAGE + reason + " for " + time + " minute" + (Integer.parseInt(time) > 1 ? "s" : "");
     }
 
     @Override
     public String help() {
         return HELP;
-    }
-
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
     }
 
 }

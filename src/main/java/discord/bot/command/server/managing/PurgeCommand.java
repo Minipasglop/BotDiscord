@@ -1,9 +1,9 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -30,19 +30,17 @@ public class PurgeCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event)  {
         try {
-        if(event.getMember().getPermissions().contains(Permission.MESSAGE_MANAGE)) {
-            TextChannel currChannel = event.getTextChannel();
-            List<Message> history = currChannel.getIterableHistory().complete();
-            currChannel.deleteMessages(history).queue();
-            event.getTextChannel().sendMessage(ACTION_PERFORMED).queue();
-        }else {
-            event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(NOT_ALLOWED).queue();
+            if(event.getMember().getPermissions().contains(Permission.MESSAGE_MANAGE)) {
+                TextChannel currChannel = event.getTextChannel();
+                List<Message> history = currChannel.getIterableHistory().complete();
+                currChannel.deleteMessages(history).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),ACTION_PERFORMED);
+            }else {
+                event.getMessage().delete().queue();
+                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
             }
         }catch (IllegalArgumentException e){
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(ACTION_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),ACTION_FAILED);
         }
     }
 
@@ -51,10 +49,4 @@ public class PurgeCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

@@ -2,6 +2,7 @@ package discord.bot.command.bot.managing;
 
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -61,12 +62,12 @@ public class SetGameCommand extends ICommand {
                 game += args[i] + (i+1 < args.length ? " " : "");
             }
             if(!setGameWithType(type,game)){
-                    event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(WRONG_TYPE).queue()));
+                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),WRONG_TYPE);
             }
-            event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(COMMAND_SUCCESS).queue()));
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_SUCCESS);
         }else {
             event.getMessage().delete().queue();
-            event.getAuthor().openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(NOT_ALLOWED).queue()));
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
         }
     }
 
@@ -75,10 +76,4 @@ public class SetGameCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if (!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

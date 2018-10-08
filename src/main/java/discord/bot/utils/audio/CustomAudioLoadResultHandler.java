@@ -5,6 +5,7 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.managers.AudioManager;
@@ -51,7 +52,7 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
     @Override
     public void noMatches() {
         if(chanToWrite != null) {
-            this.chanToWrite.sendMessage(SOUND_NOT_FOUND).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(this.chanToWrite,SOUND_NOT_FOUND);
         }
     }
 
@@ -59,7 +60,7 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
     public void loadFailed(FriendlyException e) {
         e.printStackTrace();
         if(chanToWrite != null) {
-            this.chanToWrite.sendMessage(SOUND_PLAY_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(this.chanToWrite,SOUND_PLAY_FAILED);
         }
     }
 }

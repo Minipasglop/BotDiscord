@@ -5,6 +5,7 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.audio.CustomAudioLoadResultHandler;
 import discord.bot.utils.audio.Track;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.YoutubeApi;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -56,7 +57,7 @@ public class SoundPlayerCommand extends ICommand {
         currAudioServerManager.getAudioLoadResultHandler().setChanToWrite(event.getTextChannel());
         currAudioServerManager.getAudioLoadResultHandler().setGuildAudioManager(guildAudioManager);
         if (targetChannel == null) {
-            event.getTextChannel().sendMessage(JOIN_VOCAL_CHANNEL).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),JOIN_VOCAL_CHANNEL);
         } else {
             if(!("").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume")) && ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume") != null){
                 volume = Integer.parseInt(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume"));
@@ -80,7 +81,9 @@ public class SoundPlayerCommand extends ICommand {
                 builder.setThumbnail(youtubeSearch.getThumbnailUrl());
                 builder.addField("Video Title :movie_camera: ", youtubeSearch.getTitle() + " - " + youtubeSearch.getChannelTitle() + "\n̔̏", false);
                 builder.addField("Playlist status :bulb:", String.valueOf(currAudioServerManager.getTrackAmount()) + " track" + (currAudioServerManager.getTrackAmount() == 1 ? "" : "s") + " listed.", false);
-                event.getTextChannel().sendMessage(builder.build()).queue();
+                if(event.getTextChannel().canTalk()){
+                    MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
+                }
             }
         }
     }
@@ -90,10 +93,4 @@ public class SoundPlayerCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

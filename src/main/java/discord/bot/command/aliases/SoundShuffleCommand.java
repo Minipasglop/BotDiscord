@@ -2,6 +2,7 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
@@ -30,13 +31,13 @@ public class SoundShuffleCommand extends ICommand {
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
             if(currAudioServerManager.getTrackAmount() > 1){
                 currAudioServerManager.shufflePlaylist();
-                event.getTextChannel().sendMessage(PLAYLIST_SHUFFLED).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),PLAYLIST_SHUFFLED);
             }else {
-                event.getTextChannel().sendMessage(NO_TRACK_TO_SHUFFLE).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_TRACK_TO_SHUFFLE);
             }
         }catch (Exception e){
             e.printStackTrace();
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -45,10 +46,4 @@ public class SoundShuffleCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

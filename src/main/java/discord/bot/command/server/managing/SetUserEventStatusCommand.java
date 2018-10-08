@@ -1,9 +1,9 @@
 package discord.bot.command.server.managing;
 
 import discord.bot.command.ICommand;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.PrivateChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class SetUserEventStatusCommand extends ICommand {
@@ -27,18 +27,18 @@ public class SetUserEventStatusCommand extends ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         if (event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
             if(("on").equals(args[args.length -1])){
-                event.getTextChannel().sendMessage(COMMAND_SUCCESS_ON).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS_ON);
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "userEventEnabled", "true");
 
             }
             else if(("off").equals(args[args.length -1])){
-                event.getTextChannel().sendMessage(COMMAND_SUCCESS_OFF).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS_OFF);
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "userEventEnabled", "false");
             }
         } else {
             event.getMessage().delete().queue();
-            PrivateChannel chanToTalk = event.getAuthor().openPrivateChannel().complete();
-            chanToTalk.sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
+
         }
     }
 
@@ -47,10 +47,4 @@ public class SetUserEventStatusCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if (!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

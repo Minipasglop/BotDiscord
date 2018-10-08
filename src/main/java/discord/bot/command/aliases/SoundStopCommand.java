@@ -2,13 +2,14 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Map;
 
 public class SoundStopCommand extends ICommand {
     private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!" + this.commandName + "`";
-    private final String SOUND_SKIPPED = "Sound has been stopped.";
+    private final String SOUND_STOPPED = "Sound has been stopped.";
     private final String COMMAND_FAILED = "Failed executing this command. Please make sure a track is being played.";
 
     private Map<String,AudioServerManager> audioServerManagers;
@@ -31,9 +32,9 @@ public class SoundStopCommand extends ICommand {
             currAudioServerManager.emptyPlaylist();
             currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
             currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
-            event.getTextChannel().sendMessage(SOUND_SKIPPED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),SOUND_STOPPED);
         }catch (Exception e){
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -42,10 +43,4 @@ public class SoundStopCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

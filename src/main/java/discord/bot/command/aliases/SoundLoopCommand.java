@@ -2,6 +2,7 @@ package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -31,15 +32,15 @@ public class SoundLoopCommand extends ICommand {
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
             if(currAudioServerManager.isTrackLooping() || ("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "loop"))){
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "false");
-                event.getTextChannel().sendMessage(TRACK_LOOP_DISABLED).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),TRACK_LOOP_DISABLED);
             }else {
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "true");
-                event.getTextChannel().sendMessage(TRACK_LOOP_ENABLED).queue();
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),TRACK_LOOP_ENABLED);
             }
             currAudioServerManager.reverseTrackLoop();
         }catch (Exception e){
             e.printStackTrace();
-            event.getTextChannel().sendMessage(COMMAND_FAILED).queue();
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }
 
@@ -48,10 +49,4 @@ public class SoundLoopCommand extends ICommand {
         return HELP;
     }
 
-    @Override
-    public void executed(boolean success, MessageReceivedEvent event) {
-        if(!success) {
-            event.getTextChannel().sendMessage(help()).queue();
-        }
-    }
 }

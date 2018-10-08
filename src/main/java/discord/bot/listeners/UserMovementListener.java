@@ -1,5 +1,6 @@
 package discord.bot.listeners;
 
+import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
@@ -54,10 +55,10 @@ public class UserMovementListener extends ListenerAdapter {
     }
 
     private void messageBienvenueJoinServeur(User user,TextChannel channel){
-        channel.sendMessage(":punch: Welcome : " + user.getAsMention() + " [Join]").complete();
+        MessageSenderFactory.getInstance().sendSafeMessage(channel,":punch: Welcome : " + user.getAsMention() + " [Join]");
     }
     private void messageDepartServeur(User u, TextChannel c){
-        c.sendMessage("See you in a better world : " + u.getName() + " [Leave] :cry:").complete();
+        MessageSenderFactory.getInstance().sendSafeMessage(c,"See you in a better world : " + u.getName() + " [Leave] :cry:");
     }
 
 
