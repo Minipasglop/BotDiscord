@@ -9,6 +9,8 @@ import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.managers.AudioManager;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
 
@@ -16,9 +18,9 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
     private AudioManager guildAudioManager;
     private TextChannel chanToWrite;
     private VoiceChannel targetVoicelChannel;
-
     private final String SOUND_NOT_FOUND = "Track not found.";
     private final String SOUND_PLAY_FAILED = "Can't play the track at the moment.";
+    private static Logger logger = Logger.getLogger(CustomAudioLoadResultHandler.class);
 
     public void setTargetVoicelChannel(VoiceChannel targetVoicelChannel) {
         this.targetVoicelChannel = targetVoicelChannel;
@@ -58,7 +60,7 @@ public class CustomAudioLoadResultHandler implements AudioLoadResultHandler {
 
     @Override
     public void loadFailed(FriendlyException e) {
-        e.printStackTrace();
+        logger.log(Level.INFO, "Something went wrong", e);
         if(chanToWrite != null) {
             MessageSenderFactory.getInstance().sendSafeMessage(this.chanToWrite,SOUND_PLAY_FAILED);
         }

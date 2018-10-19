@@ -34,11 +34,11 @@ public class AudioServerManager {
         player.setPaused(paused);
     }
 
-    //Méthode en interface, permettant de tout déléguer au handlePlaylist (On pars du principe qu'il joue un son), et nous dit si on peut skip ou non pour l'interaction avec l'utilisateur
+    //Méthode en interface, permettant de tout déléguer au handlePlaylist (On part du principe qu'il joue un son), et nous dit si on peut skip ou non pour l'interaction avec l'utilisateur
     public boolean skipTrack(){
         isPlaying = false;
         forceSkip = true;
-        return playlist.hasMoreTrack();
+        return playlist.hasMoreTrack(forceSkip);
     }
 
     public void emptyPlaylist(){
@@ -69,11 +69,11 @@ public class AudioServerManager {
     }
 
     private void trackEnded( ){
-        if(playlist.hasMoreTrack() && (!isTrackLooping() || forceSkip)){
+        if(playlist.hasMoreTrack(forceSkip) && (!isTrackLooping() || forceSkip)){
             playlist.skipTrack();
             loadNextTrack();
             new SoundPlaying(this).execute();
-        }else if(playlist.hasMoreTrack() && (this.playlist.isLoopingOnTrack() && !forceSkip)){
+        }else if(playlist.hasMoreTrack(forceSkip) && (this.playlist.isLoopingOnTrack() && !forceSkip)){
             loadNextTrack();
             new SoundPlaying(this).execute();
         }else {
@@ -114,6 +114,7 @@ public class AudioServerManager {
 
     public List<Track> getTrackList() { return this.playlist.getTrackList(); }
 
-    public void shufflePlaylist() { this.playlist.shuffle();
+    public void shufflePlaylist() {
+        this.playlist.shuffle();
     }
 }

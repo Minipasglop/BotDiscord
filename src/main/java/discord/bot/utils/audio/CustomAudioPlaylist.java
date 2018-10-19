@@ -33,8 +33,12 @@ public class CustomAudioPlaylist {
         return false;
     }
 
-    public boolean hasMoreTrack(){
-        return playList.size() > 1 || (playList.size() == 1 && isLooping);
+    public boolean hasMoreTrack(boolean skipLooping){
+        if(skipLooping){
+            return playList.size() > 1;
+        }else {
+            return playList.size() > 1 || (playList.size() == 1 && isLooping);
+        }
     }
 
     public void addTrack(Track track){
@@ -59,6 +63,11 @@ public class CustomAudioPlaylist {
     }
 
     public void shuffle() {
-        Collections.shuffle(this.playList);
+        if(playList.size() > 1) {
+            List<Track> shuffled = this.playList.subList(1, this.playList.size());
+            Collections.shuffle(shuffled);
+            this.playList = this.playList.subList(0,1);
+            this.playList.addAll(shuffled);
+        }
     }
 }
