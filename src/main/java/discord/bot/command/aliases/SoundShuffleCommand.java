@@ -40,7 +40,7 @@ public class SoundShuffleCommand extends ICommand {
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_TRACK_TO_SHUFFLE);
             }
         }catch (Exception e){
-            logger.log(Level.ERROR, e.getMessage());
+            logger.log(Level.ERROR, "Something went wrong", e);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

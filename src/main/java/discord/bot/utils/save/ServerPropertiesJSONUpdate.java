@@ -38,7 +38,7 @@ public class ServerPropertiesJSONUpdate {
             properties.store(fileOutput, null);
 
         } catch (IOException e) {
-            logger.log(Level.ERROR, e.getMessage());
+            logger.log(Level.ERROR, "Something went wrong", e);
         }
     }
     private void initProperties(String serverId){

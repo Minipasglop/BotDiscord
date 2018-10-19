@@ -67,7 +67,7 @@ public class SoundQueueCommand extends ICommand {
             builder.addField("Queued tracks :bulb:", trackTitleList, false);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
         }catch (Exception e){
-            logger.log(Level.ERROR, e.getMessage());
+            logger.log(Level.ERROR, "Something went wrong", e);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

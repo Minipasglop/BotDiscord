@@ -62,7 +62,7 @@ public class YoutubeApi {
         } catch (IOException e) {
             logger.log(Level.ERROR, "There was a IO error: " + e.getCause() + " : " + e.getMessage());
         } catch (Throwable t) {
-            logger.log(Level.ERROR, t.getMessage());
+            logger.log(Level.ERROR, "Something went wrong", t);
         }
         return null;
     }

@@ -34,7 +34,7 @@ public class CustomAudioPlaylist {
     }
 
     public boolean hasMoreTrack(){
-        return playList.size() > 1 || isLooping;
+        return playList.size() > 1 || (playList.size() == 1 && isLooping);
     }
 
     public void addTrack(Track track){

@@ -51,7 +51,7 @@ public class RoleAddingCommand extends ICommand {
                         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_REQUIRED);
                     }
                 } catch (Exception e) {
-                    logger.log(Level.ERROR, e.getMessage());
+                    logger.log(Level.ERROR, "Something went wrong", e);
                     MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
                 }
             }

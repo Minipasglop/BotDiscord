@@ -45,7 +45,7 @@ public class MuteCommand extends ICommand {
                         logger.log(Level.INFO,ACTION_CALLBACK + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),UNMUTE_MESSAGE);
                     } catch (InterruptedException e) {
-                        logger.log(Level.ERROR, e.getMessage());
+                        logger.log(Level.ERROR, "Something went wrong", e);
                     }
                 };
                 waitUntilDemute.run();

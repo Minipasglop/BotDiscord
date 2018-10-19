@@ -48,7 +48,7 @@ public class BotGlobalManager {
             ServiceStartedNotification();
             logger.log(Level.INFO,"BOT started");
         } catch (LoginException | InterruptedException e) {
-            logger.log(Level.ERROR, e.getMessage());
+            logger.log(Level.ERROR, "Something went wrong", e);
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
         }
     }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console

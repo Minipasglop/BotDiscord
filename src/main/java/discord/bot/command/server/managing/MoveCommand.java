@@ -39,7 +39,7 @@ public class MoveCommand extends ICommand {
                     event.getGuild().getController().moveVoiceMember(curr, targetChannel.get(0)).queue();
                     logger.log(Level.INFO,ACTION_PERFORMED + curr.getUser().getName() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
                 } catch (Exception e) {
-                    logger.log(Level.ERROR, e.getMessage());
+                    logger.log(Level.ERROR, "Something went wrong", e);
                     MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
                 }
             }

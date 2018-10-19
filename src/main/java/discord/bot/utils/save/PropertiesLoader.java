@@ -70,7 +70,7 @@ public class PropertiesLoader {
             youtubeApiKey = properties.getProperty("youtubeApiKey");
             botOwnerUserId = properties.getProperty("botOwnerUserId");
         } catch (IOException e) {
-            logger.log(Level.ERROR, e.getMessage());
+            logger.log(Level.ERROR, "Something went wrong", e);
         }
     }
 }
