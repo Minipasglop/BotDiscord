@@ -6,14 +6,15 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import discord.bot.listeners.GuildJoinListener;
 import discord.bot.listeners.MessageListener;
 import discord.bot.listeners.UserMovementListener;
+import discord.bot.utils.misc.YoutubeApi;
 import discord.bot.utils.save.PropertiesLoader;
 import discord.bot.utils.save.SaveThread;
-import discord.bot.utils.misc.YoutubeApi;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
+import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
@@ -25,9 +26,12 @@ public class BotGlobalManager {
     private static AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
     private static YoutubeApi youtubeApi = new YoutubeApi();
     private final int SHARD_AMMOUNT = 5;
+    private static Logger logger = Logger.getLogger(BotGlobalManager.class);
+
 
     BotGlobalManager() {
         try {
+            logger.error("bite");
             shards = new ArrayList<>();
             JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
             shardBuilder.addEventListener(new MessageListener());
