@@ -5,6 +5,8 @@ import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class KickCommand extends ICommand {
     private final String KICK_MESSAGE = "You've been kicked because of : ";
     private final String NOT_ALLOWED = "You're not allowed to kick other users... Sadly :)";
     private final String ACTION_PERFORMED = "Exclure : ";
+    private static Logger logger = Logger.getLogger(KickCommand.class);
 
     public KickCommand(String commandName) {
         super(commandName);
@@ -30,12 +33,11 @@ public class KickCommand extends ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().kick(curr, KICK_MESSAGE + args[args.length - 1]).queue();
-                System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
+                logger.log(Level.INFO, ACTION_PERFORMED + curr.getUser().getName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
             }
         }else {
             event.getMessage().delete().queue();
             MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
-
         }
     }
 

@@ -10,15 +10,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class YoutubeCommand extends ICommand {
 
     private final String HELP = "Looks for a video in YouTube. \nUsage : `!" + this.commandName + " requested song name`";
-
     private final String NO_RESULT = "No result found for the requested video. Sorry bro :zipper_mouth: ";
-
     private final YoutubeApi youtubeApi = BotGlobalManager.getYoutubeApi();
 
     public YoutubeCommand(String commandName) {
         super(commandName);
     }
-
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {

@@ -4,6 +4,8 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 
@@ -12,6 +14,7 @@ public class SoundPauseCommand extends ICommand {
     private final String PAUSED = "Current track has been paused.";
     private final String RESUMED = "Current track has been resumed.";
     private final String COMMAND_FAILED = "Failed pausing the sound. Please make sure a track is currently being played.";
+    private static Logger logger = Logger.getLogger(SoundPauseCommand.class);
 
     private Map<String,AudioServerManager> audioServerManagers;
 
@@ -37,7 +40,7 @@ public class SoundPauseCommand extends ICommand {
                 currAudioServerManager.setTrackPaused(true);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

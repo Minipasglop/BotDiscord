@@ -4,6 +4,8 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 
@@ -12,6 +14,8 @@ public class SoundShuffleCommand extends ICommand {
     private final String PLAYLIST_SHUFFLED = "Playlist has been successfully shuffled.";
     private final String NO_TRACK_TO_SHUFFLE = "Playlist don't have enough tracks to be shuffled :thinking:";
     private final String COMMAND_FAILED = "Failed shuffleing the playlist. Please make sure tracks are queued.";
+    private static Logger logger = Logger.getLogger(SoundShuffleCommand.class);
+
 
     private Map<String,AudioServerManager> audioServerManagers;
 
@@ -36,7 +40,7 @@ public class SoundShuffleCommand extends ICommand {
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_TRACK_TO_SHUFFLE);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

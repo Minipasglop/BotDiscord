@@ -14,6 +14,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
@@ -28,10 +29,8 @@ public class BotGlobalManager {
     private final int SHARD_AMMOUNT = 5;
     private static Logger logger = Logger.getLogger(BotGlobalManager.class);
 
-
     BotGlobalManager() {
         try {
-            logger.error("bite");
             shards = new ArrayList<>();
             JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
             shardBuilder.addEventListener(new MessageListener());
@@ -47,8 +46,9 @@ public class BotGlobalManager {
             SaveThread saveThread = new SaveThread();
             saveThread.start();
             ServiceStartedNotification();
+            logger.log(Level.INFO,"BOT started");
         } catch (LoginException | InterruptedException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
         }
     }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console

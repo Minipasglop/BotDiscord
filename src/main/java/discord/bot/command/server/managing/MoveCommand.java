@@ -6,8 +6,9 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class MoveCommand extends ICommand {
@@ -16,11 +17,11 @@ public class MoveCommand extends ICommand {
     private final String COMMAND_FAILED = "Something unexpected happened. Please make sure the user is already connected to a vocal channel.";
     private final String NOT_ALLOWED = "You're not allowed to move others... Sadly :)";
     private final String ACTION_PERFORMED = "Déplacer : ";
+    private static Logger logger = Logger.getLogger(MoveCommand.class);
 
     public MoveCommand(String commandName) {
         super(commandName);
     }
-
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -36,16 +37,15 @@ public class MoveCommand extends ICommand {
             for (Member curr : targetedUsers) {
                 try {
                     event.getGuild().getController().moveVoiceMember(curr, targetChannel.get(0)).queue();
-                    System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
+                    logger.log(Level.INFO,ACTION_PERFORMED + curr.getUser().getName() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
                 } catch (Exception e) {
-                    System.out.println(Arrays.toString(e.getStackTrace()));
+                    logger.log(Level.ERROR, e.getMessage());
                     MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
                 }
             }
         }else {
             event.getMessage().delete().queue();
             MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
-
         }
     }
 

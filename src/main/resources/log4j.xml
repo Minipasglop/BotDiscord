@@ -5,7 +5,7 @@
     <appender name="LoggerFile"
               class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File"
-               value="./BotLogs/botExceptions.log" />
+               value="./logs/jackson.log" />
         <param name="DatePattern" value="'.'yyyy-ww" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"

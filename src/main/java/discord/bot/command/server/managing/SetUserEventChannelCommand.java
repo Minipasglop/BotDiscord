@@ -29,7 +29,6 @@ public class SetUserEventChannelCommand extends ICommand {
         } else {
             event.getMessage().delete().queue();
             MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
-
         }
     }
 
@@ -37,5 +36,4 @@ public class SetUserEventChannelCommand extends ICommand {
     public String help() {
         return HELP;
     }
-
 }

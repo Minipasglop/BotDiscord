@@ -20,7 +20,6 @@ public class SetGameCommand extends ICommand {
         super(commandName);
     }
 
-
     private boolean setGameWithType(String type, String gameToSet){
         boolean success = true;
         Game game = null;

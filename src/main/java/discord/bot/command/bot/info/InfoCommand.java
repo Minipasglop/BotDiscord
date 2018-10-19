@@ -39,9 +39,7 @@ public class InfoCommand extends ICommand {
             channelNumber += shards.get(i).getTextChannels().size();
             voiceChannelNumber += shards.get(i).getVoiceChannels().size();
         }
-
         String uptime = UptimeFactory.getBotUptime();
-
         EmbedBuilder builder = new EmbedBuilder();
         builder.setAuthor("Info");
         builder.setColor(Color.ORANGE);

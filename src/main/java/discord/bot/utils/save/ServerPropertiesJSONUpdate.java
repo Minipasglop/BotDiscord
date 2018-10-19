@@ -1,5 +1,8 @@
 package discord.bot.utils.save;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -10,6 +13,8 @@ public class ServerPropertiesJSONUpdate {
     private String userEventChannel;
     private String volume;
     private String loop;
+    private static Logger logger = Logger.getLogger(ServerPropertiesJSONUpdate.class);
+
 
     public ServerPropertiesJSONUpdate(String serverID) {
         try {
@@ -32,10 +37,8 @@ public class ServerPropertiesJSONUpdate {
 
             properties.store(fileOutput, null);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
     }
     private void initProperties(String serverId){

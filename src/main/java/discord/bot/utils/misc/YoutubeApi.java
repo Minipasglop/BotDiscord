@@ -11,6 +11,8 @@ import com.google.api.services.youtube.model.SearchResult;
 import com.google.api.services.youtube.model.SearchResultSnippet;
 import discord.bot.utils.audio.Track;
 import discord.bot.utils.save.PropertiesLoader;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,8 +24,9 @@ public class YoutubeApi {
 
     private static final long NUMBER_OF_VIDEOS_RETURNED = 1;
 
-
     private static YouTube youtube;
+
+    private static Logger logger = Logger.getLogger(YoutubeApi.class);
 
 
     public Track searchVideo(String query){
@@ -55,12 +58,11 @@ public class YoutubeApi {
                 return result;
             }
         } catch (GoogleJsonResponseException e) {
-            System.err.println("There was a service error: " + e.getDetails().getCode() + " : "
-                    + e.getDetails().getMessage());
+            logger.log(Level.ERROR, "There was a service error: " + e.getDetails().getCode() + " : " + e.getDetails().getMessage());
         } catch (IOException e) {
-            System.err.println("There was an IO error: " + e.getCause() + " : " + e.getMessage());
+            logger.log(Level.ERROR, "There was a IO error: " + e.getCause() + " : " + e.getMessage());
         } catch (Throwable t) {
-            t.printStackTrace();
+            logger.log(Level.ERROR, t.getMessage());
         }
         return null;
     }

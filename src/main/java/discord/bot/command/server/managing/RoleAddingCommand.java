@@ -6,8 +6,9 @@ import discord.bot.utils.misc.RandomColorGenerator;
 import discord.bot.utils.save.PropertiesLoader;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class RoleAddingCommand extends ICommand {
@@ -19,6 +20,8 @@ public class RoleAddingCommand extends ICommand {
     private final String NOT_ALLOWED = "This command has been disabled at the moment. Please make sure to check the support server to get the latests news.";
     private final String NOT_REQUIRED = "The user tagged already owns the role.";
     private final String COMMAND_FAILED = "An unexpected error occured. Please make sure Jackson has administrations role on the server.";
+    private static Logger logger = Logger.getLogger(RoleAddingCommand.class);
+
 
     public RoleAddingCommand(String commandName) {
         super(commandName);
@@ -48,7 +51,7 @@ public class RoleAddingCommand extends ICommand {
                         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_REQUIRED);
                     }
                 } catch (Exception e) {
-                    System.out.println(Arrays.toString(e.getStackTrace()));
+                    logger.log(Level.ERROR, e.getMessage());
                     MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
                 }
             }

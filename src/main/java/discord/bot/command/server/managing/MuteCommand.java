@@ -5,6 +5,8 @@ import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class MuteCommand extends ICommand {
     private final String NOT_ALLOWED = "You're not allowed to mute other users... Sadly:)";
     private final String ACTION_PERFORMED = "Rendre muet : ";
     private final String ACTION_CALLBACK = "Rendre parole possible : ";
+    private static Logger logger = Logger.getLogger(MuteCommand.class);
 
     public MuteCommand(String commandName) {
         super(commandName);
@@ -33,16 +36,16 @@ public class MuteCommand extends ICommand {
             List<Member> targetedUsers = event.getMessage().getMentionedMembers();
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().setMute(curr, true).queue();
-                System.out.println(ACTION_PERFORMED + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
+                logger.log(Level.INFO,ACTION_PERFORMED + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                 MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), buildMuteMessage(args[args.length -2], args[args.length -1]));
                 Runnable waitUntilDemute = () -> {
                     try {
                         Thread.sleep(Integer.parseInt(args[args.length - 1]) * 60000);
                         event.getGuild().getController().setMute(curr, false).queue();
-                        System.out.println(ACTION_CALLBACK + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
+                        logger.log(Level.INFO,ACTION_CALLBACK + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),UNMUTE_MESSAGE);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        logger.log(Level.ERROR, e.getMessage());
                     }
                 };
                 waitUntilDemute.run();

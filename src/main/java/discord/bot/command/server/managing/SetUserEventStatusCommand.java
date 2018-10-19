@@ -29,7 +29,6 @@ public class SetUserEventStatusCommand extends ICommand {
             if(("on").equals(args[args.length -1])){
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS_ON);
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "userEventEnabled", "true");
-
             }
             else if(("off").equals(args[args.length -1])){
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS_OFF);
@@ -38,7 +37,6 @@ public class SetUserEventStatusCommand extends ICommand {
         } else {
             event.getMessage().delete().queue();
             MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
-
         }
     }
 
@@ -46,5 +44,4 @@ public class SetUserEventStatusCommand extends ICommand {
     public String help() {
         return HELP;
     }
-
 }

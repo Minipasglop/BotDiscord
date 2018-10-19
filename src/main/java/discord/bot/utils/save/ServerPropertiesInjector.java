@@ -1,5 +1,8 @@
 package discord.bot.utils.save;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,6 +15,8 @@ public class ServerPropertiesInjector {
 
     private final String FILE_PREFIX = "jackson-guild-";
     private final String FILE_EXTENSION = ".properties";
+    private static Logger logger = Logger.getLogger(ServerPropertiesInjector.class);
+
 
     public Map<String,String> getPropertiesFromFile(String serverID){
         Map<String, String> serverProperties = new HashMap<>();
@@ -29,7 +34,7 @@ public class ServerPropertiesInjector {
                 serverProperties.put(key,value);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
 
         return serverProperties;

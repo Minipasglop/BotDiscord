@@ -10,8 +10,6 @@ import java.util.Map;
 
 public class GuildJoinListener extends ListenerAdapter {
 
-
-    //TODO, gestion du cas où on quitte un serveur, supprimer le fichier ?
     @Override
     public void onGuildJoin(GuildJoinEvent event){
         Map<String,String> propertiesForJoinedServer = new HashMap<>();

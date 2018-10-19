@@ -4,6 +4,8 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 
@@ -12,6 +14,8 @@ public class SoundSkipCommand extends ICommand {
     private final String SOUND_SKIPPED_END = "Track has been skipped. No more in queue, `disconnecting.`";
     private final String COMMAND_FAILED = "Failed skipping the track. Please make sure a track is being played.";
     private final String NOTHING_TO_SKIP = "No track to skip.";
+    private static Logger logger = Logger.getLogger(SoundSkipCommand.class);
+
 
     private Map<String,AudioServerManager> audioServerManagers;
 
@@ -38,7 +42,7 @@ public class SoundSkipCommand extends ICommand {
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),SOUND_SKIPPED_END);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

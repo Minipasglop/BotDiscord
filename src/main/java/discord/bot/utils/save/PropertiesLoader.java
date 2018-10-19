@@ -2,6 +2,8 @@ package discord.bot.utils.save;
 
 import discord.bot.BotGlobalManager;
 import net.dv8tion.jda.core.entities.Guild;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,14 +15,11 @@ import java.util.Properties;
 
 public class PropertiesLoader {
 
+    private static Logger logger = Logger.getLogger(PropertiesLoader.class);
     private String botToken;
-
     private String addRoleCommandStatus;
-
     private String youtubeApiKey;
-
     private String botOwnerUserId;
-
     private final String MAIN_CONFIG_FILE_PATH = "jackson.properties";
 
     public String getBotToken() {
@@ -54,7 +53,7 @@ public class PropertiesLoader {
                 propertiesValueForServer.put("loop", (String) serverProperties.get("loop"));
                 ServerPropertiesManager.getInstance().setPropertiesForServer(guildList.get(i).getId(), propertiesValueForServer);
             } catch (IOException e) {
-                System.out.println("Fichier introuvable pour le serveur : " + guildList.get(i).getName());
+                logger.log(Level.INFO,"Fichier introuvable pour le serveur : " + guildList.get(i).getName());
             }
         }
     }
@@ -71,7 +70,7 @@ public class PropertiesLoader {
             youtubeApiKey = properties.getProperty("youtubeApiKey");
             botOwnerUserId = properties.getProperty("botOwnerUserId");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
     }
 }

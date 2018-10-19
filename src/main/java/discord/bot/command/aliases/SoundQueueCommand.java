@@ -6,6 +6,8 @@ import discord.bot.utils.audio.Track;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.util.List;
@@ -18,6 +20,8 @@ public class SoundQueueCommand extends ICommand {
     private final String NO_SOUND_PLAYING = "No sound is currently being played.";
     private final String COMMAND_FAILED = "Failed displaying the playlist.";
     private final String EMPTY_QUEUE = "Playlist is empty.";
+    private static Logger logger = Logger.getLogger(SoundQueueCommand.class);
+
 
     private Map<String,AudioServerManager> audioServerManagers;
 
@@ -63,7 +67,7 @@ public class SoundQueueCommand extends ICommand {
             builder.addField("Queued tracks :bulb:", trackTitleList, false);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

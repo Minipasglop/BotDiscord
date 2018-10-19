@@ -10,8 +10,13 @@ import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.core.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 public class UserMovementListener extends ListenerAdapter {
+
+    private static Logger logger = Logger.getLogger(UserMovementListener.class);
+
 
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
@@ -29,7 +34,7 @@ public class UserMovementListener extends ListenerAdapter {
                 autoRole(event.getGuild(), event.getMember());
             }
         }catch(InsufficientPermissionException e){
-            System.out.println("Le bot n'a pas les permissions requises pour l'autoRole sur le serveur " + event.getGuild().getName());
+            logger.log(Level.ERROR, "Le bot n'a pas les permissions requises pour l'autoRole sur le serveur " + event.getGuild().getName());
         }
     }
 
@@ -50,7 +55,7 @@ public class UserMovementListener extends ListenerAdapter {
         try{
             serveur.getController().addRolesToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serveur.getId(),"autoRole"),true)).complete();
         }catch (Exception e){
-            System.out.println("Erreur lors de l'autorole sur le serveur : " + serveur.getName());
+            logger.log(Level.ERROR, "Erreur lors de l'autorole sur le serveur : " + serveur.getName());
         }
     }
 

@@ -6,7 +6,6 @@ import net.dv8tion.jda.core.entities.User;
 
 public class MessageSenderFactory {
 
-
     private static MessageSenderFactory instance;
 
     public static MessageSenderFactory getInstance(){
@@ -17,7 +16,6 @@ public class MessageSenderFactory {
     }
 
     private MessageSenderFactory(){
-
     }
 
     public void sendSafeMessage(TextChannel chan, String message){
