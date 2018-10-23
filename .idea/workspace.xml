@@ -494,7 +494,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SearchEverywhereHistoryKey" value="CustomAudioLoadResultHandler&#9;FILE&#9;file://C:/Users/Minipasglop/Desktop/Prog/Jackson/src/main/java/discord/bot/utils/audio/CustomAudioLoadResultHandler.java&#10;Set&#9;FILE&#9;file://C:/Users/Minipasglop/Desktop/Prog/Jackson/src/main/java/discord/bot/command/bot/managing/SetGameCommand.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540312555651" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540312630277" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />

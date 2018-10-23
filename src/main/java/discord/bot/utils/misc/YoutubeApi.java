@@ -50,11 +50,13 @@ public class YoutubeApi {
             SearchListResponse searchResponse = search.execute();
             List<SearchResult> searchResultList = searchResponse.getItems();
             if (searchResultList != null) {
-                SearchResultSnippet snippet = searchResultList.get(0).getSnippet();
                 Track result = new Track(searchResultList.get(0).getId().getVideoId());
-                result.setChannelTitle(snippet.getChannelTitle());
-                result.setThumbnailUrl(snippet.getThumbnails().getDefault().getUrl());
-                result.setTitle(snippet.getTitle());
+                if(searchResultList.get(0).getSnippet() != null) {
+                    SearchResultSnippet snippet = searchResultList.get(0).getSnippet();
+                    result.setChannelTitle(snippet.getChannelTitle());
+                    result.setThumbnailUrl(snippet.getThumbnails().getDefault().getUrl());
+                    result.setTitle(snippet.getTitle());
+                }
                 return result;
             }
         } catch (GoogleJsonResponseException e) {
@@ -62,7 +64,7 @@ public class YoutubeApi {
         } catch (IOException e) {
             logger.log(Level.ERROR, "There was a IO error: " + e.getCause() + " : " + e.getMessage());
         } catch (Throwable t) {
-            logger.log(Level.ERROR, "Something went wrong", t);
+            logger.log(Level.ERROR, "The query was : " + query, t);
         }
         return null;
     }
