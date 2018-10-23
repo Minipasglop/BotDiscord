@@ -3,6 +3,7 @@ package discord.bot.command.aliases;
 import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.misc.MessageSenderFactory;
+import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
@@ -33,14 +34,16 @@ public class SoundLoopCommand extends ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         try{
             AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.isTrackLooping() || ("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "loop"))){
+            if((currAudioServerManager != null && currAudioServerManager.isTrackLooping()) || ("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.LOOP.getPropertyName()))){
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "false");
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),TRACK_LOOP_DISABLED);
             }else {
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "true");
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),TRACK_LOOP_ENABLED);
             }
-            currAudioServerManager.reverseTrackLoop();
+            if(currAudioServerManager != null) {
+                currAudioServerManager.reverseTrackLoop();
+            }
         }catch (Exception e){
             logger.log(Level.ERROR, event.getMessage(), e);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);

@@ -6,9 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Feat: Added !state command that shows the server settings ;)">
+    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Feat: Better display on !queue if no track played since bot reboot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java" afterDir="false" />
     </list>
     <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="">
       <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
@@ -40,7 +39,7 @@
     <session id="165420843">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="14" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="9" />
@@ -54,14 +53,14 @@
           <entry key="gitignore" value="11" />
           <entry key="java" value="9520" />
           <entry key="properties" value="42" />
-          <entry key="txt" value="1508" />
+          <entry key="txt" value="1621" />
           <entry key="xml" value="165" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="9520" />
-          <entry key="PLAIN_TEXT" value="1561" />
+          <entry key="PLAIN_TEXT" value="1674" />
           <entry key="Properties" value="42" />
           <entry key="XML" value="165" />
         </counts>
@@ -130,8 +129,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="64" column="47" lean-forward="true" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+            <state relative-caret-position="317">
+              <caret line="56" column="90" lean-forward="true" selection-start-line="56" selection-start-column="90" selection-end-line="56" selection-end-column="90" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3598#3599#0" expanded="true" />
@@ -465,7 +464,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SearchEverywhereHistoryKey" value="Ser&#9;FILE&#9;file://C:/Users/Minipasglop/Desktop/Prog/Jackson/src/main/java/discord/bot/utils/save/ServerPropertiesManager.java&#10;CustomAudioLoadResultHandler&#9;FILE&#9;file://C:/Users/Minipasglop/Desktop/Prog/Jackson/src/main/java/discord/bot/utils/audio/CustomAudioLoadResultHandler.java&#10;Set&#9;FILE&#9;file://C:/Users/Minipasglop/Desktop/Prog/Jackson/src/main/java/discord/bot/command/bot/managing/SetGameCommand.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540323679030" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540323875936" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -637,13 +636,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1474045783590</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Switched greetings messages to english">
-      <created>1529703559720</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1529703559720</updated>
     </task>
     <task id="LOCAL-00044" summary="Modified the error message of the move command">
       <created>1529705785900</created>
@@ -981,7 +973,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540323352464</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Feat: Better display on !queue if no track played since bot reboot">
+      <created>1540323759848</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1540323759848</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1007,7 +1006,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4968017" weight="0.38786566" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49840087" visible="true" weight="0.39761648" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49840087" weight="0.39761648" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -1074,7 +1073,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix thread concurrency for a better experience" />
     <MESSAGE value="Added sharding to enable the bot growth" />
     <MESSAGE value="Added persistency on the !vol command" />
     <MESSAGE value="Help update on Volume command" />
@@ -1099,7 +1097,8 @@
     <MESSAGE value="Tech: Securization on Youtube call that would make the sound playing fail sometimes" />
     <MESSAGE value="Tech: Refactor properties handling for more extensibility" />
     <MESSAGE value="Feat: Added !state command that shows the server settings ;)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: Added !state command that shows the server settings ;)" />
+    <MESSAGE value="Feat: Better display on !queue if no track played since bot reboot" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: Better display on !queue if no track played since bot reboot" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1110,12 +1109,6 @@
           <line>39</line>
           <properties />
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java</url>
-          <line>50</line>
-          <properties />
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1564,8 +1557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundQueueCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="64" column="47" lean-forward="true" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+        <state relative-caret-position="317">
+          <caret line="56" column="90" lean-forward="true" selection-start-line="56" selection-start-column="90" selection-end-line="56" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3598#3599#0" expanded="true" />
