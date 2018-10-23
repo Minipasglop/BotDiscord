@@ -5,7 +5,6 @@ import discord.bot.utils.commands.CommandHandler;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
@@ -56,7 +55,6 @@ public class HelpCommand extends ICommand {
         builder.addField("Owner only commands :warning:", ownerCommandsList + "\n̔̏", true);
         builder.addField("More infos :file_folder:", MESSAGE_FOOTER,true);
         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),builder.build());
-        logger.log(Level.INFO, event.getAuthor() + " a demandé de l'aide.");
     }
 
     @Override
