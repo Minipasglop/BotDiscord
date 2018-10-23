@@ -20,6 +20,7 @@ public enum CommandEnum {
     MUTE("mute"),
     PURGE("purge"),
     INFO("info"),
+    SERVER_SETTINGS("state"),
     PING("ping"),
     YOUTUBE_VIDEO_LINK("yt"),
     SET_BOT_GAME("setGame"),
