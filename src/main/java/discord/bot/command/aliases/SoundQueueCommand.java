@@ -4,6 +4,8 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.AudioServerManager;
 import discord.bot.utils.audio.Track;
 import discord.bot.utils.misc.MessageSenderFactory;
+import discord.bot.utils.save.PropertyEnum;
+import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
@@ -46,7 +48,7 @@ public class SoundQueueCommand extends ICommand {
             String trackTitleList = EMPTY_QUEUE;
             String currentTrack = NO_SOUND_PLAYING + "\n̔̏";
             EmbedBuilder builder = new EmbedBuilder();
-            if(currAudioServerManager.getTrackAmount() > 0){
+            if(currAudioServerManager != null && currAudioServerManager.getTrackAmount() > 0){
                 List<Track> trackList = currAudioServerManager.getTrackList();
                 builder.setThumbnail(trackList.get(0).getThumbnailUrl());
                 currentTrack = getFormattedTrackName(trackList.get(0)) + "̔̏";
@@ -57,13 +59,13 @@ public class SoundQueueCommand extends ICommand {
             }else {
                 builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
             }
-            if(currAudioServerManager.getTrackAmount() == 1){
+            if(currAudioServerManager != null && currAudioServerManager.getTrackAmount() == 1){
                 trackTitleList = NO_MORE_SOUND;
             }
             builder.setAuthor(PLAYLIST_STATUS);
             builder.setColor(Color.ORANGE);
             builder.addField("Current track :loud_sound:", currentTrack, false);
-            builder.addField("Loop :repeat_one:", (currAudioServerManager.isTrackLooping() ? "Enabled. \n̔̏" : "Disabled. \n̔̏"), false );
+            builder.addField("Loop :repeat_one:", (ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),PropertyEnum.LOOP.getPropertyName()).equals("true") ? "Enabled. \n̔̏" : "Disabled. \n̔̏"), false );
             builder.addField("Queued tracks :bulb:", trackTitleList, false);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
         }catch (Exception e){
