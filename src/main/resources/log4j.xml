@@ -6,7 +6,7 @@
               class="org.apache.log4j.DailyRollingFileAppender">
         <param name="File"
                value="./logs/jackson.log" />
-        <param name="DatePattern" value="'.'yyyy-ww" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
                    value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-8p [%t]:%C - %m%n" />
