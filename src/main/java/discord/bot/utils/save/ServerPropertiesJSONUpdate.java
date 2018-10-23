@@ -11,13 +11,7 @@ import java.util.Properties;
 
 public class ServerPropertiesJSONUpdate {
 
-    private String autoRole;
-    private String userEventEnabled;
-    private String userEventChannel;
-    private String volume;
-    private String loop;
     private static Logger logger = Logger.getLogger(ServerPropertiesJSONUpdate.class);
-
 
     public ServerPropertiesJSONUpdate(String serverID) {
         try {
@@ -30,25 +24,14 @@ public class ServerPropertiesJSONUpdate {
             Properties properties = new Properties();
             properties.load(fileInput);
             fileInput.close();
-            initProperties(serverID);
             FileOutputStream fileOutput = new FileOutputStream(configFile);
-            properties.setProperty("autoRole", autoRole);
-            properties.setProperty("userEventEnabled", userEventEnabled);
-            properties.setProperty("userEventChannel", userEventChannel);
-            properties.setProperty("volume", volume);
-            properties.setProperty("loop",loop);
-
+            for(PropertyEnum property : PropertyEnum.values()){
+                properties.setProperty(property.getPropertyName(),ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverID,property.getPropertyName()));
+            }
             properties.store(fileOutput, null);
-
         } catch (IOException e) {
-            logger.log(Level.ERROR, "Something went wrong", e);
+            logger.log(Level.ERROR, "Something went wrong during properties saving", e);
         }
     }
-    private void initProperties(String serverId){
-        autoRole = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"autoRole");
-        userEventEnabled = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventEnabled");
-        userEventChannel = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"userEventChannel");
-        volume = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"volume");
-        loop = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverId,"loop");
-    }
+
 }

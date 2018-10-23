@@ -3,7 +3,7 @@ package discord.bot;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
-import discord.bot.listeners.GuildJoinListener;
+import discord.bot.listeners.GuildMovementListener;
 import discord.bot.listeners.MessageListener;
 import discord.bot.listeners.UserMovementListener;
 import discord.bot.utils.misc.YoutubeApi;
@@ -35,7 +35,7 @@ public class BotGlobalManager {
             JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
             shardBuilder.addEventListener(new MessageListener());
             shardBuilder.addEventListener(new UserMovementListener());
-            shardBuilder.addEventListener(new GuildJoinListener());
+            shardBuilder.addEventListener(new GuildMovementListener());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             for(int i = 0; i < SHARD_AMMOUNT; i++){
                 shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT)

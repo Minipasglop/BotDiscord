@@ -2,15 +2,12 @@ package discord.bot.utils.save;
 
 import discord.bot.BotGlobalManager;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ServerPropertiesManager {
 
     private Map<String,Map<String,String>> globalProperties;
-    private List<String> propertiesList;
     private ServerPropertiesInjector injector;
 
     private static ServerPropertiesManager instance;
@@ -19,15 +16,6 @@ public class ServerPropertiesManager {
         La gérer au niveau du ServerpropertiesJSONUpdate
         L'impacter dans la méthode initializeSavedProperties du PropertiesLoader
      */
-
-    private void createPropertiesList(){
-        propertiesList = new ArrayList<>();
-        propertiesList.add("autoRole");
-        propertiesList.add("userEventChannel");
-        propertiesList.add("userEventEnabled");
-        propertiesList.add("volume");
-        propertiesList.add("loop");
-    }
 
     public static ServerPropertiesManager getInstance(){
         if(instance == null){
@@ -54,13 +42,14 @@ public class ServerPropertiesManager {
             String currServerId = BotGlobalManager.getServers().get(i).getId();
             globalProperties.put(currServerId, injector.getPropertiesFromFile(currServerId));
         }
-        createPropertiesList();
     }
-
-    public List<String> getPropertiesList(){ return propertiesList; }
 
     public void setPropertiesForServer(String serverId,Map<String,String> properties){
         globalProperties.put(serverId,properties);
+    }
+
+    public Map<String,String> getPropertiesForServer(String serverId){
+        return globalProperties.get(serverId);
     }
 
     public String getPropertyOrBlankFromServer(String serverId,String property){
