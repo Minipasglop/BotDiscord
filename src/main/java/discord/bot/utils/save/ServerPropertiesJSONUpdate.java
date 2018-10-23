@@ -3,7 +3,10 @@ package discord.bot.utils.save;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 public class ServerPropertiesJSONUpdate {
@@ -19,9 +22,9 @@ public class ServerPropertiesJSONUpdate {
     public ServerPropertiesJSONUpdate(String serverID) {
         try {
             //Opening properties file
-            File configFile = new File("jackson-guild-"+serverID+".properties");
+            File configFile = new File("jackson-guild-" + serverID + ".properties");
             if(configFile.createNewFile()){
-                System.out.println("Fichier créé pour le serveur : " + serverID);
+                logger.log(Level.INFO, "Fichier créé pour le serveur : " + serverID);
             }
             FileInputStream fileInput = new FileInputStream(configFile);
             Properties properties = new Properties();

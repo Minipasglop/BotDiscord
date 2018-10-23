@@ -40,7 +40,7 @@ public class SoundPauseCommand extends ICommand {
                 currAudioServerManager.setTrackPaused(true);
             }
         }catch (Exception e){
-            logger.log(Level.ERROR, "Something went wrong", e);
+            logger.log(Level.ERROR, event.getMessage(), e);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
         }
     }

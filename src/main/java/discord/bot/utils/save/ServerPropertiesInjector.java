@@ -17,7 +17,6 @@ public class ServerPropertiesInjector {
     private final String FILE_EXTENSION = ".properties";
     private static Logger logger = Logger.getLogger(ServerPropertiesInjector.class);
 
-
     public Map<String,String> getPropertiesFromFile(String serverID){
         Map<String, String> serverProperties = new HashMap<>();
         File configFile = new File(FILE_PREFIX + serverID + FILE_EXTENSION);
@@ -36,7 +35,6 @@ public class ServerPropertiesInjector {
         } catch (IOException e) {
             logger.log(Level.ERROR, "Something went wrong", e);
         }
-
         return serverProperties;
     }
 }
