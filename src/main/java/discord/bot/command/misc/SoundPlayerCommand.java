@@ -22,6 +22,7 @@ public class SoundPlayerCommand extends ICommand {
     private final String HELP = "Plays a track from Youtube using the name. \nUsage : `!" + this.commandName + " songName`";
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
     private final String SOUND_QUEUED = "Sound has been queued";
+    private final String NO_RESULT = "No result have been found. Make sure you didn't misspelled the track name :wink:";
 
     private YoutubeApi youtubeApi;
     private Map<String, AudioServerManager> audioServerManagers;
@@ -84,6 +85,8 @@ public class SoundPlayerCommand extends ICommand {
                 if(event.getTextChannel().canTalk()){
                     MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
                 }
+            }else {
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_RESULT);
             }
         }
     }

@@ -49,7 +49,7 @@ public class YoutubeApi {
 
             SearchListResponse searchResponse = search.execute();
             List<SearchResult> searchResultList = searchResponse.getItems();
-            if (searchResultList != null) {
+            if (searchResultList != null && searchResultList.size() > 0) {
                 Track result = new Track(searchResultList.get(0).getId().getVideoId());
                 if(searchResultList.get(0).getSnippet() != null) {
                     SearchResultSnippet snippet = searchResultList.get(0).getSnippet();
@@ -59,6 +59,8 @@ public class YoutubeApi {
                 }
                 return result;
             }
+            logger.log(Level.INFO,"Track not found with query : " + query);
+            return null;
         } catch (GoogleJsonResponseException e) {
             logger.log(Level.ERROR, "There was a service error: " + e.getDetails().getCode() + " : " + e.getDetails().getMessage());
         } catch (IOException e) {
