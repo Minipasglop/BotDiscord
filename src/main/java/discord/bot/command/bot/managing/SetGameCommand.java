@@ -62,6 +62,7 @@ public class SetGameCommand extends ICommand {
             }
             if(!setGameWithType(type,game)){
                 MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),WRONG_TYPE);
+                return;
             }
             MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_SUCCESS);
         }else {
