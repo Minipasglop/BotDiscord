@@ -1,5 +1,5 @@
 package discord.bot.utils.commands;
-//Code from https://github.com/thibautbessone
+//Parts of Code from https://github.com/thibautbessone
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -30,7 +30,7 @@ public class ChatCommandParser {
         ArrayList<String> split = new ArrayList<String>();
         String raw = str;
         String noprefix;
-        if(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()).length() == 1){
+        if(!raw.isEmpty() && ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) != null && ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()).length() == 1){
             noprefix = raw.substring(1);
         }else {
             noprefix = raw.replaceFirst(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()), "");
