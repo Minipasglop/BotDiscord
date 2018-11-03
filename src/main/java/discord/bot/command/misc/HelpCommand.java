@@ -3,6 +3,8 @@ package discord.bot.command.misc;
 import discord.bot.command.ICommand;
 import discord.bot.utils.commands.CommandHandler;
 import discord.bot.utils.misc.MessageSenderFactory;
+import discord.bot.utils.save.PropertyEnum;
+import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Logger;
@@ -13,7 +15,7 @@ import java.util.Map;
 public class HelpCommand extends ICommand {
 
     private String HELP = "The command `help` displays the commands available at the moment. \nUsage: `!" + this.commandName + "`";
-    private String MESSAGE_HEADER = "The commands available at the moment are listed below. All commands must be prefixed with a `!`. \nTo obtain more information on a command, just type `!command help`\n\n";
+    private String MESSAGE_HEADER = "The commands available at the moment are listed below. \n";
     private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThanks for using *Jackson* :heart: :smirk:";
     private static Logger logger = Logger.getLogger(HelpCommand.class);
 
@@ -48,7 +50,9 @@ public class HelpCommand extends ICommand {
         builder.setAuthor(event.getJDA().getSelfUser().getName());
         builder.setColor(Color.ORANGE);
         builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
-        builder.addField("Help :bulb: ", MESSAGE_HEADER, true);
+        builder.addField("Help :bulb: ", MESSAGE_HEADER + "All commands must be prefixed with a `" +
+                ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) + "`.\n To obtain more " +
+                "information on a command, please type `" + ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) + "command help`\n\n", true);
         builder.addField("Sound commands :loudspeaker:", soundCommandsList + "\n̔̏", true);
         builder.addField("Server commands :desktop:", serverCommandsList + "\n̔̏", true);
         builder.addField("Misc commands :keyboard:", miscCommandsList + "\n̔̏", true);

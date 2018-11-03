@@ -37,7 +37,7 @@ public class CommandHandler {
         return instance;
     }
 
-    public static void handleCommand(String guildID,ChatCommandParser.CommandAttributes cmdAttributes) {
+    public void handleCommand(String guildID,ChatCommandParser.CommandAttributes cmdAttributes) {
         if(cmdAttributes.raw.startsWith(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(guildID, PropertyEnum.PREFIX.getPropertyName()))) {
             Map<String, ICommand> localMap = new HashMap<>();
             if(soundCommands.containsKey(cmdAttributes.invoke)) localMap = soundCommands;
