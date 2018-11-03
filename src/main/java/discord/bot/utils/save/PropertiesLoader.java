@@ -46,11 +46,9 @@ public class PropertiesLoader {
                 Properties serverProperties = new Properties();
                 serverProperties.load(serverConfigFileInput);
                 serverConfigFileInput.close();
-                propertiesValueForServer.put("autoRole", (String) serverProperties.get("autoRole"));
-                propertiesValueForServer.put("userEventEnabled", (String) serverProperties.get("userEventEnabled"));
-                propertiesValueForServer.put("userEventChannel", (String) serverProperties.get("userEventChannel"));
-                propertiesValueForServer.put("volume", (String) serverProperties.get("volume"));
-                propertiesValueForServer.put("loop", (String) serverProperties.get("loop"));
+                for(PropertyEnum property : PropertyEnum.values()){
+                    propertiesValueForServer.put(property.getPropertyName(), (String) serverProperties.get(property.getPropertyName()));
+                }
                 ServerPropertiesManager.getInstance().setPropertiesForServer(guildList.get(i).getId(), propertiesValueForServer);
             } catch (IOException e) {
                 logger.log(Level.INFO,"Fichier introuvable pour le serveur : " + guildList.get(i).getName());

@@ -10,7 +10,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
-import java.util.Map;
 
 public class ServerSettingsCommand extends ICommand {
 
@@ -39,9 +38,8 @@ public class ServerSettingsCommand extends ICommand {
             builder.setAuthor("Server settings");
             builder.setColor(Color.ORANGE);
             builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
-            Map<String, String> propertiesMap = ServerPropertiesManager.getInstance().getPropertiesForServer(event.getGuild().getId());
             for (PropertyEnum property : PropertyEnum.values()) {
-                builder.addField(property.getPropertyNameForUser(), formatPropertyValue(propertiesMap.get(property.getPropertyName())), true);
+                builder.addField(property.getPropertyNameForUser(), formatPropertyValue(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),property.getPropertyName())), true);
             }
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), builder.build());
         }catch (Exception e){

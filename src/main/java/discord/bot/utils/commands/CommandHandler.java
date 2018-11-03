@@ -7,11 +7,14 @@ import discord.bot.command.bot.info.InfoCommand;
 import discord.bot.command.bot.info.ServerSettingsCommand;
 import discord.bot.command.bot.managing.ForcePropertiesSaveCommand;
 import discord.bot.command.bot.managing.SetGameCommand;
+import discord.bot.command.bot.managing.SetPrefixCommand;
 import discord.bot.command.misc.HelpCommand;
 import discord.bot.command.misc.PingCommand;
 import discord.bot.command.misc.SoundPlayerCommand;
 import discord.bot.command.misc.YoutubeCommand;
 import discord.bot.command.server.managing.*;
+import discord.bot.utils.save.PropertyEnum;
+import discord.bot.utils.save.ServerPropertiesManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +30,6 @@ public class CommandHandler {
 
     private static CommandHandler instance;
 
-    private final static String PREFIX = "!";
-
     public static CommandHandler getInstance(){
         if(instance == null){
             instance = new CommandHandler();
@@ -36,8 +37,8 @@ public class CommandHandler {
         return instance;
     }
 
-    public static void handleCommand(ChatCommandParser.CommandAttributes cmdAttributes) {
-        if(cmdAttributes.raw.startsWith(PREFIX)) {
+    public static void handleCommand(String guildID,ChatCommandParser.CommandAttributes cmdAttributes) {
+        if(cmdAttributes.raw.startsWith(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(guildID, PropertyEnum.PREFIX.getPropertyName()))) {
             Map<String, ICommand> localMap = new HashMap<>();
             if(soundCommands.containsKey(cmdAttributes.invoke)) localMap = soundCommands;
             if(serverCommands.containsKey(cmdAttributes.invoke)) localMap = serverCommands;
@@ -79,6 +80,7 @@ public class CommandHandler {
         serverCommands.put(CommandEnum.MOVE.getCommandName(), new MoveCommand(CommandEnum.MOVE.getCommandName()));
         serverCommands.put(CommandEnum.MUTE.getCommandName(), new MuteCommand(CommandEnum.MUTE.getCommandName()));
         serverCommands.put(CommandEnum.PURGE.getCommandName(), new PurgeCommand(CommandEnum.PURGE.getCommandName()));
+        serverCommands.put(CommandEnum.SET_PREFIX.getCommandName(), new SetPrefixCommand(CommandEnum.SET_PREFIX.getCommandName()));
 
         miscCommands = new HashMap<>();
         miscCommands.put(CommandEnum.INFO.getCommandName(), new InfoCommand(CommandEnum.INFO.getCommandName()));

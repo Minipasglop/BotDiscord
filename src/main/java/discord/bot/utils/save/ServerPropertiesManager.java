@@ -12,11 +12,6 @@ public class ServerPropertiesManager {
 
     private static ServerPropertiesManager instance;
 
-    /* Pour ajouter une propriété : Il faut l'ajouter dans cette property list
-        La gérer au niveau du ServerpropertiesJSONUpdate
-        L'impacter dans la méthode initializeSavedProperties du PropertiesLoader
-     */
-
     public static ServerPropertiesManager getInstance(){
         if(instance == null){
             instance = new ServerPropertiesManager();
@@ -48,15 +43,12 @@ public class ServerPropertiesManager {
         globalProperties.put(serverId,properties);
     }
 
-    public Map<String,String> getPropertiesForServer(String serverId){
-        return globalProperties.get(serverId);
-    }
-
     public String getPropertyOrBlankFromServer(String serverId,String property){
         try{
             String value = globalProperties.get(serverId).get(property);
-            if( value == null) return "";
-            else return value;
+            if( value == null) {
+                return PropertyEnum.valueOf(property.toUpperCase()).getDefaultValue();
+            }else return value;
         }catch(NullPointerException e){
             return "";
         }

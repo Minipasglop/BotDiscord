@@ -1,9 +1,9 @@
 package discord.bot.listeners;
 
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import discord.bot.utils.commands.ChatCommandParser;
 import discord.bot.utils.commands.CommandHandler;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class MessageListener extends ListenerAdapter {
 
@@ -16,6 +16,6 @@ public class MessageListener extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
-        CommandHandler.handleCommand(this.parser.parse(event.getMessage().getContentRaw(),event));
+        CommandHandler.handleCommand(event.getGuild().getId(),this.parser.parse(event.getMessage().getContentRaw(),event));
     }
 }

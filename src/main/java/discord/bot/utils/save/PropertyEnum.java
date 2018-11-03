@@ -1,18 +1,21 @@
 package discord.bot.utils.save;
 
 public enum PropertyEnum {
-    AUTOROLE("autoRole","Role granted to user on server join"),
-    USER_EVENT_CHANNEL("userEventChannel","Channel where i am supposed to say Hi / Bye"),
-    USER_EVENT_TOGGLING("userEventEnabled","Status of the Hi / Bye feature"),
-    VOLUME("volume","Last volume set"),
-    LOOP("loop", "Loop on track status");
+    AUTOROLE("autoRole","Role granted to user on server join", ""),
+    USEREVENTCHANNEL("userEventChannel","Channel where i am supposed to say Hi / Bye", ""),
+    USEREVENTENABLED("userEventEnabled","Status of the Hi / Bye feature", ""),
+    VOLUME("volume","Last volume set", "50"),
+    LOOP("loop", "Loop on track status", "false"),
+    PREFIX("prefix", "Bot's command prefix", "!");
 
     private String propertyName;
     private String propertyNameForUser;
+    private String defaultValue;
 
-    PropertyEnum(String propertyName, String propertyNameForUser){
+    PropertyEnum(String propertyName, String propertyNameForUser, String defaultValue){
         this.propertyName = propertyName;
         this.propertyNameForUser = propertyNameForUser;
+        this.defaultValue = defaultValue;
     }
 
     public String getPropertyName() {
@@ -21,5 +24,9 @@ public enum PropertyEnum {
 
     public String getPropertyNameForUser() {
         return propertyNameForUser;
+    }
+
+    public String getDefaultValue() {
+        return defaultValue;
     }
 }

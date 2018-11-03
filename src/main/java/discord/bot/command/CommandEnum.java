@@ -24,7 +24,8 @@ public enum CommandEnum {
     PING("ping"),
     YOUTUBE_VIDEO_LINK("yt"),
     SET_BOT_GAME("setGame"),
-    FORCE_PROPERTIES_SAVING("saveProperties");
+    FORCE_PROPERTIES_SAVING("saveProperties"),
+    SET_PREFIX("prefix");
 
     private String commandName;
 
