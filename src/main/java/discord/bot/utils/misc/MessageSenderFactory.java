@@ -31,11 +31,15 @@ public class MessageSenderFactory {
     }
 
     public void sendSafePrivateMessage(User author, String message){
-        author.openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(message).queue()));
+        if(!author.isBot()) {
+            author.openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(message).queue()));
+        }
     }
 
     public void sendSafePrivateMessage(User author, MessageEmbed message){
-        author.openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(message).queue()));
+        if(!author.isBot()) {
+            author.openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(message).queue()));
+        }
     }
 
 }
