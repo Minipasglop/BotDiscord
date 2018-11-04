@@ -21,11 +21,8 @@ import java.util.List;
 public class YoutubeApi {
 
     private static PropertiesLoader config = new PropertiesLoader();
-
     private static final long NUMBER_OF_VIDEOS_RETURNED = 1;
-
     private static YouTube youtube;
-
     private static Logger logger = Logger.getLogger(YoutubeApi.class);
 
 
@@ -40,6 +37,8 @@ public class YoutubeApi {
 
             String apiKey = config.getYoutubeApiKey();
             search.setKey(apiKey);
+
+            query = formatQuery(query);
             search.setQ(query);
 
             search.setType("video");
@@ -69,6 +68,15 @@ public class YoutubeApi {
             logger.log(Level.ERROR, "The query was : " + query, t);
         }
         return null;
+    }
+
+    private String formatQuery(String query) {
+        if(query.startsWith("https://www.youtube")){
+            query = query.replaceFirst("((.*)(?:v=))","");
+        }else if(query.startsWith("https://youtu")){
+            query = query.replaceFirst("((.*)(?:/))", "");
+        }
+        return query;
     }
 
 }
