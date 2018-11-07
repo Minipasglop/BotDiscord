@@ -14,6 +14,7 @@ public class KickCommand extends ICommand {
     private final String HELP = "Kick one / many users from the server if you're allowed to. \nUsage : `!"+ this.commandName +"@UserA @UserB @UserC ... Reason `";
     private final String KICK_MESSAGE = "You've been kicked because of : ";
     private final String NOT_ALLOWED = "You're not allowed to kick other users... Sadly :)";
+    private final String SUCCESS_MESSAGE = "User has been kicked from the server.";
     private final String ACTION_PERFORMED = "Exclure : ";
     private static Logger logger = Logger.getLogger(KickCommand.class);
 
@@ -34,6 +35,7 @@ public class KickCommand extends ICommand {
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().kick(curr, KICK_MESSAGE + args[args.length - 1]).queue();
                 logger.log(Level.INFO, ACTION_PERFORMED + curr.getUser().getName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
+                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),SUCCESS_MESSAGE);
             }
         }else {
             event.getMessage().delete().queue();
