@@ -19,7 +19,7 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         try {
-            if (!event.getMessage().getContentRaw().isEmpty()) {
+            if (!event.getMessage().getContentRaw().isEmpty() && !event.getGuild().getId().isEmpty()) {
                 CommandHandler.getInstance().handleCommand(event.getGuild().getId(), this.parser.parse(event.getMessage().getContentRaw(), event));
             }
         }catch (Exception e){

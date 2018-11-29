@@ -7,12 +7,13 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class PurgeCommand extends ICommand {
 
     private final String HELP = "Deletes the most message of the text channel. \nUsage :`!"+ this.commandName +"`";
-    private final String ACTION_PERFORMED = "ChatRoom has been cleaned :see_no_evil:";
+    private final String ACTION_PERFORMED = "2 weeks old messages have been deleted :see_no_evil:";
     private final String NOT_ALLOWED = "You're not allowed to purge the chatroom... Sadly :)";
     private final String ACTION_FAILED = "Failed deleting the chat room.";
 
@@ -33,6 +34,12 @@ public class PurgeCommand extends ICommand {
             if(event.getMember().getPermissions().contains(Permission.MESSAGE_MANAGE)) {
                 TextChannel currChannel = event.getTextChannel();
                 List<Message> history = currChannel.getIterableHistory().complete();
+                for(int i = 0; i < history.size(); i++){
+                    if(history.get(i).getCreationTime().isBefore(OffsetDateTime.now().minusDays(15))){
+                        history = history.subList(0, i);
+                        break;
+                    }
+                }
                 currChannel.deleteMessages(history).queue();
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),ACTION_PERFORMED);
             }else {
