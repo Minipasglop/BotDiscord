@@ -53,10 +53,10 @@ public class HelpCommand extends ICommand {
         builder.addField("Help :bulb: ", MESSAGE_HEADER + "All commands must be prefixed with a `" +
                 ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) + "`.\n To obtain more " +
                 "information on a command, please type `" + ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) + "command help`\n\n", true);
-        builder.addField("Sound commands :loudspeaker:", soundCommandsList + "\n̔̏", true);
-        builder.addField("Server commands :desktop:", serverCommandsList + "\n̔̏", true);
-        builder.addField("Misc commands :keyboard:", miscCommandsList + "\n̔̏", true);
-        builder.addField("Owner only commands :warning:", ownerCommandsList + "\n̔̏", true);
+        builder.addField("Sound commands :loudspeaker:", soundCommandsList + "\n", true);
+        builder.addField("Server commands :desktop:", serverCommandsList + "\n", true);
+        builder.addField("Misc commands :keyboard:", miscCommandsList + "\n", true);
+        builder.addField("Owner only commands :warning:", ownerCommandsList + "\n", true);
         builder.addField("More infos :file_folder:", MESSAGE_FOOTER,true);
         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),builder.build());
     }

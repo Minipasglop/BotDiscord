@@ -38,8 +38,7 @@ public class BotGlobalManager {
             shardBuilder.addEventListener(new GuildMovementListener());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             for(int i = 0; i < SHARD_AMMOUNT; i++){
-                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT)
-                        .buildBlocking());
+                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT).buildBlocking(JDA.Status.CONNECTED));
                 shards.get(i).getPresence().setGame(Game.of(Game.GameType.WATCHING,"Service starting"));
             }
             config.initializeSavedProperties();

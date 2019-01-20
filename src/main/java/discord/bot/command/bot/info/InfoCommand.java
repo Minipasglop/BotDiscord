@@ -46,7 +46,7 @@ public class InfoCommand extends ICommand {
         builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);
         builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
-        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels \n̔̏", true);
+        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels \n", true);
         builder.addBlankField(true);
         builder.addField("Uptime :timer:", uptime, true);
         MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
