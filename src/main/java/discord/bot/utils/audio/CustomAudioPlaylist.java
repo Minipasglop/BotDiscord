@@ -7,12 +7,13 @@ import java.util.List;
 public class CustomAudioPlaylist {
 
     private List<Track> playList;
+    private Track currentTrack;
     private final String NO_MORE_SOUND_QUEUED = "No more sound queued.";
     private Boolean isLooping;
 
     public CustomAudioPlaylist(Track track) {
         playList = new ArrayList<>();
-        playList.add(track);
+        currentTrack = track;
         isLooping = false;
     }
 
@@ -21,11 +22,12 @@ public class CustomAudioPlaylist {
     public boolean isLoopingOnTrack() { return this.isLooping; }
 
     public String getCurrentTrackURL(){
-        return playList.get(0).getVideoUrl();
+        return currentTrack.getVideoUrl();
     }
 
     public boolean skipTrack(){
-        if(playList.size() > 1 ){
+        if(playList.size() > 0 ){
+            currentTrack = playList.get(0);
             playList = playList.subList(1, playList.size());
             return true;
         }
@@ -35,39 +37,47 @@ public class CustomAudioPlaylist {
 
     public boolean hasMoreTrack(boolean skipLooping){
         if(skipLooping){
-            return playList.size() > 1;
+            return playList.size() > 0;
         }else {
-            return playList.size() > 1 || (playList.size() == 1 && isLooping);
+            return playList.size() > 0 || (currentTrack != null && isLooping);
         }
     }
 
     public void addTrack(Track track){
-        playList.add(track);
+        if(currentTrack == null){
+            currentTrack = track;
+        }else {
+            playList.add(track);
+        }
     }
 
     public void resetPlayList(){
         playList = new ArrayList<>();
+        currentTrack = null;
     }
 
-    public int getTrackAmount() { return playList.size(); }
+    public int getTrackAmount() {
+        return currentTrack == null ? playList.size() : playList.size() + 1; }
 
     public String getNextTrackURL() {
-        if(playList.size() > 1){
-            return playList.get(1).getVideoUrl();
+        if(playList.size() > 0){
+            return playList.get(0).getVideoUrl();
         }
         return NO_MORE_SOUND_QUEUED;
     }
 
     public List<Track> getTrackList() {
-        return this.playList;
+        List<Track> trackList = new ArrayList<>();
+        trackList.add(this.currentTrack);
+        trackList.addAll(this.playList);
+        return trackList;
     }
 
     public void shuffle() {
-        if(playList.size() > 1) {
-            List<Track> shuffled = this.playList.subList(1, this.playList.size());
+        if(playList.size() > 2) {
+            List<Track> shuffled = this.playList;
             Collections.shuffle(shuffled);
-            this.playList = this.playList.subList(0,1);
-            this.playList.addAll(shuffled);
+            this.playList = shuffled;
         }
     }
 }

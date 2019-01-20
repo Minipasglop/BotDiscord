@@ -80,7 +80,7 @@ public class SoundPlayerCommand extends ICommand {
                 builder.setAuthor(SOUND_QUEUED);
                 builder.setColor(Color.ORANGE);
                 builder.setThumbnail(youtubeSearch.getThumbnailUrl());
-                builder.addField("Video Title :movie_camera: ", youtubeSearch.getTitle() + " - " + youtubeSearch.getChannelTitle() + "\n̔̏", false);
+                builder.addField("Video Title :movie_camera: ", youtubeSearch.getTitle() + " - " + youtubeSearch.getChannelTitle() + "\n", false);
                 builder.addField("Playlist status :bulb:", String.valueOf(currAudioServerManager.getTrackAmount()) + " track" + (currAudioServerManager.getTrackAmount() == 1 ? "" : "s") + " listed.", false);
                 if(event.getTextChannel().canTalk()){
                     MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
