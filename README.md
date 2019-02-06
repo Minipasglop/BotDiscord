@@ -1,3 +1,3 @@
 # BotDiscord
-Jackson
+JacksonBot
 Music bot for discord blyat

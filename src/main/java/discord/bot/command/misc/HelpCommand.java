@@ -16,7 +16,7 @@ public class HelpCommand extends ICommand {
 
     private String HELP = "The command `help` displays the commands available at the moment. \nUsage: `!" + this.commandName + "`";
     private String MESSAGE_HEADER = "The commands available at the moment are listed below. \n";
-    private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThanks for using *Jackson* :heart: :smirk:";
+    private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThanks for using *JacksonBot* :heart: :smirk:";
     private static Logger logger = Logger.getLogger(HelpCommand.class);
 
     public HelpCommand(String commandName) {

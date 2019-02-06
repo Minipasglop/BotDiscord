@@ -54,7 +54,7 @@ public class BotGlobalManager {
 
     private static void ServiceStartedNotification(){
         for(int i = 0; i < shards.size(); i++){
-            shards.get(i).getPresence().setGame(Game.watching("!help | !play"));
+            shards.get(i).getPresence().setGame(Game.watching("jacksonbot.com | !help"));
         }
     }
 

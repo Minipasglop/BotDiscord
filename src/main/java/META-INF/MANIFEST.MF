@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Class-Path: jsr305-3.0.2.jar lavaplayer-1.2.63.jar jackson-core-2.9.4.
+ jar commons-io-2.6.jar google-oauth-client-appengine-1.23.0.jar json-
+ 20160810.jar jackson-databind-2.9.4.jar guava-jdk5-17.0.jar lavaplaye
+ r-natives-1.2.55.jar google-http-client-appengine-1.23.0.jar commons-
+ codec-1.10.jar google-oauth-client-1.23.0.jar google-api-services-you
+ tube-v3-rev198-1.23.0.jar servlet-api-2.5-20081211.jar google-http-cl
+ ient-1.23.0.jar okhttp-3.8.1.jar httpcore-4.4.9.jar jetty-6.1.26.jar 
+ commons-logging-1.2.jar google-oauth-client-jetty-1.23.0.jar google-h
+ ttp-client-jdo-1.23.0.jar gson-2.8.5.jar log4j-1.2.17.jar trove4j-3.0
+ .3.jar lavaplayer-common-1.0.6.jar base64-2.3.9.jar jsoup-1.11.2.jar 
+ apache-log4j-extras-1.2.17.jar httpclient-4.5.5.jar google-http-clien
+ t-jackson2-1.23.0.jar jna-4.4.0.jar slf4j-api-1.7.25.jar jdo2-api-2.3
+ -eb.jar commons-collections4-4.1.jar JDA-3.5.0_327.jar google-oauth-c
+ lient-servlet-1.23.0.jar jackson-annotations-2.9.0.jar jetty-util-6.1
+ .26.jar google-api-client-1.23.0.jar okio-1.13.0.jar transaction-api-
+ 1.1.jar google-oauth-client-java6-1.23.0.jar nv-websocket-client-2.2.
+ jar
+Main-Class: discord.bot.BotGlobalManager
+
