@@ -6,14 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Fix(Playlist System): Reworked the playlist system">
-      <change afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/BotDiscord_jar.xml" beforeDir="false" />
+    <list default="true" id="dc0d315b-7e0c-4d80-97f0-6d2706264b70" name="Default" comment="Feat(Name of the bot): + WEBSITE OMG">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/misc/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/SetUserEventChannelCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/command/server/managing/SetUserEventChannelCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildMovementListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildMovementListener.java" afterDir="false" />
     </list>
     <list id="f0e0f5c3-62dc-4851-a5a4-81e2b1283193" name="ignored" comment="" />
     <ignored path="BotDiscord.iws" />
@@ -43,24 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/audio/Track.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/audio/CustomAudioPlaylist.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/audio/CustomAudioLoadResultHandler.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -119,16 +96,38 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="59" selection-start-line="59" selection-end-line="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildMovementListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="23" column="85" lean-forward="true" selection-start-line="23" selection-start-column="85" selection-end-line="23" selection-end-column="85" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/save/PropertyEnum.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="425">
+              <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+              <folding>
+                <element signature="e#988#989#0" expanded="true" />
+                <element signature="e#1023#1024#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -217,7 +216,6 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/bot/info/CustomizableStatus.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/bot/info/CustomizableStatusCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildJoinListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildMovementListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/save/ServerPropertiesJSONUpdate.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/bot/info/ServerSettingsCommand.java" />
@@ -244,6 +242,7 @@
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/utils/audio/CustomAudioPlaylist.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/command/bot/info/InviteCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildMovementListener.java" />
       </list>
     </option>
   </component>
@@ -455,8 +454,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -652,14 +651,8 @@
       <workItem from="1548011359603" duration="258000" />
       <workItem from="1548102196161" duration="10000" />
       <workItem from="1548103118081" duration="9000" />
-      <workItem from="1549480833759" duration="67000" />
-    </task>
-    <task id="LOCAL-00059" summary="Added a primary version of a Pause command, to pause the sound playing + refactored the name of some command aliases">
-      <created>1530399274080</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1530399274080</updated>
+      <workItem from="1549480833759" duration="649000" />
+      <workItem from="1550246406702" duration="43000" />
     </task>
     <task id="LOCAL-00060" summary="Deleted a trailing '">
       <created>1530399568717</created>
@@ -997,11 +990,18 @@
       <option name="project" value="LOCAL" />
       <updated>1547988849903</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Feat(Name of the bot): + WEBSITE OMG">
+      <created>1549480955203</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1549480955204</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7165000" />
+    <option name="totallyTimeSpent" value="7790000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1016,7 +1016,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4917647" visible="true" weight="0.20149253" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4917647" visible="true" weight="0.20362474" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Palette&#9;" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -1031,7 +1031,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.22860238" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4978678" weight="0.32827735" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4978678" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4989339" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50319827" side_tool="true" weight="0.38786566" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -1111,7 +1111,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tech: Added loggin system to enhance debugging" />
     <MESSAGE value="Tech: Cleaned the project, and set the logs on commands ;)" />
     <MESSAGE value="Tech: Enhanced logs detail with better bug discovery" />
     <MESSAGE value="Tech: Modified logs roll to split 1 file per day" />
@@ -1136,7 +1135,8 @@
     <MESSAGE value="Feat(Command): Added !invite" />
     <MESSAGE value="Feat(Visual): Modified display of some commands" />
     <MESSAGE value="Fix(Playlist System): Reworked the playlist system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix(Playlist System): Reworked the playlist system" />
+    <MESSAGE value="Feat(Name of the bot): + WEBSITE OMG" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat(Name of the bot): + WEBSITE OMG" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1217,8 +1217,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/handle/MessageCreateHandler.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/handle/SocketHandler.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/net/dv8tion/JDA/3.5.0_327/JDA-3.5.0_327-sources.jar!/net/dv8tion/jda/core/requests/WebSocketClient.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/apis/google-api-services-youtube/v3-rev198-1.23.0/google-api-services-youtube-v3-rev198-1.23.0-sources.jar!/com/google/api/services/youtube/YouTubeRequest.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/apis/google-api-services-youtube/v3-rev198-1.23.0/google-api-services-youtube-v3-rev198-1.23.0-sources.jar!/com/google/api/services/youtube/YouTube.java" />
@@ -1507,14 +1505,32 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/command/aliases/SoundLoopCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/BotGlobalManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/listeners/GuildMovementListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="23" column="85" lean-forward="true" selection-start-line="23" selection-start-column="85" selection-end-line="23" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/discord/bot/utils/save/PropertyEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+          <folding>
+            <element signature="e#988#989#0" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -21,7 +21,7 @@ public class GuildMovementListener extends ListenerAdapter {
     public void onGuildJoin(GuildJoinEvent event){
         Map<String,String> propertiesForJoinedServer = new HashMap<>();
         for(PropertyEnum property : PropertyEnum.values()){
-            propertiesForJoinedServer.put(property.getPropertyName(),"");
+            propertiesForJoinedServer.put(property.getPropertyName(),property.getDefaultValue());
         }
         ServerPropertiesManager.getInstance().setPropertiesForServer(event.getGuild().getId(),propertiesForJoinedServer);
         ServerPropertiesJSONUpdate saver = new ServerPropertiesJSONUpdate(event.getGuild().getId());
