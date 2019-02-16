@@ -33,7 +33,7 @@ public class ServerPropertiesInjector {
                 serverProperties.put(key,value);
             }
         } catch (IOException e) {
-            logger.log(Level.ERROR, "Something went wrong", e);
+            logger.log(Level.ERROR, "Properties injector failed for server : " + serverID, e);
         }
         return serverProperties;
     }

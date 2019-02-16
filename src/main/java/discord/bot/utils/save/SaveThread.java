@@ -2,7 +2,6 @@ package discord.bot.utils.save;
 
 import discord.bot.BotGlobalManager;
 import net.dv8tion.jda.core.entities.Guild;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -28,7 +27,6 @@ public class SaveThread extends Thread {
                     System.runFinalization();
                     System.gc();
                 }
-                logger.log(Level.INFO,"Propriétés sauvegardées.");
             }
         };
         timer.scheduleAtFixedRate(autoSaveTask, 1000*60*3, 1000*60*60);

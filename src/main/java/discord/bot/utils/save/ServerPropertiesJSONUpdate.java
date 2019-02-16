@@ -30,7 +30,7 @@ public class ServerPropertiesJSONUpdate {
             }
             properties.store(fileOutput, null);
         } catch (IOException e) {
-            logger.log(Level.ERROR, "Something went wrong during properties saving", e);
+            logger.log(Level.ERROR, "Something went wrong during properties saving with server id : " + serverID, e);
         }
     }
 

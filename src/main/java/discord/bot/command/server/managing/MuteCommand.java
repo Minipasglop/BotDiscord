@@ -37,13 +37,13 @@ public class MuteCommand extends ICommand {
             for (Member curr : targetedUsers) {
                 event.getGuild().getController().setMute(curr, true).queue();
                 logger.log(Level.INFO,ACTION_PERFORMED + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
-                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), buildMuteMessage(args[args.length -2], args[args.length -1]));
+                MessageSenderFactory.getInstance().sendSafePrivateMessage(curr.getUser(), buildMuteMessage(args[args.length -2], args[args.length -1]));
                 Runnable waitUntilDemute = () -> {
                     try {
                         Thread.sleep(Integer.parseInt(args[args.length - 1]) * 60000);
                         event.getGuild().getController().setMute(curr, false).queue();
                         logger.log(Level.INFO,ACTION_CALLBACK + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
-                        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),UNMUTE_MESSAGE);
+                        MessageSenderFactory.getInstance().sendSafePrivateMessage(curr.getUser(),UNMUTE_MESSAGE);
                     } catch (InterruptedException e) {
                         logger.log(Level.ERROR, event.getMessage(), e);
                     }
