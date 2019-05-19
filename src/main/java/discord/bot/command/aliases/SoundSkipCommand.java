@@ -1,13 +1,14 @@
+
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.GuildMusicManager;
+import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.Map;
 
 public class SoundSkipCommand extends ICommand {
     private final String HELP = "Skip the current track played. \nUsage : `!" + this.commandName + "`";
@@ -16,12 +17,8 @@ public class SoundSkipCommand extends ICommand {
     private final String NOTHING_TO_SKIP = "No track to skip.";
     private static Logger logger = Logger.getLogger(SoundSkipCommand.class);
 
-
-    private Map<String,AudioServerManager> audioServerManagers;
-
-    public SoundSkipCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundSkipCommand(String commandName){
         super(commandName);
-        this.audioServerManagers =  audioServerManagers;
     }
 
     @Override
@@ -32,13 +29,14 @@ public class SoundSkipCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         try{
-            AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.getTrackAmount() == 0){
+            GuildMusicManager musicManager = GuildMusicManagerSupervisor.getInstance().getGuildMusicManager(event.getGuild().getIdLong());
+            if(musicManager.scheduler.getTrackAmount() == 0){
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NOTHING_TO_SKIP);
+                return;
             }
-            else if(!currAudioServerManager.skipTrack()){
-                currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
-                currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
+            musicManager.scheduler.nextTrack();
+            if(musicManager.player.isPaused()){
+                event.getGuild().getAudioManager().closeAudioConnection();
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),SOUND_SKIPPED_END);
             }
         }catch (Exception e){

@@ -1,7 +1,10 @@
 package discord.bot.command.aliases;
 
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import discord.bot.command.ICommand;
-import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.AudioTrackToTrackUtil;
+import discord.bot.utils.audio.GuildMusicManager;
+import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.audio.Track;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.PropertyEnum;
@@ -12,8 +15,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class SoundQueueCommand extends ICommand {
     private final String HELP = "Display the current playlist status played. \nUsage : `!" + this.commandName + "`";
@@ -24,12 +26,8 @@ public class SoundQueueCommand extends ICommand {
     private final String EMPTY_QUEUE = "Playlist is empty.";
     private static Logger logger = Logger.getLogger(SoundQueueCommand.class);
 
-
-    private Map<String,AudioServerManager> audioServerManagers;
-
-    public SoundQueueCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundQueueCommand(String commandName){
         super(commandName);
-        this.audioServerManagers =  audioServerManagers;
     }
 
     @Override
@@ -44,22 +42,22 @@ public class SoundQueueCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         try{
-            AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
+            GuildMusicManager musicManager = GuildMusicManagerSupervisor.getInstance().getGuildMusicManager(event.getGuild().getIdLong());
             String trackTitleList = EMPTY_QUEUE;
             String currentTrack = NO_SOUND_PLAYING + "\n";
             EmbedBuilder builder = new EmbedBuilder();
-            if(currAudioServerManager != null && currAudioServerManager.getTrackAmount() > 0){
-                List<Track> trackList = currAudioServerManager.getTrackList();
-                builder.setThumbnail(trackList.get(0).getThumbnailUrl());
-                currentTrack = getFormattedTrackName(trackList.get(0)) + "\n";
+            if(musicManager.scheduler.getTrackAmount() > 0){
+                ArrayList<AudioTrack> trackList = musicManager.scheduler.getTrackList();
+                builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
+                currentTrack = getFormattedTrackName(AudioTrackToTrackUtil.convert(trackList.get(0))) + "\n";
                 trackTitleList = "";
                 for(int i = 1; i < trackList.size(); i++){
-                    trackTitleList += i + " - " + getFormattedTrackName(trackList.get(i));
+                    trackTitleList += i + " - " + getFormattedTrackName(AudioTrackToTrackUtil.convert(trackList.get(i)));
                 }
             }else {
                 builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
             }
-            if(currAudioServerManager != null && currAudioServerManager.getTrackAmount() == 1){
+            if(musicManager.scheduler.getTrackAmount() == 1){
                 trackTitleList = NO_MORE_SOUND;
             }
             builder.setAuthor(PLAYLIST_STATUS);

@@ -1,22 +1,18 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.GuildMusicManager;
+import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-
-import java.util.Map;
 
 public class SoundStopCommand extends ICommand {
     private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!" + this.commandName + "`";
     private final String SOUND_STOPPED = "Sound has been stopped.";
     private final String COMMAND_FAILED = "Failed executing this command. Please make sure a track is being played.";
 
-    private Map<String,AudioServerManager> audioServerManagers;
-
-    public SoundStopCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundStopCommand( String commandName){
         super(commandName);
-        this.audioServerManagers =  audioServerManagers;
     }
 
     @Override
@@ -26,12 +22,10 @@ public class SoundStopCommand extends ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-
         try{
-            AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            currAudioServerManager.emptyPlaylist();
-            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().setSendingHandler(null);
-            currAudioServerManager.getAudioLoadResultHandler().getGuildAudioManager().closeAudioConnection();
+            GuildMusicManager musicManager = GuildMusicManagerSupervisor.getInstance().getGuildMusicManager(event.getGuild().getIdLong());
+            musicManager.scheduler.stop();
+            event.getGuild().getAudioManager().closeAudioConnection();
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),SOUND_STOPPED);
         }catch (Exception e){
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);
