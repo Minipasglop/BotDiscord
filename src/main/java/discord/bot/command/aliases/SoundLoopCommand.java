@@ -1,15 +1,14 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.GuildMusicManager;
+import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import java.util.Map;
 
 public class SoundLoopCommand extends ICommand {
     private final String HELP = "Enables / Disables the repetition of the current track. \nUsage : `!" + this.commandName + "`";
@@ -18,11 +17,8 @@ public class SoundLoopCommand extends ICommand {
     private final String COMMAND_FAILED = "Failed looping the sound. Please make sure a track is being played";
     private static Logger logger = Logger.getLogger(SoundLoopCommand.class);
 
-    private Map<String,AudioServerManager> audioServerManagers;
-
-    public SoundLoopCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundLoopCommand(String commandName){
         super(commandName);
-        this.audioServerManagers =  audioServerManagers;
     }
 
     @Override
@@ -33,17 +29,16 @@ public class SoundLoopCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         try{
-            AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if((currAudioServerManager != null && currAudioServerManager.isTrackLooping()) || ("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.LOOP.getPropertyName()))){
+            GuildMusicManager musicManager = GuildMusicManagerSupervisor.getInstance().getGuildMusicManager(event.getGuild().getIdLong());
+            if(("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.LOOP.getPropertyName()))){
+                musicManager.scheduler.setLooping(true);
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "false");
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),TRACK_LOOP_DISABLED);
             }else {
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "loop", "true");
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),TRACK_LOOP_ENABLED);
             }
-            if(currAudioServerManager != null) {
-                currAudioServerManager.reverseTrackLoop();
-            }
+            musicManager.scheduler.reverseTrackLoop();
         }catch (Exception e){
             logger.log(Level.ERROR, event.getMessage(), e);
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_FAILED);

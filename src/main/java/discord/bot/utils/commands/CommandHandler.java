@@ -58,17 +58,16 @@ public class CommandHandler {
     }
 
     private CommandHandler(){
-        SoundPlayerCommand soundPlayerCommandReference = new SoundPlayerCommand(CommandEnum.SOUND.getCommandName());
 
         soundCommands = new HashMap<>();
-        soundCommands.put(CommandEnum.SOUND.getCommandName(), soundPlayerCommandReference);
-        soundCommands.put(CommandEnum.VOLUME.getCommandName(), new SoundVolumeCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.VOLUME.getCommandName()));
-        soundCommands.put(CommandEnum.SKIP.getCommandName(), new SoundSkipCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.SKIP.getCommandName()));
-        soundCommands.put(CommandEnum.STOP.getCommandName(), new SoundStopCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.STOP.getCommandName()));
-        soundCommands.put(CommandEnum.LOOP.getCommandName(), new SoundLoopCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.LOOP.getCommandName()));
-        soundCommands.put(CommandEnum.QUEUE.getCommandName(), new SoundQueueCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.QUEUE.getCommandName()));
-        soundCommands.put(CommandEnum.PLAY_PAUSE.getCommandName(), new SoundPauseCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.PLAY_PAUSE.getCommandName()));
-        soundCommands.put(CommandEnum.SHUFFLE.getCommandName(), new SoundShuffleCommand(soundPlayerCommandReference.getAudioServerManagers(),CommandEnum.SHUFFLE.getCommandName()));
+        soundCommands.put(CommandEnum.SOUND.getCommandName(), new SoundPlayerCommand(CommandEnum.SOUND.getCommandName()));
+        soundCommands.put(CommandEnum.VOLUME.getCommandName(), new SoundVolumeCommand(CommandEnum.VOLUME.getCommandName()));
+        soundCommands.put(CommandEnum.SKIP.getCommandName(), new SoundSkipCommand(CommandEnum.SKIP.getCommandName()));
+        soundCommands.put(CommandEnum.STOP.getCommandName(), new SoundStopCommand(CommandEnum.STOP.getCommandName()));
+        soundCommands.put(CommandEnum.LOOP.getCommandName(), new SoundLoopCommand(CommandEnum.LOOP.getCommandName()));
+        soundCommands.put(CommandEnum.QUEUE.getCommandName(), new SoundQueueCommand(CommandEnum.QUEUE.getCommandName()));
+        soundCommands.put(CommandEnum.PLAY_PAUSE.getCommandName(), new SoundPauseCommand(CommandEnum.PLAY_PAUSE.getCommandName()));
+        soundCommands.put(CommandEnum.SHUFFLE.getCommandName(), new SoundShuffleCommand(CommandEnum.SHUFFLE.getCommandName()));
 
         serverCommands = new HashMap<>();
         serverCommands.put(CommandEnum.ADD_ROLE.getCommandName() ,new RoleAddingCommand(CommandEnum.ADD_ROLE.getCommandName()));

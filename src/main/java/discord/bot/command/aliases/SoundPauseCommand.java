@@ -1,13 +1,12 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.GuildMusicManager;
+import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import java.util.Map;
 
 public class SoundPauseCommand extends ICommand {
     private final String HELP = "Pauses / Resumes the current track. \nUsage : `!" + this.commandName + "`";
@@ -16,11 +15,8 @@ public class SoundPauseCommand extends ICommand {
     private final String COMMAND_FAILED = "Failed pausing the sound. Please make sure a track is currently being played.";
     private static Logger logger = Logger.getLogger(SoundPauseCommand.class);
 
-    private Map<String,AudioServerManager> audioServerManagers;
-
-    public SoundPauseCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundPauseCommand(String commandName){
         super(commandName);
-        this.audioServerManagers =  audioServerManagers;
     }
 
     @Override
@@ -31,13 +27,13 @@ public class SoundPauseCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         try{
-            AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.isTrackPaused()){
+            GuildMusicManager musicManager = GuildMusicManagerSupervisor.getInstance().getGuildMusicManager(event.getGuild().getIdLong());
+            if(musicManager.player.isPaused()){
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),RESUMED);
-                currAudioServerManager.setTrackPaused(false);
+                musicManager.player.setPaused(false);
             }else {
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),PAUSED);
-                currAudioServerManager.setTrackPaused(true);
+                musicManager.player.setPaused(true);
             }
         }catch (Exception e){
             logger.log(Level.ERROR, event.getMessage(), e);
