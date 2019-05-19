@@ -1,13 +1,12 @@
 package discord.bot.command.aliases;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.audio.AudioServerManager;
+import discord.bot.utils.audio.GuildMusicManager;
+import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-
-import java.util.Map;
 
 public class SoundShuffleCommand extends ICommand {
     private final String HELP = "Shuffles the playlist order. \nUsage : `!" + this.commandName + "`";
@@ -16,12 +15,8 @@ public class SoundShuffleCommand extends ICommand {
     private final String COMMAND_FAILED = "Failed shuffleing the playlist. Please make sure tracks are queued.";
     private static Logger logger = Logger.getLogger(SoundShuffleCommand.class);
 
-
-    private Map<String,AudioServerManager> audioServerManagers;
-
-    public SoundShuffleCommand(Map<String,AudioServerManager> audioServerManagers, String commandName){
+    public SoundShuffleCommand(String commandName){
         super(commandName);
-        this.audioServerManagers =  audioServerManagers;
     }
 
     @Override
@@ -32,9 +27,9 @@ public class SoundShuffleCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         try{
-            AudioServerManager currAudioServerManager = audioServerManagers.get(event.getGuild().getId());
-            if(currAudioServerManager.getTrackAmount() > 1){
-                currAudioServerManager.shufflePlaylist();
+            GuildMusicManager musicManager = GuildMusicManagerSupervisor.getInstance().getGuildMusicManager(event.getGuild().getIdLong());
+            if(musicManager.scheduler.getTrackAmount() > 1){
+                musicManager.scheduler.shuffle();
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),PLAYLIST_SHUFFLED);
             }else {
                 MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_TRACK_TO_SHUFFLE);
