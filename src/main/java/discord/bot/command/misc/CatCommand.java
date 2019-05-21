@@ -1,7 +1,7 @@
 package discord.bot.command.misc;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.misc.CatApi;
+import discord.bot.utils.misc.CatApiCall;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -22,9 +22,9 @@ public class CatCommand extends ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String catImageUri = CatApi.getInstance().getRandomCatImage();
-        if(catImageUri != null && !catImageUri.isEmpty()){
-            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),catImageUri);
+        String imageUri = CatApiCall.getInstance().getRandomCatImage();
+        if(imageUri != null && !imageUri.isEmpty()){
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),imageUri);
         }else {
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),FAILED);
         }

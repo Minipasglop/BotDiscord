@@ -21,6 +21,7 @@ public class PropertiesLoader {
     private String youtubeApiKey;
     private String catApiKey;
     private String dogApiKey;
+    private String chuckNorrisApiKey;
     private String botOwnerUserId;
     private final String MAIN_CONFIG_FILE_PATH = "jackson.properties";
 
@@ -38,6 +39,10 @@ public class PropertiesLoader {
 
     public String getDogApiKey() {
         return dogApiKey;
+    }
+
+    public String getChuckNorrisApiKey() {
+        return chuckNorrisApiKey;
     }
 
     public boolean isRoleAddingCommandEnabled(){ return("true").equals(addRoleCommandStatus); }
@@ -78,6 +83,7 @@ public class PropertiesLoader {
             youtubeApiKey = properties.getProperty("youtubeApiKey");
             catApiKey = properties.getProperty("catApiKey");
             dogApiKey = properties.getProperty("dogApiKey");
+            chuckNorrisApiKey = properties.getProperty("chuckNorrisApiKey");
             botOwnerUserId = properties.getProperty("botOwnerUserId");
         } catch (IOException e) {
             logger.log(Level.ERROR, "Something went wrong", e);

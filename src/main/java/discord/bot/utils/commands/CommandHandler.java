@@ -87,6 +87,7 @@ public class CommandHandler {
         miscCommands.put(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName(), new YoutubeCommand(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName()));
         miscCommands.put(CommandEnum.CAT_PICTURE.getCommandName(), new CatCommand(CommandEnum.CAT_PICTURE.getCommandName()));
         miscCommands.put(CommandEnum.DOG_PICTURE.getCommandName(), new DogCommand(CommandEnum.DOG_PICTURE.getCommandName()));
+        miscCommands.put(CommandEnum.CHUCK_NORRIS_FACT.getCommandName(), new ChuckNorrisCommand(CommandEnum.CHUCK_NORRIS_FACT.getCommandName()));
 
         ownerCommands = new HashMap<>();
         ownerCommands.put(CommandEnum.SET_BOT_GAME.getCommandName(), new SetGameCommand(CommandEnum.SET_BOT_GAME.getCommandName()));

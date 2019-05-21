@@ -66,6 +66,11 @@
             <artifactId>lavaplayer</artifactId>
             <version>1.2.63</version>
         </dependency>
+        <dependency>
+        <groupId>com.mashape.unirest</groupId>
+        <artifactId>unirest-java</artifactId>
+        <version>1.4.9</version>
+    </dependency>
         <!-- Partie relative à l'API Youtube -->
         <dependency>
             <groupId>com.google.api-client</groupId>

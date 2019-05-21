@@ -21,11 +21,12 @@ public enum CommandEnum {
     PURGE("purge"),
     INFO("info"),
     INVITE("invite"),
-    SERVER_SETTINGS("state"),
+    SERVER_SETTINGS("serverconf"),
     PING("ping"),
     YOUTUBE_VIDEO_LINK("yt"),
     CAT_PICTURE("cat"),
     DOG_PICTURE("dog"),
+    CHUCK_NORRIS_FACT("chucknorris"),
     SET_BOT_GAME("setGame"),
     FORCE_PROPERTIES_SAVING("saveProperties"),
     SET_PREFIX("prefix");

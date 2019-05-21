@@ -1,16 +1,16 @@
 package discord.bot.command.misc;
 
 import discord.bot.command.ICommand;
-import discord.bot.utils.misc.DogApiCall;
+import discord.bot.utils.misc.ChuckNorrisApiCall;
 import discord.bot.utils.misc.MessageSenderFactory;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-public class DogCommand extends ICommand {
+public class ChuckNorrisCommand extends ICommand {
 
-    private final String HELP = "Get a nice :dog: pic. \nUsage : `!" + this.commandName + "`";
-    private final String FAILED = "Failed to load a cute :dog: pic... :sweat: ";
+    private final String HELP = "Get a sick chuck norris fact. \nUsage : `!" + this.commandName + "`";
+    private final String FAILED = "Failed to load a chuck norris fact. Hope he won't load you :sweat: ";
 
-    public DogCommand(String commandName) {
+    public ChuckNorrisCommand(String commandName) {
         super(commandName);
     }
 
@@ -22,9 +22,9 @@ public class DogCommand extends ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String imageUri = DogApiCall.getInstance().getRandomDogImage();
-        if(imageUri != null && !imageUri.isEmpty()){
-            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),imageUri);
+        String chuckNorrisFact = ChuckNorrisApiCall.getInstance().getRandomFact();
+        if(chuckNorrisFact != null && !chuckNorrisFact.isEmpty()){
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),chuckNorrisFact);
         }else {
             MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),FAILED);
         }
