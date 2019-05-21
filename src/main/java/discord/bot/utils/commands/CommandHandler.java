@@ -9,10 +9,7 @@ import discord.bot.command.bot.info.ServerSettingsCommand;
 import discord.bot.command.bot.managing.ForcePropertiesSaveCommand;
 import discord.bot.command.bot.managing.SetGameCommand;
 import discord.bot.command.bot.managing.SetPrefixCommand;
-import discord.bot.command.misc.HelpCommand;
-import discord.bot.command.misc.PingCommand;
-import discord.bot.command.misc.SoundPlayerCommand;
-import discord.bot.command.misc.YoutubeCommand;
+import discord.bot.command.misc.*;
 import discord.bot.command.server.managing.*;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
@@ -88,6 +85,7 @@ public class CommandHandler {
         miscCommands.put(CommandEnum.SERVER_SETTINGS.getCommandName(), new ServerSettingsCommand(CommandEnum.SERVER_SETTINGS.getCommandName()));
         miscCommands.put(CommandEnum.PING.getCommandName(), new PingCommand(CommandEnum.PING.getCommandName()));
         miscCommands.put(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName(), new YoutubeCommand(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName()));
+        miscCommands.put(CommandEnum.CAT_PICTURE.getCommandName(), new CatCommand(CommandEnum.CAT_PICTURE.getCommandName()));
 
         ownerCommands = new HashMap<>();
         ownerCommands.put(CommandEnum.SET_BOT_GAME.getCommandName(), new SetGameCommand(CommandEnum.SET_BOT_GAME.getCommandName()));

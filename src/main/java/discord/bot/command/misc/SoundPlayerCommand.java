@@ -19,6 +19,7 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.managers.AudioManager;
+import org.apache.log4j.Logger;
 
 import java.awt.*;
 
@@ -28,8 +29,11 @@ public class SoundPlayerCommand extends ICommand {
     private final String JOIN_VOCAL_CHANNEL = "Please join a vocal channel.";
     private final String SOUND_QUEUED = "Sound has been queued";
     private final String NO_RESULT = "No result have been found. Make sure you didn't misspelled the track name :wink:";
+    private final String LOAD_FAILED_LOG = "Erreur lors de la lecture de la video : ";
 
     private YoutubeApi youtubeApi;
+    private static Logger logger = Logger.getLogger(SoundPlayerCommand.class);
+
 
     public SoundPlayerCommand(String commandName){
         super(commandName);
@@ -82,6 +86,7 @@ public class SoundPlayerCommand extends ICommand {
             @Override
             public void loadFailed(FriendlyException exception) {
                 MessageSenderFactory.getInstance().sendSafeMessage(channel,"Could not play: " + exception.getMessage());
+                logger.error(LOAD_FAILED_LOG + youtubeSearch.getVideoUrl() + " " + exception.getMessage() );
             }
         });
     }
@@ -112,7 +117,7 @@ public class SoundPlayerCommand extends ICommand {
             for(int i = 0; i  < args.length; ++i){
                 youtubeQuery += args[i] + " ";
             }
-            System.out.println(event.getAuthor().getName() + " searched : " + youtubeQuery + " on server : " + event.getGuild().getName());
+            logger.info(event.getAuthor().getName() + " searched : " + youtubeQuery + " on server : " + event.getGuild().getName());
             Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
             if (youtubeSearch != null) {
                 loadAndPlay(targetChannel, event.getTextChannel(), youtubeSearch, volume);

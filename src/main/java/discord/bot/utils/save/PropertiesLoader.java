@@ -19,6 +19,7 @@ public class PropertiesLoader {
     private String botToken;
     private String addRoleCommandStatus;
     private String youtubeApiKey;
+    private String catApiKey;
     private String botOwnerUserId;
     private final String MAIN_CONFIG_FILE_PATH = "jackson.properties";
 
@@ -28,6 +29,10 @@ public class PropertiesLoader {
 
     public String getYoutubeApiKey() {
         return youtubeApiKey;
+    }
+
+    public String getCatApiKey() {
+        return catApiKey;
     }
 
     public boolean isRoleAddingCommandEnabled(){ return("true").equals(addRoleCommandStatus); }
@@ -66,6 +71,7 @@ public class PropertiesLoader {
             botToken = properties.getProperty("botToken");
             addRoleCommandStatus = properties.getProperty("addRoleCommandStatus");
             youtubeApiKey = properties.getProperty("youtubeApiKey");
+            catApiKey = properties.getProperty("catApiKey");
             botOwnerUserId = properties.getProperty("botOwnerUserId");
         } catch (IOException e) {
             logger.log(Level.ERROR, "Something went wrong", e);
