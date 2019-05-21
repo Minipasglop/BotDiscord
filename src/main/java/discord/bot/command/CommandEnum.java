@@ -25,6 +25,7 @@ public enum CommandEnum {
     PING("ping"),
     YOUTUBE_VIDEO_LINK("yt"),
     CAT_PICTURE("cat"),
+    DOG_PICTURE("dog"),
     SET_BOT_GAME("setGame"),
     FORCE_PROPERTIES_SAVING("saveProperties"),
     SET_PREFIX("prefix");
