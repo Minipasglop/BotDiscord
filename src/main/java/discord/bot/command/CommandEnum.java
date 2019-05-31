@@ -29,7 +29,8 @@ public enum CommandEnum {
     CHUCK_NORRIS_FACT("chucknorris"),
     SET_BOT_GAME("setGame"),
     FORCE_PROPERTIES_SAVING("saveProperties"),
-    SET_PREFIX("prefix");
+    SET_PREFIX("prefix"),
+    WEBSITE("website");
 
     private String commandName;
 

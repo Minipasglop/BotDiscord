@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class PingCommand extends ICommand {
 
-    String HELP = "Command for testing bot ping. \nUsage : `!" + this.commandName + "`";
+    private final String HELP = "Command for testing bot ping. \nUsage : `!" + this.commandName + "`";
 
     public PingCommand(String commandName) {
         super(commandName);

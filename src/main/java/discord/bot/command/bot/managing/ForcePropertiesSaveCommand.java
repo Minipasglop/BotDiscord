@@ -11,9 +11,9 @@ import java.util.List;
 
 public class ForcePropertiesSaveCommand extends ICommand {
 
-    private String HELP = "This command allows the Owner to force the save of properties before a reboot. \nUsage: `!" + this.commandName + "`";
-    private String COMMAND_SUCCESS = "Successfully saved properties files";
-    private String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
+    private final String HELP = "This command allows the Owner to force the save of properties before a reboot. \nUsage: `!" + this.commandName + "`";
+    private final String COMMAND_SUCCESS = "Successfully saved properties files";
+    private final String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
 
     public ForcePropertiesSaveCommand(String commandName) {
         super(commandName);

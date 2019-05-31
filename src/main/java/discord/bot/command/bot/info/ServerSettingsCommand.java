@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class ServerSettingsCommand extends ICommand {
 
-    private String HELP = "The command `"+ this.commandName +"` displays the current server settings. \nUsage: `!" + this.commandName + "`";
+    private final String HELP = "The command `"+ this.commandName +"` displays the current server settings. \nUsage: `!" + this.commandName + "`";
     private final String BLANK_PROPERTY = "Not set yet";
     private final String PROPERTY_ON = "On";
     private final String PROPERTY_OFF = "Off";

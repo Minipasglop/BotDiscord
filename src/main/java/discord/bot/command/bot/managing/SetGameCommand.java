@@ -11,10 +11,10 @@ import java.util.List;
 
 public class SetGameCommand extends ICommand {
 
-    private String HELP = "This command allows the Owner to change the current game status of the bot. \nUsage: `!" + this.commandName + " type game`";
-    private String COMMAND_SUCCESS = "Successfully updated game.";
-    private String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
-    private String WRONG_TYPE = "Wrong type specified bruh :cold_sweat:";
+    private final String HELP = "This command allows the Owner to change the current game status of the bot. \nUsage: `!" + this.commandName + " type game`";
+    private final String COMMAND_SUCCESS = "Successfully updated game.";
+    private final String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
+    private final String WRONG_TYPE = "Wrong type specified bruh :cold_sweat:";
 
     public SetGameCommand(String commandName) {
         super(commandName);

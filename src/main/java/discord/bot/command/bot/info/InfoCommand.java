@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InfoCommand extends ICommand {
 
-    private String HELP = "The command `"+ this.commandName +"` displays some infos about the bot status at the moment. \nUsage: `!" + this.commandName + "`";
+    private final String HELP = "The command `"+ this.commandName +"` displays some infos about the bot status at the moment. \nUsage: `!" + this.commandName + "`";
 
     public InfoCommand(String commandName) {
         super(commandName);

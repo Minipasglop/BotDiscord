@@ -6,6 +6,7 @@ import discord.bot.command.aliases.*;
 import discord.bot.command.bot.info.InfoCommand;
 import discord.bot.command.bot.info.InviteCommand;
 import discord.bot.command.bot.info.ServerSettingsCommand;
+import discord.bot.command.bot.info.WebsiteCommand;
 import discord.bot.command.bot.managing.ForcePropertiesSaveCommand;
 import discord.bot.command.bot.managing.SetGameCommand;
 import discord.bot.command.bot.managing.SetPrefixCommand;
@@ -82,6 +83,7 @@ public class CommandHandler {
         miscCommands = new HashMap<>();
         miscCommands.put(CommandEnum.INFO.getCommandName(), new InfoCommand(CommandEnum.INFO.getCommandName()));
         miscCommands.put(CommandEnum.INVITE.getCommandName(),new InviteCommand(CommandEnum.INVITE.getCommandName()));
+        miscCommands.put(CommandEnum.WEBSITE.getCommandName(), new WebsiteCommand(CommandEnum.WEBSITE.getCommandName()));
         miscCommands.put(CommandEnum.SERVER_SETTINGS.getCommandName(), new ServerSettingsCommand(CommandEnum.SERVER_SETTINGS.getCommandName()));
         miscCommands.put(CommandEnum.PING.getCommandName(), new PingCommand(CommandEnum.PING.getCommandName()));
         miscCommands.put(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName(), new YoutubeCommand(CommandEnum.YOUTUBE_VIDEO_LINK.getCommandName()));

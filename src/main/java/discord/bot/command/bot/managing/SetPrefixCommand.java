@@ -5,13 +5,11 @@ import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import org.apache.log4j.Logger;
 
 public class SetPrefixCommand extends ICommand {
 
-    private String HELP = "This command set the bot's command prefix. \nUsage: `!" + this.commandName + " prefix`";
-    private String COMMAND_SUCCESS = "Successfully updated prefix.";
-    private static Logger logger = Logger.getLogger(SetPrefixCommand.class);
+    private final String HELP = "This command set the bot's command prefix. \nUsage: `!" + this.commandName + " prefix`";
+    private final String COMMAND_SUCCESS = "Successfully updated prefix.";
 
     public SetPrefixCommand(String commandName) {
         super(commandName);

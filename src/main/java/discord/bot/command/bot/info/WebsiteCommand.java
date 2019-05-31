@@ -7,12 +7,12 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
-public class InviteCommand extends ICommand {
+public class WebsiteCommand extends ICommand {
 
-    private final String HELP = "The command `"+ this.commandName +"` sends an invitation link in order to add the bot to any server you're admin on. \nUsage: `!" + this.commandName + "`";
-    private final String INVITATION_LINK = "https://discordapp.com/oauth2/authorize?client_id=457256267069784102&scope=bot&permissions=-1";
+    private final String HELP = "JacksonBot's website \nUsage: `!" + this.commandName + "`";
+    private final String WEBSITE_URI = "https://jacksonbot.com";
 
-    public InviteCommand(String commandName) {
+    public WebsiteCommand(String commandName) {
         super(commandName);
     }
 
@@ -26,10 +26,10 @@ public class InviteCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setAuthor("Invitation Link");
+        builder.setAuthor("JacksonBot's Website");
         builder.setColor(Color.ORANGE);
         builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
-        builder.addField("", INVITATION_LINK, true);
+        builder.addField("", WEBSITE_URI, true);
         MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), builder.build());
     }
 
