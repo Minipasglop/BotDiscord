@@ -27,16 +27,16 @@ public class SetUserEventStatusCommand extends ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         if (event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
             if(("on").equals(args[args.length -1])){
-                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS_ON);
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), COMMAND_SUCCESS_ON);
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "userEventEnabled", "true");
             }
             else if(("off").equals(args[args.length -1])){
-                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS_OFF);
+                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), COMMAND_SUCCESS_OFF);
                 ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "userEventEnabled", "false");
             }
         } else {
             event.getMessage().delete().queue();
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), COMMAND_FAILED, event.getTextChannel(), COMMAND_FAILED);
         }
     }
 

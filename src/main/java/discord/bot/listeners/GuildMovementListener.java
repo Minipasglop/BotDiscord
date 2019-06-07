@@ -24,7 +24,7 @@ public class GuildMovementListener extends ListenerAdapter {
             propertiesForJoinedServer.put(property.getPropertyName(),property.getDefaultValue());
         }
         ServerPropertiesManager.getInstance().setPropertiesForServer(event.getGuild().getId(),propertiesForJoinedServer);
-        ServerPropertiesJSONUpdate saver = new ServerPropertiesJSONUpdate(event.getGuild().getId());
+        new ServerPropertiesJSONUpdate().init(event.getGuild().getId()); //Saves the property file
         logger.log(Level.INFO, "Bot has been added to server : " + event.getGuild().getName());
     }
 

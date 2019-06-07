@@ -13,7 +13,10 @@ public class ServerPropertiesJSONUpdate {
 
     private static Logger logger = Logger.getLogger(ServerPropertiesJSONUpdate.class);
 
-    public ServerPropertiesJSONUpdate(String serverID) {
+    public ServerPropertiesJSONUpdate() {
+    }
+
+    public void init(String serverID){
         try {
             //Opening properties file
             File configFile = new File("jackson-guild-" + serverID + ".properties");
@@ -26,7 +29,7 @@ public class ServerPropertiesJSONUpdate {
             fileInput.close();
             FileOutputStream fileOutput = new FileOutputStream(configFile);
             for(PropertyEnum property : PropertyEnum.values()){
-                properties.setProperty(property.getPropertyName(),ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverID,property.getPropertyName()));
+                properties.setProperty(property.getPropertyName(), ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serverID, property.getPropertyName()));
             }
             properties.store(fileOutput, null);
         } catch (IOException e) {

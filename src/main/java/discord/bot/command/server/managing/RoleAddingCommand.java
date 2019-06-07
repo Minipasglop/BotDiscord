@@ -48,7 +48,7 @@ public class RoleAddingCommand extends ICommand {
                         System.out.println(ACTION_PERFORMED_ADD + args[args.length - 1] + " a l'utilisateur " + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                     }else {
                         event.getMessage().delete().queue();
-                        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_REQUIRED);
+                        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), NOT_REQUIRED, event.getTextChannel(), NOT_REQUIRED);
                     }
                 } catch (Exception e) {
                     logger.log(Level.ERROR, event.getMessage(), e);
@@ -57,7 +57,7 @@ public class RoleAddingCommand extends ICommand {
             }
         }else {
             event.getMessage().delete().queue();
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), NOT_ALLOWED, event.getTextChannel(), NOT_ALLOWED);
         }
     }
 

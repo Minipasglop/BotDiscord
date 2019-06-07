@@ -28,11 +28,11 @@ public class SetAutoRoleOnJoinCommand extends ICommand {
             role += args[i] + (i+1 < args.length ? " " : "");
         }
         if (!(event.getGuild().getRolesByName(role, true).get(0) == null)) {
-            ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(),"autoRole",role);
-            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS);
+            ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(),"autoRole", role);
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), COMMAND_SUCCESS);
         } else {
             event.getMessage().delete().queue();
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor() ,COMMAND_FAILED, event.getTextChannel(), COMMAND_FAILED);
         }
     }
 

@@ -25,10 +25,10 @@ public class SetUserEventChannelCommand extends ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         if (!event.getGuild().getTextChannelsByName(args[args.length - 1],true).isEmpty()) {
             ServerPropertiesManager.getInstance().setPropertyForServer(event.getGuild().getId(), "userEventChannel", args[args.length - 1]);
-            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),COMMAND_SUCCESS);
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), COMMAND_SUCCESS);
         } else {
             event.getMessage().delete().queue();
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_FAILED);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), COMMAND_FAILED, event.getTextChannel(), COMMAND_FAILED);
         }
     }
 

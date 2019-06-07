@@ -17,7 +17,6 @@ public class UserMovementListener extends ListenerAdapter {
 
     private static Logger logger = Logger.getLogger(UserMovementListener.class);
 
-
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         String serverId = event.getGuild().getId();

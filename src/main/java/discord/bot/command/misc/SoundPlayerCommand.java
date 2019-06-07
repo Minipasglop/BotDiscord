@@ -35,7 +35,7 @@ public class SoundPlayerCommand extends ICommand {
     private static Logger logger = Logger.getLogger(SoundPlayerCommand.class);
 
 
-    public SoundPlayerCommand(String commandName){
+    public SoundPlayerCommand(String commandName) {
         super(commandName);
         youtubeApi = BotGlobalManager.getYoutubeApi();
     }
@@ -52,10 +52,10 @@ public class SoundPlayerCommand extends ICommand {
         return args.length != 0 && !args[0].equals("help");
     }
 
-    private void loadAndPlay(final VoiceChannel voiceChannel, final TextChannel channel, final Track youtubeSearch, final int volume){
+    private void loadAndPlay(final VoiceChannel voiceChannel, final TextChannel channel, final Track youtubeSearch, final int volume) {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
         musicManager.player.setVolume(volume);
-        if(("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(voiceChannel.getGuild().getId(), PropertyEnum.LOOP.getPropertyName()))) {
+        if (("true").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(voiceChannel.getGuild().getId(), PropertyEnum.LOOP.getPropertyName()))) {
             musicManager.scheduler.setLooping(true);
         }
         BotGlobalManager.getAudioPlayerManager().loadItemOrdered(musicManager, youtubeSearch.getVideoUrl(), new AudioLoadResultHandler() {
@@ -68,8 +68,8 @@ public class SoundPlayerCommand extends ICommand {
                 builder.setThumbnail(youtubeSearch.getThumbnailUrl());
                 builder.addField("Track Title :musical_note:", youtubeSearch.getTitle() + " - " + youtubeSearch.getChannelTitle() + "\n", false);
                 builder.addField("Playlist status :bulb:", musicManager.scheduler.getTrackAmount() + " track" + (musicManager.scheduler.getTrackAmount() == 1 ? "" : "s") + " listed.", false);
-                if(channel.canTalk()){
-                    MessageSenderFactory.getInstance().sendSafeMessage(channel,builder.build());
+                if (channel.canTalk()) {
+                    MessageSenderFactory.getInstance().sendSafeMessage(channel, builder.build());
                 }
             }
 
@@ -80,16 +80,17 @@ public class SoundPlayerCommand extends ICommand {
 
             @Override
             public void noMatches() {
-                MessageSenderFactory.getInstance().sendSafeMessage(channel,"Nothing found by " + youtubeSearch.getVideoUrl());
+                MessageSenderFactory.getInstance().sendSafeMessage(channel, "Nothing found by " + youtubeSearch.getVideoUrl());
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-                MessageSenderFactory.getInstance().sendSafeMessage(channel,"Could not play: " + exception.getMessage());
-                logger.error(LOAD_FAILED_LOG + youtubeSearch.getVideoUrl() + " " + exception.getMessage() );
+                MessageSenderFactory.getInstance().sendSafeMessage(channel, "Could not play: " + exception.getMessage());
+                logger.error(LOAD_FAILED_LOG + youtubeSearch.getVideoUrl() + " " + exception.getMessage());
             }
         });
     }
+
     private void play(Guild guild, GuildMusicManager musicManager, AudioTrack track, VoiceChannel voiceChannel) {
         connectToVoiceChannel(guild.getAudioManager(), voiceChannel);
 
@@ -106,24 +107,26 @@ public class SoundPlayerCommand extends ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         int volume = 50;
-        VoiceChannel targetChannel = event.getMember().getVoiceState().getChannel();
-        if (targetChannel == null) {
-            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),JOIN_VOCAL_CHANNEL);
+        VoiceChannel targetChannel;
+        try {
+            targetChannel = event.getMember().getVoiceState().getChannel();
+        } catch (NullPointerException e) {
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), JOIN_VOCAL_CHANNEL);
+            return;
+        }
+        if (!("").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "volume")) && ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "volume") != null) {
+            volume = Integer.parseInt(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), "volume"));
+        }
+        String youtubeQuery = "";
+        for (int i = 0; i < args.length; ++i) {
+            youtubeQuery += args[i] + " ";
+        }
+        logger.info(event.getAuthor().getName() + " searched : " + youtubeQuery + " on server : " + event.getGuild().getName());
+        Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
+        if (youtubeSearch != null) {
+            loadAndPlay(targetChannel, event.getTextChannel(), youtubeSearch, volume);
         } else {
-            if(!("").equals(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume")) && ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume") != null){
-                volume = Integer.parseInt(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(),"volume"));
-            }
-            String youtubeQuery = "";
-            for(int i = 0; i  < args.length; ++i){
-                youtubeQuery += args[i] + " ";
-            }
-            logger.info(event.getAuthor().getName() + " searched : " + youtubeQuery + " on server : " + event.getGuild().getName());
-            Track youtubeSearch = youtubeApi.searchVideo(youtubeQuery);
-            if (youtubeSearch != null) {
-                loadAndPlay(targetChannel, event.getTextChannel(), youtubeSearch, volume);
-            }else {
-                MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),NO_RESULT);
-            }
+            MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(), NO_RESULT);
         }
     }
 

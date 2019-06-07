@@ -3,6 +3,7 @@ package discord.bot.command.bot.managing;
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
+import discord.bot.utils.misc.SharedStringEnum;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -13,7 +14,6 @@ public class SetGameCommand extends ICommand {
 
     private final String HELP = "This command allows the Owner to change the current game status of the bot. \nUsage: `!" + this.commandName + " type game`";
     private final String COMMAND_SUCCESS = "Successfully updated game.";
-    private final String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
     private final String WRONG_TYPE = "Wrong type specified bruh :cold_sweat:";
 
     public SetGameCommand(String commandName) {
@@ -61,13 +61,13 @@ public class SetGameCommand extends ICommand {
                 game += args[i] + (i+1 < args.length ? " " : "");
             }
             if(!setGameWithType(type,game)){
-                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),WRONG_TYPE);
+                MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), WRONG_TYPE, event.getTextChannel(), WRONG_TYPE);
                 return;
             }
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_SUCCESS);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), COMMAND_SUCCESS, event.getTextChannel(), COMMAND_SUCCESS);
         }else {
             event.getMessage().delete().queue();
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), SharedStringEnum.BOT_OWNER_ONLY.getSharedString(), event.getTextChannel(), SharedStringEnum.BOT_OWNER_ONLY.getSharedString());
         }
     }
 

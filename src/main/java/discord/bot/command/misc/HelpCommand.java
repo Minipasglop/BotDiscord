@@ -3,11 +3,11 @@ package discord.bot.command.misc;
 import discord.bot.command.ICommand;
 import discord.bot.utils.commands.CommandHandler;
 import discord.bot.utils.misc.MessageSenderFactory;
+import discord.bot.utils.misc.SharedStringEnum;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.util.Map;
@@ -17,7 +17,6 @@ public class HelpCommand extends ICommand {
     private String HELP = "The command `help` displays the commands available at the moment. \nUsage: `!" + this.commandName + "`";
     private String MESSAGE_HEADER = "The commands available at the moment are listed below. \n";
     private String MESSAGE_FOOTER ="\nIf you need help, please mind joining the support server : https://discord.gg/MUaWKcu\nThanks for using *JacksonBot* :heart: :smirk:";
-    private static Logger logger = Logger.getLogger(HelpCommand.class);
 
     public HelpCommand(String commandName) {
         super(commandName);
@@ -58,7 +57,7 @@ public class HelpCommand extends ICommand {
         builder.addField("Misc commands :keyboard:", miscCommandsList + "\n", true);
         builder.addField("Owner only commands :warning:", ownerCommandsList + "\n", true);
         builder.addField("More infos :file_folder:", MESSAGE_FOOTER,true);
-        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),builder.build());
+        MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), builder.build(), event.getTextChannel(), SharedStringEnum.NO_PRIVATE_CHANNEL_OPEN.getSharedString());
     }
 
     @Override

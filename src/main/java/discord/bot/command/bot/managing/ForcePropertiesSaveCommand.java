@@ -3,6 +3,7 @@ package discord.bot.command.bot.managing;
 import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
+import discord.bot.utils.misc.SharedStringEnum;
 import discord.bot.utils.save.ServerPropertiesJSONUpdate;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -13,7 +14,6 @@ public class ForcePropertiesSaveCommand extends ICommand {
 
     private final String HELP = "This command allows the Owner to force the save of properties before a reboot. \nUsage: `!" + this.commandName + "`";
     private final String COMMAND_SUCCESS = "Successfully saved properties files";
-    private final String NOT_ALLOWED = "You must be the bot Owner in order to do that!";
 
     public ForcePropertiesSaveCommand(String commandName) {
         super(commandName);
@@ -30,14 +30,13 @@ public class ForcePropertiesSaveCommand extends ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         if(event.getAuthor().getId().equals(BotGlobalManager.getConfig().getBotOwnerUserId())) {
             List<Guild> guildList = BotGlobalManager.getServers();
-            ServerPropertiesJSONUpdate saver;
             for (int i = 0; i < guildList.size(); i++) {
-                saver = new ServerPropertiesJSONUpdate(guildList.get(i).getId());
+                new ServerPropertiesJSONUpdate().init(event.getGuild().getId());
             }
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),COMMAND_SUCCESS);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), COMMAND_SUCCESS, event.getTextChannel(), COMMAND_SUCCESS);
         }else {
             event.getMessage().delete().queue();
-            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(),NOT_ALLOWED);
+            MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), SharedStringEnum.BOT_OWNER_ONLY.getSharedString(), event.getTextChannel(), SharedStringEnum.BOT_OWNER_ONLY.getSharedString());
         }
     }
 
