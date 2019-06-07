@@ -14,12 +14,14 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.TextChannel;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BotGlobalManager {
     private static List<JDA> shards;
@@ -32,28 +34,28 @@ public class BotGlobalManager {
     BotGlobalManager() {
         try {
             shards = new ArrayList<>();
-            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING,"Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
+            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING, "Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
             shardBuilder.addEventListener(new MessageListener());
             shardBuilder.addEventListener(new UserMovementListener());
             shardBuilder.addEventListener(new GuildMovementListener());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
-            for(int i = 0; i < SHARD_AMMOUNT; i++){
+            for (int i = 0; i < SHARD_AMMOUNT; i++) {
                 shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT).buildBlocking(JDA.Status.CONNECTED));
-                shards.get(i).getPresence().setGame(Game.of(Game.GameType.WATCHING,"Service starting"));
+                shards.get(i).getPresence().setGame(Game.of(Game.GameType.WATCHING, "Service starting"));
             }
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
             saveThread.start();
             ServiceStartedNotification();
-            logger.log(Level.INFO,"BOT started");
+            logger.log(Level.INFO, "BOT started");
         } catch (LoginException | InterruptedException e) {
             logger.log(Level.ERROR, "Something went wrong", e);
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
         }
     }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console
 
-    private static void ServiceStartedNotification(){
-        for(int i = 0; i < shards.size(); i++){
+    private static void ServiceStartedNotification() {
+        for (int i = 0; i < shards.size(); i++) {
             shards.get(i).getPresence().setGame(Game.watching("jacksonbot.com | !help"));
         }
     }
@@ -62,20 +64,37 @@ public class BotGlobalManager {
         new BotGlobalManager();
     }//Fonction main
 
-    public static YoutubeApi getYoutubeApi(){ return youtubeApi; }
+    public static YoutubeApi getYoutubeApi() {
+        return youtubeApi;
+    }
 
     public static PropertiesLoader getConfig() {
         return config;
     }
 
-    public static AudioPlayerManager getAudioPlayerManager() {return audioPlayerManager;}
+    public static AudioPlayerManager getAudioPlayerManager() {
+        return audioPlayerManager;
+    }
 
     public static List<Guild> getServers() {
         List<Guild> servers = new ArrayList<>();
-        for(int i = 0; i < shards.size(); i++){
+        for (int i = 0; i < shards.size(); i++) {
             servers.addAll(shards.get(i).getGuilds());
         }
         return servers;
+    }
+
+    public static Guild getSupportServer() {
+        for (int i = 0; i < shards.size(); i++) {
+            if (shards.get(i).getGuildById(config.getSupportServerId()) != null) {
+                return shards.get(i).getGuildById(config.getSupportServerId());
+            }
+        }
+        return null;
+    }
+
+    public static TextChannel getBotLogsChannel(){
+        return Objects.requireNonNull(getSupportServer()).getTextChannelById(config.getBotLogsChannelId());
     }
 
     public static List<JDA> getShards() {

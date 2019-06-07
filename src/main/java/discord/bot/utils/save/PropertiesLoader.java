@@ -23,6 +23,8 @@ public class PropertiesLoader {
     private String dogApiKey;
     private String chuckNorrisApiKey;
     private String botOwnerUserId;
+    private String botLogsChannelId;
+    private String supportServerId;
     private final String MAIN_CONFIG_FILE_PATH = "jackson.properties";
 
     public String getBotToken() {
@@ -49,6 +51,14 @@ public class PropertiesLoader {
 
     public String getBotOwnerUserId() {
         return botOwnerUserId;
+    }
+
+    public String getBotLogsChannelId() {
+        return botLogsChannelId;
+    }
+
+    public String getSupportServerId() {
+        return supportServerId;
     }
 
     public void initializeSavedProperties() {
@@ -85,6 +95,8 @@ public class PropertiesLoader {
             dogApiKey = properties.getProperty("dogApiKey");
             chuckNorrisApiKey = properties.getProperty("chuckNorrisApiKey");
             botOwnerUserId = properties.getProperty("botOwnerUserId");
+            botLogsChannelId = properties.getProperty("botLogsChannelId");
+            supportServerId = properties.getProperty("supportServerId");
         } catch (IOException e) {
             logger.log(Level.ERROR, "Something went wrong", e);
         }
