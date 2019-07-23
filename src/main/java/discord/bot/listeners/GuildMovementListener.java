@@ -21,7 +21,7 @@ public class GuildMovementListener extends ListenerAdapter {
 
     @Override
     public void onGuildJoin(GuildJoinEvent event){
-        String joinMessage = "Bot has been added to server : " + event.getGuild().getName()  + " - " + event.getGuild().getId() + "(" + event.getGuild().getMembers().size() + " users)";
+        String joinMessage = "Bot has been added to server : " + event.getGuild().getName()  + " - " + event.getGuild().getId() + " - (" + event.getGuild().getMembers().size() + " users)";
         Map<String,String> propertiesForJoinedServer = new HashMap<>();
         for(PropertyEnum property : PropertyEnum.values()){
             propertiesForJoinedServer.put(property.getPropertyName(), property.getDefaultValue());
@@ -34,7 +34,7 @@ public class GuildMovementListener extends ListenerAdapter {
 
     @Override
     public void onGuildLeave(GuildLeaveEvent event){
-        String leaveMessage = "Bot has been removed from server : " + event.getGuild().getName() + " - " + event.getGuild().getId() + "(" + event.getGuild().getMembers().size() + " users)";
+        String leaveMessage = "Bot has been removed from server : " + event.getGuild().getName() + " - " + event.getGuild().getId() + " - (" + event.getGuild().getMembers().size() + " users)";
         MessageSenderFactory.getInstance().sendSafeMessage(Objects.requireNonNull(BotGlobalManager.getBotLogsChannel()), leaveMessage);
         logger.log(Level.INFO, leaveMessage);
     }
