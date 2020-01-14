@@ -35,24 +35,26 @@ public class BotGlobalManager {
         try {
             shards = new ArrayList<>();
             JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setActivity(Activity.of(Activity.ActivityType.WATCHING, "Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
-            shardBuilder.addEventListeners(new MessageListener(), new UserMovementListener(), new GuildMovementListener());
+            shardBuilder.addEventListeners(new MessageListener());
+            shardBuilder.addEventListeners(new UserMovementListener());
+            shardBuilder.addEventListeners(new GuildMovementListener());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             for (int i = 0; i < SHARD_AMMOUNT; i++) {
-                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT).build());
+                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT).build().awaitStatus(JDA.Status.CONNECTED));
                 shards.get(i).getPresence().setActivity(Activity.of(Activity.ActivityType.WATCHING, "Service starting"));
             }
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
             saveThread.start();
-            ServiceStartedNotification();
+            serviceStartedNotification();
             logger.log(Level.INFO, "BOT started");
-        } catch (LoginException e) {
+        } catch (LoginException | InterruptedException e) {
             logger.log(Level.ERROR, "Something went wrong", e);
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
         }
-    }//Constructeur de la JDA permettant de faire fonctionner le bot et le couper en tapant stop dans la console
+    }//Constructeur de la JDA permettant de faire fonctionner le bot
 
-    private static void ServiceStartedNotification() {
+    private void serviceStartedNotification() {
         for (int i = 0; i < shards.size(); i++) {
             shards.get(i).getPresence().setActivity(Activity.watching("jacksonbot.com | !help"));
         }

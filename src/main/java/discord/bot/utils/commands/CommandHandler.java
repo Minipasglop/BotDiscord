@@ -26,6 +26,7 @@ public class CommandHandler {
     private static Map<String, ICommand> serverCommands;
     private static Map<String, ICommand> miscCommands;
     private static Map<String, ICommand> ownerCommands;
+    private String DEFAULT_PREFIX = "!";
 
     private static CommandHandler instance;
 
@@ -37,7 +38,8 @@ public class CommandHandler {
     }
 
     public void handleCommand(String guildID,ChatCommandParser.CommandAttributes cmdAttributes) {
-        if(cmdAttributes.raw.startsWith(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(guildID, PropertyEnum.PREFIX.getPropertyName()))) {
+        String customPrefix = ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(guildID, PropertyEnum.PREFIX.getPropertyName());
+        if((!customPrefix.isEmpty() && cmdAttributes.raw.startsWith(customPrefix)) || cmdAttributes.raw.startsWith(DEFAULT_PREFIX)) {
             Map<String, ICommand> localMap = new HashMap<>();
             if(soundCommands.containsKey(cmdAttributes.invoke)) localMap = soundCommands;
             if(serverCommands.containsKey(cmdAttributes.invoke)) localMap = serverCommands;
