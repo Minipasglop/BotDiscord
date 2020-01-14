@@ -1,8 +1,9 @@
 package discord.bot.utils.commands;
 //Parts of Code from https://github.com/thibautbessone
+
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
 

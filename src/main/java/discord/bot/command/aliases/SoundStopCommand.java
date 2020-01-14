@@ -4,7 +4,7 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.GuildMusicManager;
 import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class SoundStopCommand extends ICommand {
     private final String HELP = "Stop the sound playing and disconnect the bot from the voice channel. \nUsage : `!" + this.commandName + "`";

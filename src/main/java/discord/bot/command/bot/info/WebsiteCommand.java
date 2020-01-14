@@ -2,8 +2,8 @@ package discord.bot.command.bot.info;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 

@@ -4,9 +4,9 @@ import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.UptimeFactory;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -45,10 +45,10 @@ public class InfoCommand extends ICommand {
         builder.setColor(Color.ORANGE);
         builder.setThumbnail(event.getJDA().getSelfUser().getAvatarUrl());
         builder.addField("Users :busts_in_silhouette:", String.valueOf(usersNumber), true);
-        builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
-        builder.addField("Channels :keyboard: :loud_sound:", String.valueOf(channelNumber) + " text / " + String.valueOf(voiceChannelNumber) + " voice channels \n", true);
         builder.addBlankField(true);
-        builder.addField("Uptime :timer:", uptime, true);
+        builder.addField("Servers :desktop:", String.valueOf(serversNumber), true);
+        builder.addField("Channels :keyboard: :loud_sound:", channelNumber + " text / " + voiceChannelNumber + " voice channels \n", false);
+        builder.addField("Uptime :timer:", uptime, false);
         MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),builder.build());
     }
 

@@ -2,14 +2,14 @@ package discord.bot.listeners;
 
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberLeaveEvent;
-import net.dv8tion.jda.core.exceptions.InsufficientPermissionException;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
+import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -52,13 +52,13 @@ public class UserMovementListener extends ListenerAdapter {
 
     private void autoRole(Guild serveur, Member user) {
         try{
-            serveur.getController().addRolesToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serveur.getId(),"autoRole"),true)).complete();
+            serveur.addRoleToMember(user, serveur.getRolesByName(ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(serveur.getId(),"autoRole"),true).get(0)).complete();
         }catch (Exception e){
             logger.log(Level.ERROR, "Erreur lors de l'autorole sur le serveur : " + serveur.getName());
         }
     }
 
-    private void messageBienvenueJoinServeur(User user,TextChannel channel){
+    private void messageBienvenueJoinServeur(User user, TextChannel channel){
         MessageSenderFactory.getInstance().sendSafeMessage(channel,":punch: Welcome : " + user.getAsMention() + " [Join]");
     }
     private void messageDepartServeur(User u, TextChannel c){

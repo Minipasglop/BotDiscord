@@ -4,9 +4,9 @@ import discord.bot.BotGlobalManager;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.SharedStringEnum;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -22,24 +22,24 @@ public class SetGameCommand extends ICommand {
 
     private boolean setGameWithType(String type, String gameToSet){
         boolean success = true;
-        Game game = null;
+        Activity game = null;
         List<JDA> shards = BotGlobalManager.getShards();
         switch(type){
             case "playing":
-                game = Game.playing(gameToSet);
+                game = Activity.playing(gameToSet);
                 break;
             case "watching":
-                game = Game.watching(gameToSet);
+                game = Activity.watching(gameToSet);
                 break;
             case "listening":
-                game = Game.listening(gameToSet);
+                game = Activity.listening(gameToSet);
                 break;
             default:
                 success = false;
         }
         if(game != null){
             for(int i = 0; i < shards.size(); i++){
-                shards.get(i).getPresence().setGame(game);
+                shards.get(i).getPresence().setActivity(game);
             }
         }
         return success;

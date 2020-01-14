@@ -5,7 +5,7 @@ import discord.bot.utils.audio.GuildMusicManager;
 import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class SoundVolumeCommand extends ICommand {
     private final String HELP = "Set the volume (must be between 0 and 100). \nUsage :  `!" + this.commandName + " 20`";

@@ -5,9 +5,9 @@ import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesJSONUpdate;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.core.events.guild.GuildLeaveEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
+import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

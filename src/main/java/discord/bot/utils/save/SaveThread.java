@@ -1,7 +1,7 @@
 package discord.bot.utils.save;
 
 import discord.bot.BotGlobalManager;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.api.entities.Guild;
 
 import java.util.List;
 import java.util.Timer;

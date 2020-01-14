@@ -9,12 +9,12 @@ import discord.bot.listeners.UserMovementListener;
 import discord.bot.utils.misc.YoutubeApi;
 import discord.bot.utils.save.PropertiesLoader;
 import discord.bot.utils.save.SaveThread;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.entities.Game;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -34,21 +34,19 @@ public class BotGlobalManager {
     BotGlobalManager() {
         try {
             shards = new ArrayList<>();
-            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setGame(Game.of(Game.GameType.WATCHING, "Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
-            shardBuilder.addEventListener(new MessageListener());
-            shardBuilder.addEventListener(new UserMovementListener());
-            shardBuilder.addEventListener(new GuildMovementListener());
+            JDABuilder shardBuilder = new JDABuilder(AccountType.BOT).setActivity(Activity.of(Activity.ActivityType.WATCHING, "Service starting")).setToken(config.getBotToken()).setBulkDeleteSplittingEnabled(false);
+            shardBuilder.addEventListeners(new MessageListener(), new UserMovementListener(), new GuildMovementListener());
             audioPlayerManager.registerSourceManager(new YoutubeAudioSourceManager());
             for (int i = 0; i < SHARD_AMMOUNT; i++) {
-                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT).buildBlocking(JDA.Status.CONNECTED));
-                shards.get(i).getPresence().setGame(Game.of(Game.GameType.WATCHING, "Service starting"));
+                shards.add(shardBuilder.useSharding(i, SHARD_AMMOUNT).build());
+                shards.get(i).getPresence().setActivity(Activity.of(Activity.ActivityType.WATCHING, "Service starting"));
             }
             config.initializeSavedProperties();
             SaveThread saveThread = new SaveThread();
             saveThread.start();
             ServiceStartedNotification();
             logger.log(Level.INFO, "BOT started");
-        } catch (LoginException | InterruptedException e) {
+        } catch (LoginException e) {
             logger.log(Level.ERROR, "Something went wrong", e);
             System.out.println("Une erreur est survenue veuillez verifier le token ou votre connection internet");
         }
@@ -56,7 +54,7 @@ public class BotGlobalManager {
 
     private static void ServiceStartedNotification() {
         for (int i = 0; i < shards.size(); i++) {
-            shards.get(i).getPresence().setGame(Game.watching("jacksonbot.com | !help"));
+            shards.get(i).getPresence().setActivity(Activity.watching("jacksonbot.com | !help"));
         }
     }
 

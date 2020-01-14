@@ -6,8 +6,8 @@ import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.SharedStringEnum;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Map;
@@ -52,11 +52,12 @@ public class HelpCommand extends ICommand {
         builder.addField("Help :bulb: ", MESSAGE_HEADER + "All commands must be prefixed with a `" +
                 ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) + "`.\n To obtain more " +
                 "information on a command, please type `" + ServerPropertiesManager.getInstance().getPropertyOrBlankFromServer(event.getGuild().getId(), PropertyEnum.PREFIX.getPropertyName()) + "command help`\n\n", true);
+        builder.addBlankField(true);
         builder.addField("Sound commands :loudspeaker:", soundCommandsList + "\n", true);
         builder.addField("Server commands :desktop:", serverCommandsList + "\n", true);
-        builder.addField("Misc commands :keyboard:", miscCommandsList + "\n", true);
+        builder.addField("Misc commands :keyboard:", miscCommandsList + "\n", false);
         builder.addField("Owner only commands :warning:", ownerCommandsList + "\n", true);
-        builder.addField("More infos :file_folder:", MESSAGE_FOOTER,true);
+        builder.addField("More infos :file_folder:", MESSAGE_FOOTER,false);
         MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), builder.build(), event.getTextChannel(), SharedStringEnum.NO_PRIVATE_CHANNEL_OPEN.getSharedString());
     }
 

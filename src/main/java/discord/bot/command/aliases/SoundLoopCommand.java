@@ -6,7 +6,7 @@ import discord.bot.utils.audio.GuildMusicManagerSupervisor;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.PropertyEnum;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

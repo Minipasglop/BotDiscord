@@ -2,7 +2,7 @@ package discord.bot.command;
 
 
 import discord.bot.utils.misc.MessageSenderFactory;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public abstract class ICommand {
     protected String commandName;

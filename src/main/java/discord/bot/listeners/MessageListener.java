@@ -3,9 +3,9 @@ package discord.bot.listeners;
 import discord.bot.utils.commands.ChatCommandParser;
 import discord.bot.utils.commands.CommandHandler;
 import discord.bot.utils.misc.MessageSenderFactory;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -23,8 +23,10 @@ public class MessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         try {
-            if (event.getMessage().getContentRaw() != null && !event.getMessage().getContentRaw().isEmpty() && event.getGuild().getId() != null && !event.getGuild().getId().isEmpty() && !event.getAuthor().isBot()) {
-                CommandHandler.getInstance().handleCommand(event.getGuild().getId(), this.parser.parse(event.getMessage().getContentRaw(), event));
+            if(event.getChannelType().isGuild()) {
+                if (event.getMessage().getContentRaw() != null && !event.getMessage().getContentRaw().isEmpty() && event.getGuild().getId() != null && !event.getGuild().getId().isEmpty() && !event.getAuthor().isBot()) {
+                    CommandHandler.getInstance().handleCommand(event.getGuild().getId(), this.parser.parse(event.getMessage().getContentRaw(), event));
+                }
             }
         }catch (Exception e){
             logger.log(Level.ERROR, event.getMessage().getContentRaw(), e);

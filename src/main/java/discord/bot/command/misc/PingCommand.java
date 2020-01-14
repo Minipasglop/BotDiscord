@@ -2,7 +2,7 @@ package discord.bot.command.misc;
 
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class PingCommand extends ICommand {
 
@@ -19,7 +19,7 @@ public class PingCommand extends ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),"The bot ping is : " + event.getJDA().getPing() + " ms");
+        MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),"The bot ping is : " + event.getJDA().getRestPing() + " ms");
     }
 
     @Override

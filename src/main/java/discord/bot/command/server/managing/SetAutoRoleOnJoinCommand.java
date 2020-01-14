@@ -3,7 +3,7 @@ package discord.bot.command.server.managing;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.save.ServerPropertiesManager;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class SetAutoRoleOnJoinCommand extends ICommand {
 

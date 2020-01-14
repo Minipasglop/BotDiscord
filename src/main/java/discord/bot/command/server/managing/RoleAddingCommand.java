@@ -4,8 +4,8 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.RandomColorGenerator;
 import discord.bot.utils.save.PropertiesLoader;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -40,11 +40,11 @@ public class RoleAddingCommand extends ICommand {
                for (Member curr : targetedUsers) {
                 try {
                     if(event.getGuild().getRolesByName(args[args.length - 1],true).isEmpty()) {
-                        event.getGuild().getController().createRole().setName(args[args.length - 1]).setColor(RandomColorGenerator.generateRandomColor()).complete();
-                        event.getGuild().getController().addRolesToMember(curr, event.getGuild().getRolesByName(args[args.length - 1], true)).queue();
+                        event.getGuild().createRole().setName(args[args.length - 1]).setColor(RandomColorGenerator.generateRandomColor()).complete();
+                        event.getGuild().addRoleToMember(curr, event.getGuild().getRolesByName(args[args.length - 1],true).get(0)).queue();
                         System.out.println(ACTION_PERFORMED_CREATE + args[args.length - 1] + " a l'utilisateur " + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                     }else if(!curr.getRoles().contains(event.getGuild().getRolesByName(args[args.length - 1],true).get(0))) {
-                        event.getGuild().getController().addRolesToMember(curr, event.getGuild().getRolesByName(args[args.length - 1], true)).queue();
+                        event.getGuild().addRoleToMember(curr, event.getGuild().getRolesByName(args[args.length - 1], true).get(0)).queue();
                         System.out.println(ACTION_PERFORMED_ADD + args[args.length - 1] + " a l'utilisateur " + curr.getUser().getName() + " sur le serveur : " + event.getGuild().getName());
                     }else {
                         event.getMessage().delete().queue();

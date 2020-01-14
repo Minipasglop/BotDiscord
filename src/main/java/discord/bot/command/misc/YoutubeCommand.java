@@ -5,7 +5,7 @@ import discord.bot.command.ICommand;
 import discord.bot.utils.audio.Track;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.YoutubeApi;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class YoutubeCommand extends ICommand {
 

@@ -3,10 +3,10 @@ package discord.bot.command.server.managing;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.SharedStringEnum;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Message;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.apache.log4j.Logger;
 
 import java.time.OffsetDateTime;
@@ -37,7 +37,7 @@ public class PurgeCommand extends ICommand {
                 TextChannel currChannel = event.getTextChannel();
                 List<Message> history = currChannel.getIterableHistory().complete();
                 for(int i = 0; i < history.size(); i++){
-                    if(history.get(i).getCreationTime().isBefore(OffsetDateTime.now().minusDays(15))){
+                    if(history.get(i).getTimeCreated().isBefore(OffsetDateTime.now().minusDays(15))){
                         history = history.subList(0, i);
                         break;
                     }

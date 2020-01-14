@@ -3,10 +3,10 @@ package discord.bot.command.server.managing;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.SharedStringEnum;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.VoiceChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -42,7 +42,7 @@ public class MoveCommand extends ICommand {
                 List<VoiceChannel> targetChannel = event.getGuild().getVoiceChannelsByName(args[args.length - 1], true);
                 for (Member curr : targetedUsers) {
                     try {
-                        event.getGuild().getController().moveVoiceMember(curr, targetChannel.get(0)).queue();
+                        event.getGuild().moveVoiceMember(curr, targetChannel.get(0)).queue();
                         logger.log(Level.INFO, ACTION_PERFORMED + curr.getUser().getName() + " vers le salon " + targetChannel.get(0).getName() + " sur le serveur : " + event.getGuild().getName());
                     } catch (Exception e) {
                         logger.log(Level.ERROR, event.getMessage(), e);

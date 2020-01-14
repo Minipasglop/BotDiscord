@@ -3,9 +3,9 @@ package discord.bot.command.server.managing;
 import discord.bot.command.ICommand;
 import discord.bot.utils.misc.MessageSenderFactory;
 import discord.bot.utils.misc.SharedStringEnum;
-import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -39,7 +39,7 @@ public class BanCommand extends ICommand {
             if(!event.getMessage().getMentionedMembers().isEmpty()) {
                 List<Member> targetedUsers = event.getMessage().getMentionedMembers();
                 for (Member curr : targetedUsers) {
-                    event.getGuild().getController().ban(curr, 1, BAN_MESSAGE + args[args.length - 1]).queue();
+                    event.getGuild().ban(curr, 1, BAN_MESSAGE + args[args.length - 1]).queue();
                     logger.log(Level.INFO, ACTION_PERFORMED + curr.getUser().getName() + " par " + event.getAuthor().getName() + " sur le serveur : " + event.getGuild().getName());
                     MessageSenderFactory.getInstance().sendSafePrivateMessage(event.getAuthor(), SUCCESS_MESSAGE, event.getTextChannel(), SUCCESS_MESSAGE);
                 }

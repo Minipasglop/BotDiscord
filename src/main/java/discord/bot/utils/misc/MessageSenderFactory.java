@@ -1,9 +1,11 @@
 package discord.bot.utils.misc;
 
-import net.dv8tion.jda.core.entities.MessageEmbed;
-import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.entities.User;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.User;
 import org.apache.log4j.Logger;
+
+import java.io.File;
 
 public class MessageSenderFactory {
 
@@ -44,6 +46,12 @@ public class MessageSenderFactory {
     public void sendSafePrivateMessage(User author, MessageEmbed message, TextChannel callbackChannel, String callBackMessage){
         if(!author.isBot()) {
             author.openPrivateChannel().queue((privateChannel -> privateChannel.sendMessage(message).queue(null, throwable -> sendSafeMessage(callbackChannel, callBackMessage))));
+        }
+    }
+
+    public void sendSafeFile(TextChannel channel, File image) {
+        if(channel.canTalk()){
+            channel.sendFile(image).queue(null, throwable -> logger.error("Couldn't send message to : " + channel.getName() + " on server : " + channel.getGuild().getId()));
         }
     }
 
