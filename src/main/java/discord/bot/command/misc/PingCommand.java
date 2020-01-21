@@ -19,7 +19,7 @@ public class PingCommand extends ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),"The bot ping is : " + event.getJDA().getRestPing() + " ms");
+        MessageSenderFactory.getInstance().sendSafeMessage(event.getTextChannel(),"The bot ping is : " + event.getJDA().getRestPing().complete() + " ms");
     }
 
     @Override
